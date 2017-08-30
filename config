@@ -1,0 +1,15 @@
+# Base Alias:
+# Any line that does not start with a whitespace is considered a base
+# alias.
+dir: ls -l
+
+
+# Sub Aliases:
+# Any line that starts with one or more whitespaces will be nested as
+# a subcommand of the previous base alias.
+g: git
+  s: status
+  l: log --all --graph --date=relative
+  p: push
+  m: merge
+  b: branch
