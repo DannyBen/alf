@@ -3,7 +3,6 @@
 # alias.
 dir: ls -l
 
-
 # Sub Aliases:
 # Any line that starts with one or more whitespaces will be nested as
 # a subcommand of the previous base alias.
@@ -13,3 +12,7 @@ g: git
   p: push
   m: merge
   b: branch
+
+# Reuse:
+# You can call an alias from another alias
+gg: g p
