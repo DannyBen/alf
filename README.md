@@ -17,6 +17,6 @@ Usage
 
     `$ fung ~/fung.conf > ~/.bash_aliases && . ~/.bash_aliases`
 
-5. If your `~/.bash_rc` doesn't already source `~/.bash_aliases`, you can
+5. If your `~/.bashrc` doesn't already source `~/.bash_aliases`, you can
    add `. ~/.bash_aliases` to the bottom of the file.
 
