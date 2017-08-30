@@ -3,7 +3,7 @@
 # fung - generate bash aliases (as functions) from config.
 # 
 # Usage:
-# $ ./fungen config > ~/.bash_aliases && . ~/.bash_aliases
+# $ ./fung config > ~/.bash_aliases && . ~/.bash_aliases
 #
 # See the sample config file for more details
 # ---------------------------------------------------------------
