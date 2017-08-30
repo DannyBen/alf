@@ -20,3 +20,7 @@ Usage
 5. If your `~/.bashrc` doesn't already source `~/.bash_aliases`, you can
    add `. ~/.bash_aliases` to the bottom of the file.
 
+
+For a one-line install, see the [myfung][1] example repo
+
+[1]: https://github.com/DannyBen/myfung
