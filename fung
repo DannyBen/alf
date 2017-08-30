@@ -23,7 +23,7 @@ function generate_last_cmd {
   fi
 }
 
-regex="^(\s*)(\w*):\s*(.+)$"
+regex="^(\s*)([a-z\-]+):\s*(.+)$"
 cond="if"
 lastcmd=""
 

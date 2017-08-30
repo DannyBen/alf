@@ -16,3 +16,6 @@ g: git
 # Reuse:
 # You can call an alias from another alias
 gg: g p
+
+# Self Update Example:
+fundate: curl -Ss https://raw.githubusercontent.com/DannyBen/fung/master/config | fung > ~/.bash_aliases && . ~/.bash_aliases
