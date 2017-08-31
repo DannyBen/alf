@@ -7,11 +7,7 @@ usage() {
     printf "alf $VERSION - Your Little Bash Alias Friend\n\n"
   fi
   printf "Usage:\n"
-  printf "  alf -h|--help\n"
-  if $LONG_USAGE; then
-    printf "    Show this message\n\n"
-  fi
-  printf "  alf -c|--connect REPO\n"
+  printf "  alf connect REPO\n"
   if $LONG_USAGE; then
     printf "    Connect to a remote git repository.\n"
     printf "    REPO can be:\n"
@@ -20,23 +16,27 @@ usage() {
     printf "    - Your username/repo on GitHub\n"
     printf "    - Any other full URL to a repository\n\n"
   fi
-  printf "  alf -d|--download\n"
+  printf "  alf download\n"
   if $LONG_USAGE; then
     printf "    Perform 'git pull' on a previously connected repo\n\n"
   fi
-  printf "  alf -u|--upload\n"
+  printf "  alf upload\n"
   if $LONG_USAGE; then
     printf "    Perform 'git commit' and 'git push' on a previously connected\n"
     printf "    repo\n\n"
   fi
-  printf "  alf -g|--generate\n"
+  printf "  alf generate\n"
   if $LONG_USAGE; then
     printf "    Generate aliases from the config file in the connected repo\n"
     printf "    to stdout\n\n"
   fi
-  printf "  alf -s|--save\n"
+  printf "  alf save\n"
   if $LONG_USAGE; then
     printf "    Generate aliases and save to ~/.bash_aliases\n\n"
+  fi
+  printf "  alf -h|--help\n"
+  if $LONG_USAGE; then
+    printf "    Show this message\n\n"
   fi
   printf "  alf -v|--version\n"
   if $LONG_USAGE; then
@@ -137,8 +137,8 @@ upload() {
   fi
   pushd $REPO_PATH > /dev/null
   echo "Pushing $REPO_PATH to repository"
-  # git commit -am "automatic push"
-  # git push
+  git commit -am "automatic push"
+  git push
   popd > /dev/null
 }
 
@@ -174,26 +174,26 @@ save() {
   $ME -g > ~/.bash_aliases
 }
 
-# parse arguments
-OPTS=`getopt -o hc:dugsv --long help,connect:,download,upload,generate,save,version -n 'alf' -- "$@"`
-if [ $? != 0 ] ; then exit 1 ; fi
-set -e
+main() {
+  # internal variables
+  VERSION="0.0.1"
+  LONG_USAGE=false
+  REPO=''
+  RC_FILE=~/.alfrc
+  ME=$0
 
-# internal variables
-VERSION="0.0.1"
-LONG_USAGE=false
-REPO=''
-RC_FILE=~/.alfrc
-ME=$0
+  # execute
+  set -e
+  case "$1" in
+    c | connect  ) REPO=$2; connect ;;
+    d | download ) download ;;
+    g | generate ) generate ;;
+    s | save     ) save ;;
+    u | upload   ) upload ;;
+    -h | --help    | help    ) LONG_USAGE=true; usage ;;
+    -v | --version | version ) echo $VERSION ;;
+    * ) usage ;;
+  esac
+}
 
-# execute
-case "$1" in
-  -c | --connect  ) REPO=$2; connect ;;
-  -d | --download ) download ;;
-  -g | --generate ) generate ;;
-  -h | --help     ) LONG_USAGE=true; usage ;;
-  -s | --save     ) save ;;
-  -u | --upload   ) upload ;;
-  -v | --version  ) echo $VERSION ;;
-  *               ) usage ;;
-esac
+main $@
