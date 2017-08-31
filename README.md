@@ -6,7 +6,7 @@ Usage
 
 1. Create your `alf` executable
 
-    `$ bash -c "sudo curl https://raw.githubusercontent.com/DannyBen/alf/master/fung > /usr/local/bin/alf && sudo chmod a+x /usr/local/bin/alf"`
+    `$ sudo bash -c "curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf && chmod a+x /usr/local/bin/alf"`
 
 2. Create your own `alf-conf` repository
 
