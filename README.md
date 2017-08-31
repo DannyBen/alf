@@ -1,4 +1,4 @@
-alf - Your Little Bash Alias Friend
+Alf - Your Little Bash Alias Friend
 ==================================================
 
 Usage

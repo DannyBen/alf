@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------
-# alf - Your Little Bash Alias Friend
+# Alf - Your Little Bash Alias Friend
 # ---------------------------------------------------------------
 usage() { 
   if $LONG_USAGE; then
