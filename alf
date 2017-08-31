@@ -2,15 +2,46 @@
 # ---------------------------------------------------------------
 # alf - Your Little Bash Alias Friend
 # ---------------------------------------------------------------
-# show usage
 usage() { 
-  echo "Usage:"
-  echo "  alf -h|--help"
-  echo "  alf -c|--connect REPO"
-  echo "  alf -d|--download"
-  echo "  alf -u|--upload"
-  echo "  alf -g|--generate"
-  echo "  alf -s|--save"
+  if $LONG_USAGE; then
+    printf "alf $VERSION - Your Little Bash Alias Friend\n\n"
+  fi
+  printf "Usage:\n"
+  printf "  alf -h|--help\n"
+  if $LONG_USAGE; then
+    printf "    Show this message\n\n"
+  fi
+  printf "  alf -c|--connect REPO\n"
+  if $LONG_USAGE; then
+    printf "    Connect to a remote git repository.\n"
+    printf "    REPO can be:\n"
+    printf "    - Your username on GitHub. In this case, we will assume the\n"
+    printf "      repository is named 'alf-config'\n"
+    printf "    - Your username/repo on GitHub\n"
+    printf "    - Any other full URL to a repository\n\n"
+  fi
+  printf "  alf -d|--download\n"
+  if $LONG_USAGE; then
+    printf "    Perform 'git pull' on a previously connected repo\n\n"
+  fi
+  printf "  alf -u|--upload\n"
+  if $LONG_USAGE; then
+    printf "    Perform 'git commit' and 'git push' on a previously connected\n"
+    printf "    repo\n\n"
+  fi
+  printf "  alf -g|--generate\n"
+  if $LONG_USAGE; then
+    printf "    Generate aliases from the config file in the connected repo\n"
+    printf "    to stdout\n\n"
+  fi
+  printf "  alf -s|--save\n"
+  if $LONG_USAGE; then
+    printf "    Generate aliases and save to ~/.bash_aliases\n\n"
+  fi
+  printf "  alf -v|--version\n"
+  if $LONG_USAGE; then
+    printf "    Show version number\n\n"
+  fi
 }
 
 generate_last_cmd() {
@@ -144,40 +175,25 @@ save() {
 }
 
 # parse arguments
-OPTS=`getopt -o hc:dugs --long help,connect:,download,upload,generate,save -n 'parse-options' -- "$@"`
-if [ $? != 0 ] ; then echo "Failed parsing options." >&2 ; exit 1 ; fi
-eval set -- "$OPTS"
+OPTS=`getopt -o hc:dugsv --long help,connect:,download,upload,generate,save,version -n 'alf' -- "$@"`
+if [ $? != 0 ] ; then exit 1 ; fi
 set -e
 
-# default values
-GENERATE=false
-HELP=false
-REPO=''
-SAVE=false
-UPLOAD=false
-
 # internal variables
+VERSION="0.0.1"
+LONG_USAGE=false
+REPO=''
 RC_FILE=~/.alfrc
 ME=$0
 
-# process arguments
-while true; do
-  case "$1" in
-    -c | --connect  ) CONNECT=true; REPO=$2; shift 2 ;;
-    -d | --download ) DOWNLOAD=true; shift ;;
-    -g | --generate ) GENERATE=true; shift ;;
-    -h | --help     ) HELP=true  ; shift ;;
-    -s | --save     ) SAVE=true; shift ;;
-    -u | --upload   ) UPLOAD=true; shift ;;
-    -- ) shift; break ;;
-    *  ) break ;;
-  esac
-done
-
-# invoke requested action
-if $CONNECT;  then connect;  exit; fi
-if $DOWNLOAD; then download; exit; fi
-if $GENERATE; then generate; exit; fi
-if $HELP;     then usage;    exit; fi
-if $SAVE;     then save;     exit; fi
-if $UPLOAD;   then upload;   exit; fi
+# execute
+case "$1" in
+  -c | --connect  ) REPO=$2; connect ;;
+  -d | --download ) download ;;
+  -g | --generate ) generate ;;
+  -h | --help     ) LONG_USAGE=true; usage ;;
+  -s | --save     ) save ;;
+  -u | --upload   ) upload ;;
+  -v | --version  ) echo $VERSION ;;
+  *               ) usage ;;
+esac
