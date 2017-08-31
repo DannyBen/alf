@@ -9,8 +9,9 @@ Usage
     `$ sudo bash -c "curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf && chmod a+x /usr/local/bin/alf"`
 
 2. Create your own `alf-conf` repository
-
-Instructions soon
+   The easiest way to use alf is to create a repository on github, call it 
+   `alf-conf`, and put an `alf.conf` file in it. See the [`alf.conf`][/alf.conf]
+   file as a starting poing.
 
 3. Connect alf to your repository
 
