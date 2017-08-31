@@ -1,26 +1,11 @@
-fung - bash function generator
+alf - Your Little Bash Alias Friend
 ==================================================
 
 Usage
 --------------------------------------------------
 
-1. Download or clone the repository
+1. Create your `alf` executable
 
-2. Create a symlink to `fung`
+    `$ bash -c "sudo curl ALF_FILE > /usr/local/bin/alf && sudo chmod a+X /usr/local/bin/alf"`
 
-    `$ ln -s $PWD/fung /usr/local/bin/fung`
-
-3. Create a config file (for example, `~/fung.conf`) - see the provided 
-   sample config as a starting point.
-
-4. Generate the aliases
-
-    `$ fung ~/fung.conf > ~/.bash_aliases && . ~/.bash_aliases`
-
-5. If your `~/.bashrc` doesn't already source `~/.bash_aliases`, you can
-   add `. ~/.bash_aliases` to the bottom of the file.
-
-
-For a one-line install, see the [myfung][1] example repo
-
-[1]: https://github.com/DannyBen/myfung
+2. ...

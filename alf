@@ -1,0 +1,183 @@
+#!/usr/bin/env bash
+# ---------------------------------------------------------------
+# alf - Your Little Bash Alias Friend
+# ---------------------------------------------------------------
+# show usage
+usage() { 
+  echo "Usage:"
+  echo "  alf -h|--help"
+  echo "  alf -c|--connect REPO"
+  echo "  alf -d|--download"
+  echo "  alf -u|--upload"
+  echo "  alf -g|--generate"
+  echo "  alf -s|--save"
+}
+
+generate_last_cmd() {
+  if [[ -n $lastcmd ]]; then
+    if [[ $cond = "if" ]]; then
+      echo "  $lastcmd \"\$@\""
+      echo "}"
+    else
+      echo "  else"
+      echo "    $lastcmd \"\$@\""
+      echo "  fi"
+      echo "}"
+      cond="if"
+    fi
+  fi
+}
+
+find_config() {
+  CONFIG_FILE="alf.conf"
+  REPO_PATH="$PWD/alf-conf"
+  if [[ -f $RC_FILE ]]; then
+    REPO_PATH=$(<$RC_FILE)
+    CONFIG_FILE=$REPO_PATH/alf.conf
+  fi
+}
+
+generate() {
+  regex="^(\s*)([a-z\-]+):\s*(.+)$"
+  cond="if"
+  lastcmd=""
+  find_config
+
+  while IFS= read -r line; do
+    if [[ $line =~ $regex ]]; then
+      indent="${BASH_REMATCH[1]}"
+      
+      if [[ -z $indent ]]; then
+        ali1="${BASH_REMATCH[2]}"
+        cmd1="${BASH_REMATCH[3]}"
+        unset ali2
+        unset cmd2
+        generate_last_cmd
+        lastcmd=$cmd1
+      else
+        ali2="${BASH_REMATCH[2]}"
+        cmd2="${BASH_REMATCH[3]}"
+      fi    
+
+      if [[ -n $ali2 ]]; then
+        echo "  $cond [[ \$1 = \"$ali2\" ]]; then"
+        echo "    shift"
+        echo "    $cmd1 $cmd2 \"\$@\""
+        cond="elif"
+      else
+        echo ""
+        echo "$ali1() {"
+      fi
+    fi
+  done < $CONFIG_FILE
+  generate_last_cmd
+}
+
+make_full_repo_path() {
+  if [[ $REPO =~ ':' ]]; then
+    REPO_URL=$REPO
+  elif [[ $REPO =~ '/' ]]; then
+    REPO_URL="https://github.com/$REPO.git"
+  else
+    REPO_URL="https://github.com/$REPO/alf-conf.git"
+  fi
+}
+
+download() {
+  find_config
+  if [[ ! -f $RC_FILE ]]; then
+    echo "Cannot find $RC_FILE"
+    echo "Please connect alf to a repository first"
+    exit 1
+  fi
+  pushd $REPO_PATH > /dev/null
+  echo "Pulling from repository to $REPO_PATH"
+  git pull
+  popd > /dev/null
+  $ME --save
+}
+
+upload() {
+  find_config
+  if [[ ! -f $RC_FILE ]]; then
+    echo "Cannot find $RC_FILE"
+    echo "Please connect alf to a repository first"
+    exit 1
+  fi
+  pushd $REPO_PATH > /dev/null
+  echo "Pushing $REPO_PATH to repository"
+  # git commit -am "automatic push"
+  # git push
+  popd > /dev/null
+}
+
+connect() {
+  make_full_repo_path
+  echo "This operation will:"
+  if [[ ! -d ./alf-conf ]]; then
+    echo "  clone  $REPO_URL"
+    echo "     to  ./alf-conf"
+  fi
+  echo "  write  $PWD/alf-conf"
+  echo "     to  $RC_FILE"
+  echo ""
+  printf "Continue? [yN] "
+  read answer
+  if [[ $answer =~ [Yy] ]]; then
+    if [[ -d ./alf-conf ]]; then
+      echo "Skipping clone, directory already exists"
+    else
+      git clone $REPO_URL ./alf-conf
+    fi
+    echo "$PWD/alf-conf" > "$RC_FILE"
+    echo "Storing location in $RC_FILE"
+  else
+    echo "Aborting"
+    exit
+  fi
+  $ME --save
+}
+
+save() {
+  echo "Saving to ~/.bash_aliases"
+  $ME -g > ~/.bash_aliases
+}
+
+# parse arguments
+OPTS=`getopt -o hc:dugs --long help,connect:,download,upload,generate,save -n 'parse-options' -- "$@"`
+if [ $? != 0 ] ; then echo "Failed parsing options." >&2 ; exit 1 ; fi
+eval set -- "$OPTS"
+set -e
+
+# default values
+GENERATE=false
+HELP=false
+REPO=''
+SAVE=false
+UPLOAD=false
+
+# internal variables
+RC_FILE=~/.alfrc
+ME=$0
+
+# process arguments
+while true; do
+  case "$1" in
+    -c | --connect  ) CONNECT=true; REPO=$2; shift 2 ;;
+    -d | --download ) DOWNLOAD=true; shift ;;
+    -g | --generate ) GENERATE=true; shift ;;
+    -h | --help     ) HELP=true  ; shift ;;
+    -s | --save     ) SAVE=true; shift ;;
+    -u | --upload   ) UPLOAD=true; shift ;;
+    -- ) shift; break ;;
+    *  ) break ;;
+  esac
+done
+
+# invoke requested action
+if $CONNECT;  then connect;  exit; fi
+if $DOWNLOAD; then download; exit; fi
+if $GENERATE; then generate; exit; fi
+if $HELP;     then usage;    exit; fi
+if $SAVE;     then save;     exit; fi
+if $UPLOAD;   then upload;   exit; fi
