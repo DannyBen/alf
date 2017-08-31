@@ -125,7 +125,7 @@ download() {
   echo "Pulling from repository to $REPO_PATH"
   git pull
   popd > /dev/null
-  $ME --save
+  $ME save
 }
 
 upload() {
@@ -166,12 +166,12 @@ connect() {
     echo "Aborting"
     exit
   fi
-  $ME --save
+  $ME save
 }
 
 save() {
   echo "Saving to ~/.bash_aliases"
-  $ME -g > ~/.bash_aliases
+  $ME generate > ~/.bash_aliases
 }
 
 main() {
