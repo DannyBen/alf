@@ -4,9 +4,9 @@ alf - Your Little Bash Alias Friend
 Usage
 --------------------------------------------------
 
-1. Create your `alf` executable
+1. Install the `alf` executable script
 
-    `$ sudo bash -c "curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf && chmod a+x /usr/local/bin/alf"`
+    `$ bash <(curl -s https://raw.githubusercontent.com/DannyBen/alf/master/setup)`
 
 2. Create your own `alf-conf` repository  
    The easiest way to use alf is to create a repository on github, call it 

@@ -1,4 +1,18 @@
 #!/usr/bin/env bash
-echo "===> download alf"
-sudo bash -c "curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf"
-sudo chmod a+x /usr/local/bin/alf
+echo "This operation will download the alf bash script to /usr/local/bin/alf."
+echo "Continue? [yN]"
+read answer
+
+if [[ $answer =~ [Yy] ]]; then
+  echo "Downloading from github.com/DannyBen/alf..."
+  sudo bash -c "curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf"
+  sudo chmod a+x /usr/local/bin/alf
+  if type alf > /dev/null; then
+    echo "Done. Type 'alf --help' for more info."
+  else
+    echo "Failed downloading."
+    exit 1
+  fi
+else
+  echo "Aborting"
+fi
