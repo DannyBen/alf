@@ -15,4 +15,4 @@ Usage
 
 3. Connect alf to your repository
 
-    $ alf connect <your github user>
+    `$ alf connect <your github user>`
