@@ -26,7 +26,7 @@ Usage
 2. Create your own `alf-conf` repository  
    The easiest way to use alf is to create a repository on github, call it 
    `alf-conf`, and put an `alf.conf` file in it. See the [`alf.conf`](alf.conf)
-   file as a starting poing.
+   file as a starting point.
 
 3. Connect alf to your repository
 
