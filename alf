@@ -51,6 +51,14 @@ find_config() {
     REPO_PATH=$(<$RC_FILE)
     CONFIG_FILE=$REPO_PATH/alf.conf
   fi
+
+  if [[ ! -f $CONFIG_FILE ]]; then
+    printf "ERROR: Cannot find config file.\n\n"
+    echo "You should either:"
+    echo "- Run this command in a folder with 'alf.conf' file, or"
+    echo "- Run 'alf connect' to properly connect to a remote config"
+    exit 1
+  fi
 }
 
 generate_last_cmd() {
@@ -105,7 +113,10 @@ generate() {
 }
 
 make_full_repo_path() {
-  if [[ $REPO =~ ':' ]]; then
+  if [[ -z $REPO ]]; then
+    echo "ERROR: Please provide a repo name or URL."
+    exit 1
+  elif [[ $REPO =~ ':' ]]; then
     REPO_URL=$REPO
   elif [[ $REPO =~ '/' ]]; then
     REPO_URL="https://github.com/$REPO.git"
@@ -125,7 +136,7 @@ download() {
   echo "Pulling from repository to $REPO_PATH"
   git pull
   popd > /dev/null
-  $ME save
+  save
 }
 
 upload() {
@@ -166,20 +177,21 @@ connect() {
     echo "Aborting"
     exit
   fi
-  $ME save
+  save
 }
 
 save() {
-  echo "Saving to ~/.bash_aliases"
-  $ME generate > ~/.bash_aliases
+  find_config
+  echo "Saving to $ALIASES_FILE"
+  generate > $ALIASES_FILE
 }
 
 initialize() {
   VERSION="0.0.1"
   LONG_USAGE=false
   REPO=${ALF_REPO:=''}
+  ALIASES_FILE=${ALF_ALIASES_FILE:=~/.bash_aliases}
   RC_FILE=${ALF_RC_FILE:=~/.alfrc}
-  ME=$0
   set -e
 }
 

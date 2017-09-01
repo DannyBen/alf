@@ -1,9 +1,14 @@
-language: bash
+language: ruby
 
-before_install:
-- sudo add-apt-repository ppa:duggan/bats --yes
-- sudo apt update
-- sudo apt install bats
+rvm:
+  - 2.4.1
 
-script:
-- bash test/run
+before_script: 
+  - export PATH=$PATH:$PWD
+  - cd test 
+  - bundle
+
+script: bundle exec cucumber
+
+notifications:
+  email: false

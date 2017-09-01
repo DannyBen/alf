@@ -1,0 +1,8 @@
+source "https://rubygems.org"
+
+gem 'runfile'
+gem 'runfile-tasks'
+gem 'cucumber'
+gem 'rspec-expectations'
+gem 'similar_text'
+gem 'byebug'
