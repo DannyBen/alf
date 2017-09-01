@@ -202,14 +202,6 @@ Then(/^stop for debug$/) do
   byebug
 end
 
-Then(/^the (?:status|exit) code should be (success|failure)$/) do |type|
-  if type == "failure"
-    expect(@status.success?).to_not be true
-  else
-    expect(@status.success?).to be true
-  end
-end
-
 ## Then...exit code
 
 Then(/^the (?:status|exit) code should (not )?be "([^"]+)"$/) do |negate, code|
