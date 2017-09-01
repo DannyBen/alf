@@ -196,4 +196,6 @@ main() {
   esac
 }
 
-main $@
+if ! $ALF_SUPRESS_RUN; then
+  main $@
+fi

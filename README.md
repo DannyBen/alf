@@ -1,6 +1,17 @@
 Alf - Your Little Bash Alias Friend
 ==================================================
 
+Alf enhances your bash alias management.
+
+Features
+--------------------------------------------------
+
+- Create aliases by using a config file
+- Create aliases for sub-commands (for example, `g s` for `git status`)
+- Synchronize your aliases across hosts by uploading your config file to 
+  GitHub.
+
+
 Usage
 --------------------------------------------------
 
