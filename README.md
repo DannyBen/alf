@@ -1,6 +1,10 @@
 Alf - Your Little Bash Alias Friend
 ==================================================
 
+[![Build Status](https://travis-ci.org/DannyBen/alf.svg?branch=tests)](https://travis-ci.org/DannyBen/alf)
+
+---
+
 Alf enhances your bash alias management.
 
 Features
