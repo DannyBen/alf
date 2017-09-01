@@ -19,7 +19,7 @@ end
 
 Given(/^the (?:folder|dir|directory) "([^"]*)" (does not )?exists?$/) do |dir, negate|
   if negate
-    Dir.rm_rf(dir) if Dir.exist? dir
+    FileUtils.rm_rf(dir) if Dir.exist? dir
   else
     Dir.mkdir(dir) unless Dir.exist? dir
   end
@@ -63,6 +63,12 @@ Given(/^the variable "([^"]*)" is (not )?"([^"]*)"$/) do |name, negate, value|
   else
     ENV[name] = value
   end
+end
+
+## Given...ran
+
+Given(/^I have already ran "([^"]*)"$/) do |command|
+  @stdout, @stderr, @status = Open3.capture3 command
 end
 
 ## When...run

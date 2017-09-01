@@ -7,14 +7,16 @@ usage() {
     printf "alf $VERSION - Your Little Bash Alias Friend\n\n"
   fi
   printf "Usage:\n"
-  printf "  alf connect REPO\n"
+  printf "  alf connect REPO [-y]\n"
   if $LONG_USAGE; then
     printf "    Connect to a remote git repository.\n"
     printf "    REPO can be:\n"
     printf "    - Your username on GitHub. In this case, we will assume the\n"
     printf "      repository is named 'alf-config'\n"
     printf "    - Your username/repo on GitHub\n"
-    printf "    - Any other full URL to a repository\n\n"
+    printf "    - Any other full URL to a repository\n"
+    printf "    In case the -y flag is specified, the operation will be\n"
+    printf "    executed without prompting for confirmation.\n\n"
   fi
   printf "  alf download\n"
   if $LONG_USAGE; then
@@ -155,16 +157,21 @@ upload() {
 
 connect() {
   make_full_repo_path
-  echo "This operation will:"
-  if [[ ! -d ./alf-conf ]]; then
-    echo "  clone  $REPO_URL"
-    echo "     to  ./alf-conf"
+  if [[ $FORCE != "-y" ]]; then
+    echo "This operation will:"
+    if [[ ! -d ./alf-conf ]]; then
+      echo "  clone  $REPO_URL"
+      echo "     to  ./alf-conf"
+    fi
+    echo "  write  $PWD/alf-conf"
+    echo "     to  $RC_FILE"
+    echo ""
+    printf "Continue? [yN] "
+    read answer
+  else
+    answer=y
   fi
-  echo "  write  $PWD/alf-conf"
-  echo "     to  $RC_FILE"
-  echo ""
-  printf "Continue? [yN] "
-  read answer
+
   if [[ $answer =~ [Yy] ]]; then
     if [[ -d ./alf-conf ]]; then
       echo "Skipping clone, directory already exists"
@@ -187,7 +194,7 @@ save() {
 }
 
 initialize() {
-  VERSION="0.0.1"
+  VERSION="0.0.2"
   LONG_USAGE=false
   REPO=${ALF_REPO:=''}
   ALIASES_FILE=${ALF_ALIASES_FILE:=~/.bash_aliases}
@@ -197,7 +204,7 @@ initialize() {
 
 run() {
   case "$1" in
-    c | connect  ) REPO=$2; connect ;;
+    c | connect  ) REPO=$2; FORCE=$3; connect ;;
     d | download ) download ;;
     g | generate ) generate ;;
     s | save     ) save ;;

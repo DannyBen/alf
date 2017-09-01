@@ -1,0 +1,117 @@
+
+ag() {
+  command ag --color-match "1;36" "$@"
+}
+
+d() {
+  if [[ $1 = "ps" ]]; then
+    shift
+    docker ps --format "{{.ID}} {{.Names}}\t{{.Status}}  {{.Ports}}" "$@"
+  elif [[ $1 = "clean" ]]; then
+    shift
+    docker system prune -f "$@"
+  elif [[ $1 = "i" ]]; then
+    shift
+    docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}" "$@"
+  elif [[ $1 = "images" ]]; then
+    shift
+    docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}" "$@"
+  elif [[ $1 = "rmi" ]]; then
+    shift
+    docker images --format "{{.Repository}}:{{.Tag}}" |grep $1 | xargs docker rmi -f # "$@"
+  elif [[ $1 = "v" ]]; then
+    shift
+    docker volume "$@"
+  else
+    docker "$@"
+  fi
+}
+
+dc() {
+  if [[ $1 = "circle" ]]; then
+    shift
+    docker-compose -f.circleci/docker-compose.yml "$@"
+  else
+    docker-compose "$@"
+  fi
+}
+
+dps() {
+  d ps "$@"
+}
+
+g() {
+  if [[ $1 = "s" ]]; then
+    shift
+    git status "$@"
+  elif [[ $1 = "ll" ]]; then
+    shift
+    git log --graph --oneline --decorate --all "$@"
+  elif [[ $1 = "l" ]]; then
+    shift
+    git log --all --graph --date=relative --pretty=format:'%h %Cgreen%ad%Creset %Cblue%an%Creset%n        %s%n       %C(auto)%d%Creset' "$@"
+  elif [[ $1 = "c" ]]; then
+    shift
+    git add . --all && git commit -am "$@"
+  elif [[ $1 = "p" ]]; then
+    shift
+    git push "$@"
+  elif [[ $1 = "m" ]]; then
+    shift
+    git merge "$@"
+  elif [[ $1 = "b" ]]; then
+    shift
+    git branch "$@"
+  elif [[ $1 = "co" ]]; then
+    shift
+    git checkout "$@"
+  elif [[ $1 = "pl" ]]; then
+    shift
+    git pull "$@"
+  elif [[ $1 = "rename" ]]; then
+    shift
+    git branch -m "$@"
+  elif [[ $1 = "chmod" ]]; then
+    shift
+    git update-index --chmod  "$@"
+  elif [[ $1 = "history" ]]; then
+    shift
+    git log -p "$@"
+  elif [[ $1 = "resolve-theirs" ]]; then
+    shift
+    git checkout --theirs . ; git add -u ; git commit -m 'Resolved conflicts with --theirs' "$@"
+  elif [[ $1 = "resolve-ours" ]]; then
+    shift
+    git checkout --ours . ; git add -u ; git commit -m 'Resolved conflicts with --ours' "$@"
+  elif [[ $1 = "remote-delete" ]]; then
+    shift
+    git push origin --delete "$@"
+  elif [[ $1 = "discard" ]]; then
+    shift
+    git checkout -- . ; git clean -fd "$@"
+  elif [[ $1 = "datelog" ]]; then
+    shift
+    git log --pretty=format:'%h %ad%x09%an%x09%s' --date=short "$@"
+  elif [[ $1 = "rollback" ]]; then
+    shift
+    git revert --no-commit $1..HEAD # "$@"
+  else
+    git "$@"
+  fi
+}
+
+gg() {
+  g p "$@"
+}
+
+l() {
+  ls -l "$@"
+}
+
+myip() {
+  ifconfig |head -n2 |sed -rn 's/.*addr:([^ ]+) .*/\1/p' "$@"
+}
+
+sad() {
+  ssh-add "$@"
+}
