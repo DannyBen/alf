@@ -91,14 +91,17 @@ generate() {
       if [[ -z $indent ]]; then
         ali1="${BASH_REMATCH[2]}"
         cmd1="${BASH_REMATCH[3]}"
-        unset ali2
-        unset cmd2
+        local_regex="^$ali1(\s+|$)"
+        if [[ $cmd1 =~ $local_regex ]]; then
+          cmd1="command $cmd1"
+        fi
+        unset ali2 cmd2
         generate_last_cmd
         lastcmd=$cmd1
       else
         ali2="${BASH_REMATCH[2]}"
         cmd2="${BASH_REMATCH[3]}"
-      fi    
+      fi
 
       if [[ -n $ali2 ]]; then
         echo "  $cond [[ \$1 = \"$ali2\" ]]; then"
