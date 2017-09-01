@@ -12,8 +12,8 @@ Features
 
 - Create aliases by using a config file
 - Create aliases for sub-commands (for example, `g s` for `git status`)
-- Synchronize your aliases across hosts by uploading your config file to 
-  GitHub.
+- Synchronize your aliases across hosts or users by uploading your 
+  config file to GitHub.
 
 
 Usage
@@ -26,8 +26,13 @@ Usage
 2. Create your own `alf-conf` repository  
    The easiest way to use alf is to create a repository on github, call it 
    `alf-conf`, and put an `alf.conf` file in it. See the [`alf.conf`](alf.conf)
-   file as a starting point.
+   file as a starting point, or fork my [alf-conf][1] repository.
 
 3. Connect alf to your repository
 
     `$ alf connect <your github user>`
+
+
+---
+
+[1]: https://github.com/DannyBen/alf-conf

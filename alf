@@ -194,6 +194,8 @@ save() {
   find_config
   echo "Saving to $ALIASES_FILE"
   generate > $ALIASES_FILE
+  echo "To apply new aliases to the current session, run:"
+  echo "$ source ~/.bash_aliases"
 }
 
 initialize() {
