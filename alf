@@ -177,8 +177,8 @@ save() {
 initialize() {
   VERSION="0.0.1"
   LONG_USAGE=false
-  REPO=''
-  RC_FILE=~/.alfrc
+  REPO=${ALF_REPO:=''}
+  RC_FILE=${ALF_RC_FILE:=~/.alfrc}
   ME=$0
   set -e
 }

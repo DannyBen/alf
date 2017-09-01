@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# NOTE: You should run this from the root directory of the repo
+#       $ test/run
+
+before_all() {
+  [[ -d test ]] || { echo "Are you in the right folder? ($PWD)"; exit 1; }
+  chmod +x ./alf
+  [[ ! -d bak ]] && mkdir bak
+  [[ -f ~/.alfrc ]] && cp ~/.alfrc bak/.alfrc
+  [[ -f ~/.bash_aliases ]] && cp ~/.bash_aliases bak/.bash_aliases
+}
+
+after_all() {
+  [[ -f bak/.alfrc ]] && cp bak/.alfrc ~/.alfrc
+  [[ -f bak/.bash_aliases ]] && cp bak/.bash_aliases ~/.bash_aliases
+}
+
+before_all
+bats test
+after_all
+

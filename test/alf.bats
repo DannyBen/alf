@@ -14,7 +14,7 @@ ALF_SUPRESS_RUN=1 source ./alf
 }
 
 @test "alf.find_config, without .alfrc, returns default values" {
-  if [[ -f ~/.alfrc ]]; then rm ~/.alfrc; fi
+  [[ -f ~/.alfrc ]] && rm ~/.alfrc
   find_config
   [[ $REPO_PATH = "$PWD/alf-conf" ]]
   [[ $CONFIG_FILE = "alf.conf" ]]
