@@ -45,8 +45,8 @@ usage() {
 }
 
 find_config() {
-  CONFIG_FILE="alf.conf"
   REPO_PATH="$PWD/alf-conf"
+  CONFIG_FILE="alf.conf"
   if [[ -f $RC_FILE ]]; then
     REPO_PATH=$(<$RC_FILE)
     CONFIG_FILE=$REPO_PATH/alf.conf
@@ -174,16 +174,16 @@ save() {
   $ME generate > ~/.bash_aliases
 }
 
-main() {
-  # internal variables
+initialize() {
   VERSION="0.0.1"
   LONG_USAGE=false
   REPO=''
   RC_FILE=~/.alfrc
   ME=$0
-
-  # execute
   set -e
+}
+
+run() {
   case "$1" in
     c | connect  ) REPO=$2; connect ;;
     d | download ) download ;;
@@ -196,6 +196,8 @@ main() {
   esac
 }
 
-if ! $ALF_SUPRESS_RUN; then
-  main $@
+initialize
+
+if [[ $ALF_SUPRESS_RUN -ne 1 ]]; then
+  run $@
 fi
