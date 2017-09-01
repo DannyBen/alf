@@ -19,7 +19,7 @@ end
 
 Given(/^the (?:folder|dir|directory) "([^"]*)" (does not )?exists?$/) do |dir, negate|
   if negate
-    Dir.rm_rf(dir) if Dir.exist? dir
+    FileUtils.rm_rf(dir) if Dir.exist? dir
   else
     Dir.mkdir(dir) unless Dir.exist? dir
   end
