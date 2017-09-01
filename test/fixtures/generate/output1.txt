@@ -21,3 +21,16 @@ g() {
 gg() {
   g p "$@"
 }
+
+ag() {
+  command ag --color "$@"
+}
+
+abc() {
+  if [[ $1 = "help" ]]; then
+    shift
+    command abc --help "$@"
+  else
+    command abc "$@"
+  fi
+}
