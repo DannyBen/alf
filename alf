@@ -44,6 +44,15 @@ usage() {
   fi
 }
 
+find_config() {
+  CONFIG_FILE="alf.conf"
+  REPO_PATH="$PWD/alf-conf"
+  if [[ -f $RC_FILE ]]; then
+    REPO_PATH=$(<$RC_FILE)
+    CONFIG_FILE=$REPO_PATH/alf.conf
+  fi
+}
+
 generate_last_cmd() {
   if [[ -n $lastcmd ]]; then
     if [[ $cond = "if" ]]; then
@@ -56,15 +65,6 @@ generate_last_cmd() {
       echo "}"
       cond="if"
     fi
-  fi
-}
-
-find_config() {
-  CONFIG_FILE="alf.conf"
-  REPO_PATH="$PWD/alf-conf"
-  if [[ -f $RC_FILE ]]; then
-    REPO_PATH=$(<$RC_FILE)
-    CONFIG_FILE=$REPO_PATH/alf.conf
   fi
 }
 

@@ -11,6 +11,6 @@ export ALF_SUPRESS_RUN=false
 @test "cli --help, shows detailed usage" {
   run ./alf --help
   [ "$status" -eq 0 ]
-  expected="alf `alf -v` - Your Little Bash Alias Friend"
+  expected="alf `./alf -v` - Your Little Bash Alias Friend"
   [ ${lines[0]} = $expected ]
 }

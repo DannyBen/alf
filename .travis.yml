@@ -6,4 +6,4 @@ before_install:
 - sudo apt install bats
 
 script:
-  - bats test
+- bats test
