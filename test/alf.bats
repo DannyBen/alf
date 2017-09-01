@@ -14,8 +14,9 @@ source ./alf
   [ $REPO_URL = https://github.com/Bob/myrepo.git ]
 }
 
-@test "alf.make_full_repo_path, with full path, returns valid path" {
+@test "alf.find_config, without .alfrc, returns default values" {
   REPO='https://bitbucket/user/reo'
-  make_full_repo_path
-  [ $REPO_URL = $REPO ]
+  find_config
+  [ $CONFIG_FILE = 'alf.conf' ]
+  [ $REPO_PATH = "$PWD/alf-conf" ]
 }
