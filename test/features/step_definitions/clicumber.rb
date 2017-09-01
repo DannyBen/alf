@@ -65,6 +65,12 @@ Given(/^the variable "([^"]*)" is (not )?"([^"]*)"$/) do |name, negate, value|
   end
 end
 
+## Given...ran
+
+Given(/^I have already ran "([^"]*)"$/) do |command|
+  @stdout, @stderr, @status = Open3.capture3 command
+end
+
 ## When...run
 
 When(/^I run: (.+)$/) do |command|
