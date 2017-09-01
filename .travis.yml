@@ -3,7 +3,7 @@ language: ruby
 rvm:
   - 2.4.1
 
-before_script: cd test && bundle
+before_script: cd test && bundle && export PATH=$PATH:$PWD
 
 script: bundle exec cucumber
 
