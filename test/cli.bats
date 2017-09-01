@@ -1,4 +1,5 @@
 #!/usr/bin/env bats
+load test_helper
 export ALF_SUPRESS_RUN=false
 
 @test "cli without args, shows usage" {
