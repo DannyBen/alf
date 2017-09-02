@@ -36,10 +36,6 @@ usage() {
   if $LONG_USAGE; then
     printf "    Generate aliases and save to ~/.bash_aliases\n\n"
   fi
-  printf "  alf upgrade\n"
-  if $LONG_USAGE; then
-    printf "    Upgrade alf executable to latest release\n\n"
-  fi
   printf "  alf -h|--help\n"
   if $LONG_USAGE; then
     printf "    Show this message\n\n"
@@ -202,12 +198,6 @@ save() {
   echo "$ source ~/.bash_aliases"
 }
 
-upgrade() {
-  echo "Downloading latest alf version"
-  curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf
-  echo "`alf version` installed"
-}
-
 run() {
   case "$1" in
     c | connect  ) REPO=$2; FORCE=$3; connect ;;
@@ -215,7 +205,6 @@ run() {
     g | generate ) generate ;;
     s | save     ) save ;;
     u | upload   ) upload ;;
-    upgrade      ) upgrade ;;
     -h | --help    | help    ) LONG_USAGE=true; usage ;;
     -v | --version | version ) echo $VERSION ;;
     * ) usage ;;
@@ -223,7 +212,7 @@ run() {
 }
 
 initialize() {
-  VERSION="0.0.3"
+  VERSION="0.0.4"
   LONG_USAGE=false
   REPO=${ALF_REPO:=''}
   ALIASES_FILE=${ALF_ALIASES_FILE:=~/.bash_aliases}
