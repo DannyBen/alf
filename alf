@@ -204,7 +204,7 @@ save() {
 
 upgrade() {
   echo "Downloading latest alf version"
-  # curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf
+  curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf
   echo "`alf version` installed"
 }
 
