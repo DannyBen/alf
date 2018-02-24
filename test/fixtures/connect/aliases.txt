@@ -19,6 +19,9 @@ d() {
   elif [[ $1 = "rmi" ]]; then
     shift
     docker images --format "{{.Repository}}:{{.Tag}}" |grep $1 | xargs docker rmi -f # "$@"
+  elif [[ $1 = "rmv" ]]; then
+    shift
+    docker volume ls --format "{{.Name}}" |grep $1 |xargs docker volume rm -f # "$@"
   elif [[ $1 = "v" ]]; then
     shift
     docker volume "$@"
@@ -28,12 +31,25 @@ d() {
 }
 
 dc() {
-  if [[ $1 = "circle" ]]; then
+  if [[ $1 = "ci" ]]; then
+    shift
+    docker-compose -f.ci/docker-compose.yml "$@"
+  elif [[ $1 = "circle" ]]; then
     shift
     docker-compose -f.circleci/docker-compose.yml "$@"
+  elif [[ $1 = "ls" ]]; then
+    shift
+    docker-compose config --services "$@"
+  elif [[ $1 = "upd" ]]; then
+    shift
+    docker-compose up -d "$@"
   else
     docker-compose "$@"
   fi
+}
+
+dfh() {
+  df -h "$@"
 }
 
 dps() {
@@ -68,6 +84,12 @@ g() {
   elif [[ $1 = "pl" ]]; then
     shift
     git pull "$@"
+  elif [[ $1 = "ls" ]]; then
+    shift
+    git ls-tree --full-name --name-only -r HEAD "$@"
+  elif [[ $1 = "compare" ]]; then
+    shift
+    git diff --stat --color $1..HEAD # "$@"
   elif [[ $1 = "rename" ]]; then
     shift
     git branch -m "$@"
@@ -95,6 +117,9 @@ g() {
   elif [[ $1 = "rollback" ]]; then
     shift
     git revert --no-commit $1..HEAD # "$@"
+  elif [[ $1 = "optimize" ]]; then
+    shift
+    git repack -ad && git gc "$@"
   else
     git "$@"
   fi
@@ -104,14 +129,34 @@ gg() {
   g p "$@"
 }
 
+gpl() {
+  g pl "$@"
+}
+
+killport() {
+  [[ $(lsof -ti:$1) ]] && kill -9 $(lsof -ti:$1) # "$@"
+}
+
 l() {
   ls -l "$@"
+}
+
+ll() {
+  ls -la "$@"
 }
 
 myip() {
   ifconfig |head -n2 |sed -rn 's/.*addr:([^ ]+) .*/\1/p' "$@"
 }
 
+py() {
+  python3 "$@"
+}
+
 sad() {
   ssh-add "$@"
+}
+
+uml() {
+  java -jar /vagrant/java/plantuml/plantuml.jar "$@"
 }
