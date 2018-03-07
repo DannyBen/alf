@@ -12,7 +12,7 @@ usage() {
     printf "    Connect to a remote git repository.\n"
     printf "    REPO can be:\n"
     printf "    - Your username on GitHub. In this case, we will assume the\n"
-    printf "      repository is named 'alf-config'\n"
+    printf "      repository is named 'alf-conf'\n"
     printf "    - Your username/repo on GitHub\n"
     printf "    - Any other full URL to a repository\n"
     printf "    In case the -y flag is specified, the operation will be\n"
