@@ -37,14 +37,14 @@ Usage
 --------------------------------------------------
 
     $ alf --help
-    alf 0.0.4 - Your Little Bash Alias Friend
+    alf - Your Little Bash Alias Friend
 
     Usage:
       alf connect REPO [-y]
         Connect to a remote git repository.
         REPO can be:
         - Your username on GitHub. In this case, we will assume the
-          repository is named 'alf-config'
+          repository is named 'alf-conf'
         - Your username/repo on GitHub
         - Any other full URL to a repository
         In case the -y flag is specified, the operation will be

@@ -9,7 +9,7 @@ Scenario: Run alf download
     And the directory "alf-conf" exists
    When I run "alf download"
    Then the output should match "Pulling from repository"
-    And the output should match "Already up-to-date"
+    And the output should match "Already up.to.date"
     And the exit code should mean success
 
 Scenario: Run alf download without repo connection
