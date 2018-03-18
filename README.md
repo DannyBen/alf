@@ -1,7 +1,8 @@
 Alf - Your Little Bash Alias Friend
 ==================================================
 
-[![Build Status](https://travis-ci.org/DannyBen/alf.svg?branch=tests)](https://travis-ci.org/DannyBen/alf)
+![Version](https://img.shields.io/badge/version-0.1.1-blue.svg?style=flat-square)
+[![Build](https://img.shields.io/travis/DannyBen/alf.svg?style=flat-square)](https://travis-ci.org/DannyBen/alf)
 
 ---
 
@@ -63,6 +64,9 @@ Usage
 
       alf save
         Generate aliases and save to ~/.bash_aliases
+
+      alf edit
+        Open your alf.conf for editing
 
       alf -h|--help
         Show this message
