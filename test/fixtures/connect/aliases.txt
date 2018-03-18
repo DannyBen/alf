@@ -6,6 +6,11 @@ ag() {
   command ag --color-match "1;36" "$@"
 }
 
+unalias be 1>/dev/null 2>&1
+be() {
+  bundle exec "$@"
+}
+
 unalias d 1>/dev/null 2>&1
 d() {
   if [[ $1 = "ps" ]]; then
@@ -29,6 +34,9 @@ d() {
   elif [[ $1 = "v" ]]; then
     shift
     docker volume "$@"
+  elif [[ $1 = "n" ]]; then
+    shift
+    docker network "$@"
   else
     docker "$@"
   fi
@@ -55,7 +63,7 @@ dc() {
 
 unalias dfh 1>/dev/null 2>&1
 dfh() {
-  df -h "$@"
+  df -h |grep sd "$@"
 }
 
 unalias dps 1>/dev/null 2>&1
