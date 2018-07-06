@@ -31,7 +31,7 @@ place it somewhere in your path, and make it executable.
 
 The easiest way to use alf is to create a repository on github, call it 
 `alf-conf`, and put an `alf.conf` file in it. See the [`alf.conf`](alf.conf)
-file as a starting point, or fork my [alf-conf][1] repository.
+file as a starting point, or fork my [alf-conf][conf] repository.
 
 ### 3. Connect alf to your repository
 
@@ -81,4 +81,11 @@ Usage
 
 ---
 
-[1]: https://github.com/DannyBen/alf-conf
+For a similar project, but for command shortcuts on a per-directory basis, 
+see [opcode][opcode].
+
+
+---
+
+[conf]: https://github.com/DannyBen/alf-conf
+[opcode]: https://github.com/DannyBen/opcode
