@@ -5,8 +5,19 @@ read answer
 
 if [[ $answer =~ [Yy] ]]; then
   echo "Downloading from github.com/DannyBen/alf..."
-  sudo bash -c "curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf"
-  sudo chmod a+x /usr/local/bin/alf
+
+  CURL_COMMAND="curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf"
+  
+  if [[ $EUID -ne 0 ]]; then
+    # not root, need sudo
+    sudo bash -c "$CURL_COMMAND"
+    sudo chmod a+x /usr/local/bin/alf
+  else
+    # root
+    bash -c "$CURL_COMMAND"
+    chmod a+x /usr/local/bin/alf
+  fi
+
   if type alf > /dev/null; then
     echo "Done. Type 'alf --help' for more info."
   else
