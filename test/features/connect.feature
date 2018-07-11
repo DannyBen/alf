@@ -10,6 +10,7 @@ Scenario: Run alf connect without repo
    Then the output should match "ERROR: Please provide a repo name or URL."
     And the exit code should mean failure
 
+@current
 Scenario: Run alf connect with a github username
    When I run "alf connect JohnSnow"
    Then the output should match "clone  https://github.com/JohnSnow/alf-conf.git"
