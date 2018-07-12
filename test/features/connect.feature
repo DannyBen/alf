@@ -16,11 +16,11 @@ Scenario: Run alf connect with a github username
 
 Scenario: Run alf connect with a github username and reponame
    When I run "alf connect JohnSnow/winterfell"
-   Then the output should be match "clone.*JohnSnow/winterfell.git"
+   Then the output should match "clone.*JohnSnow/winterfell.git"
 
 Scenario: Run alf connect with a full repo url
    When I run "alf connect https://bitbucket.com/JohnSnow/winterfell"
-   Then the output should be match "clone.*https://bitbucket.com/JohnSnow/winterfell"
+   Then the output should match "clone.*https://bitbucket.com/JohnSnow/winterfell"
 
 Scenario: Run alf connect non interactively
   Given the file "alfrc" does not exist
