@@ -132,9 +132,11 @@ make_full_repo_path() {
   elif [[ $REPO =~ ':' ]]; then
     REPO_URL=$REPO
   elif [[ $REPO =~ '/' ]]; then
-    REPO_URL="https://github.com/$REPO.git"
+    PARTIAL_GITHUB_URL=1
+    REPO_URL="$REPO.git"
   else
-    REPO_URL="https://github.com/$REPO/alf-conf.git"
+    PARTIAL_GITHUB_URL=1
+    REPO_URL="$REPO/alf-conf.git"
   fi
 }
 
@@ -170,6 +172,7 @@ connect() {
   make_full_repo_path
   if [[ $FORCE != "-y" ]]; then
     echo "This operation will:"
+    echo ""
     if [[ ! -d ./alf-conf ]]; then
       echo "  clone  $REPO_URL"
       echo "     to  ./alf-conf"
@@ -177,8 +180,28 @@ connect() {
     echo "  write  $PWD/alf-conf"
     echo "     to  $RC_FILE"
     echo ""
-    printf "Continue? [yN] "
-    read answer
+
+    if [[ -n "$PARTIAL_GITHUB_URL" ]]; then
+      echo "Would you like to connect to GitHub via SSH or HTTPS?"
+      echo ""
+      printf "[S]SH, [H]TTPS or [A]bort (default): "
+      read answer
+      
+      if [[ $answer =~ [Ss] ]]; then
+        REPO_URL="git@github.com:$REPO_URL"
+        answer=y
+        echo ""
+        echo "Using $REPO_URL"
+      elif [[ $answer =~ [Hh] ]]; then
+        REPO_URL="https://github.com/$REPO_URL"
+        answer=y
+        echo ""
+        echo "Using $REPO_URL"
+      fi
+    else
+      printf "Continue? [yN] "
+      read answer
+    fi
   else
     answer=y
   fi
@@ -226,7 +249,7 @@ run() {
 }
 
 initialize() {
-  VERSION="0.1.2"
+  VERSION="0.1.3"
   LONG_USAGE=false
   REPO=${ALF_REPO:=''}
   ALIASES_FILE=${ALF_ALIASES_FILE:=~/.bash_aliases}

@@ -93,6 +93,13 @@ When(/^I wait (?:for )?"([^"]*)" seconds?$/) do |seconds|
   sleep seconds.to_f
 end
 
+## When...save
+
+When(/^I save the (error )?output to "([^"]*)"$/) do |stderr, file|
+  stream = stderr ? @stderr : @stdout
+  File.write file, stream
+end
+
 ## Then...output
 
 Then(/^the (error )?output should (not )?be like "([^"]*)"$/) do |stderr, negate, file|
