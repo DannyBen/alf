@@ -12,18 +12,15 @@ Scenario: Run alf connect without repo
 
 Scenario: Run alf connect with a github username
    When I run "alf connect JohnSnow"
-  # And I save the output to "output-username.txt"
-   Then the output should be like "output-username.txt"
+   Then the output should match "clone.*JohnSnow/alf-conf.git"
 
 Scenario: Run alf connect with a github username and reponame
    When I run "alf connect JohnSnow/winterfell"
-  # And I save the output to "output-reponame.txt"
-   Then the output should be like "output-reponame.txt"
+   Then the output should be match "clone.*JohnSnow/winterfell.git"
 
 Scenario: Run alf connect with a full repo url
    When I run "alf connect https://bitbucket.com/JohnSnow/winterfell"
-  # And I save the output to "output-fullname.txt"
-   Then the output should be like "output-fullname.txt"
+   Then the output should be match "clone.*https://bitbucket.com/JohnSnow/winterfell"
 
 Scenario: Run alf connect non interactively
   Given the file "alfrc" does not exist

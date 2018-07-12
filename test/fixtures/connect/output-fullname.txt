@@ -1,8 +1,0 @@
-This operation will:
-
-  clone  https://bitbucket.com/JohnSnow/winterfell
-     to  ./alf-conf
-  write  /vagrant/bash/alf/test/fixtures/connect/alf-conf
-     to  ./alfrc
-
-Continue? [yN] 
