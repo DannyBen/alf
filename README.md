@@ -1,7 +1,7 @@
 Alf - Your Little Bash Alias Friend
 ==================================================
 
-![Version](https://img.shields.io/badge/version-0.1.3-blue.svg)
+![Version](https://img.shields.io/badge/version-0.1.4-blue.svg)
 [![Build](https://img.shields.io/travis/DannyBen/alf.svg)](https://travis-ci.org/DannyBen/alf)
 
 ---
