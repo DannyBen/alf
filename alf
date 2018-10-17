@@ -83,7 +83,7 @@ generate_last_cmd() {
 }
 
 generate() {
-  regex="^(\s*)([a-z\-]+):\s*(.+)$"
+  regex="^(\s*)([a-z0-9\-]+):\s*(.+)$"
   cond="if"
   lastcmd=""
   find_config
@@ -249,7 +249,7 @@ run() {
 }
 
 initialize() {
-  VERSION="0.1.3"
+  VERSION="0.1.4"
   LONG_USAGE=false
   REPO=${ALF_REPO:=''}
   ALIASES_FILE=${ALF_ALIASES_FILE:=~/.bash_aliases}
