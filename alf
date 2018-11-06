@@ -7,7 +7,7 @@ usage() {
     printf "alf $VERSION - Your Little Bash Alias Friend\n\n"
   fi
   printf "Usage:\n"
-  printf "  alf connect REPO [-y]\n"
+  printf "  alf c|connect REPO [-y]\n"
   if $LONG_USAGE; then
     printf "    Connect to a remote git repository.\n"
     printf "    REPO can be:\n"
@@ -18,33 +18,37 @@ usage() {
     printf "    In case the -y flag is specified, the operation will be\n"
     printf "    executed without prompting for confirmation.\n\n"
   fi
-  printf "  alf download\n"
+  printf "  alf d|download\n"
   if $LONG_USAGE; then
     printf "    Perform 'git pull' on a previously connected repo\n\n"
   fi
-  printf "  alf upload\n"
+  printf "  alf u|upload\n"
   if $LONG_USAGE; then
     printf "    Perform 'git commit' and 'git push' on a previously connected\n"
     printf "    repo\n\n"
   fi
-  printf "  alf generate\n"
+  printf "  alf g|generate\n"
   if $LONG_USAGE; then
     printf "    Generate aliases from the config file in the connected repo\n"
     printf "    to stdout\n\n"
   fi
-  printf "  alf save\n"
+  printf "  alf s|save\n"
   if $LONG_USAGE; then
     printf "    Generate aliases and save to ~/.bash_aliases\n\n"
   fi
-  printf "  alf edit\n"
+  printf "  alf e|edit\n"
   if $LONG_USAGE; then
     printf "    Open your alf.conf for editing\n\n"
   fi
-  printf "  alf -h|--help\n"
+  printf "  alf -u|--upgrade|upgrade\n"
+  if $LONG_USAGE; then
+    printf "    Upgrade alf to latest version\n\n"
+  fi
+  printf "  alf -h|--help|help\n"
   if $LONG_USAGE; then
     printf "    Show this message\n\n"
   fi
-  printf "  alf -v|--version\n"
+  printf "  alf -v|--version|version\n"
   if $LONG_USAGE; then
     printf "    Show version number\n\n"
   fi
@@ -69,12 +73,18 @@ find_config() {
 
 generate_last_cmd() {
   if [[ -n $lastcmd ]]; then
+    if [[ $lastcmd =~ \$ ]]; then
+      fullcmd=$lastcmd
+    else
+      fullcmd="$lastcmd \"\$@\""
+    fi
+
     if [[ $cond = "if" ]]; then
-      echo "  $lastcmd \"\$@\""
+      echo "  $fullcmd"
       echo "}"
     else
       echo "  else"
-      echo "    $lastcmd \"\$@\""
+      echo "    $fullcmd"
       echo "  fi"
       echo "}"
       cond="if"
@@ -234,6 +244,10 @@ edit() {
   ${EDITOR:-vi} $CONFIG_FILE
 }
 
+upgrade() {
+  bash <(curl -s https://raw.githubusercontent.com/DannyBen/alf/master/setup)
+}
+
 run() {
   case "$1" in
     c | connect  ) REPO=$2; FORCE=$3; connect ;;
@@ -242,6 +256,7 @@ run() {
     s | save     ) save ;;
     u | upload   ) upload ;;
     e | edit     ) edit ;;
+    -u | --upgrade | upgrade ) upgrade ;;
     -h | --help    | help    ) LONG_USAGE=true; usage ;;
     -v | --version | version ) echo $VERSION ;;
     * ) usage ;;
@@ -249,7 +264,7 @@ run() {
 }
 
 initialize() {
-  VERSION="0.1.4"
+  VERSION="0.2.0"
   LONG_USAGE=false
   REPO=${ALF_REPO:=''}
   ALIASES_FILE=${ALF_ALIASES_FILE:=~/.bash_aliases}
