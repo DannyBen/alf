@@ -8,15 +8,12 @@ dir() {
 
 unalias g 1>/dev/null 2>&1
 g() {
-
   if [[ $1 = "s" ]]; then
     shift
     git status "$@"
-
   elif [[ $1 = "l" ]]; then
     shift
     git log --all --graph --date=relative "$@"
-
   elif [[ $1 = "p" ]]; then
     shift
     git push "$@"
@@ -37,11 +34,25 @@ ag() {
 
 unalias abc 1>/dev/null 2>&1
 abc() {
-
   if [[ $1 = "help" ]]; then
     shift
     command abc --help "$@"
   else
     command abc "$@"
+  fi
+}
+
+unalias reverse 1>/dev/null 2>&1
+reverse() {
+  echo $2 $1
+}
+
+unalias say 1>/dev/null 2>&1
+say() {
+  if [[ $1 = "again" ]]; then
+    shift
+    echo $1 $1
+  else
+    echo "$@"
   fi
 }

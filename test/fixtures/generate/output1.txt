@@ -41,3 +41,18 @@ abc() {
     command abc "$@"
   fi
 }
+
+unalias reverse 1>/dev/null 2>&1
+reverse() {
+  echo $2 $1
+}
+
+unalias say 1>/dev/null 2>&1
+say() {
+  if [[ $1 = "again" ]]; then
+    shift
+    echo $1 $1
+  else
+    echo "$@"
+  fi
+}
