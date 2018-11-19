@@ -121,9 +121,14 @@ generate() {
       fi
 
       if [[ -n $ali2 ]]; then
+        echo ""
         echo "  $cond [[ \$1 = \"$ali2\" ]]; then"
         echo "    shift"
-        echo "    $cmd1 $cmd2 \"\$@\""
+        if [[ $cmd2 =~ \$ ]]; then
+          echo "    $cmd1 $cmd2"
+        else
+          echo "    $cmd1 $cmd2 \"\$@\""
+        fi
         cond="elif"
       else
         echo ""
