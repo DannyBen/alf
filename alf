@@ -123,7 +123,11 @@ generate() {
       if [[ -n $ali2 ]]; then
         echo "  $cond [[ \$1 = \"$ali2\" ]]; then"
         echo "    shift"
-        echo "    $cmd1 $cmd2 \"\$@\""
+        if [[ $cmd2 =~ \$ ]]; then
+          echo "    $cmd1 $cmd2"
+        else
+          echo "    $cmd1 $cmd2 \"\$@\""
+        fi
         cond="elif"
       else
         echo ""
@@ -264,7 +268,7 @@ run() {
 }
 
 initialize() {
-  VERSION="0.2.0"
+  VERSION="0.2.1"
   LONG_USAGE=false
   REPO=${ALF_REPO:=''}
   ALIASES_FILE=${ALF_ALIASES_FILE:=~/.bash_aliases}
