@@ -268,7 +268,7 @@ run() {
 }
 
 initialize() {
-  VERSION="0.2.0"
+  VERSION="0.2.1"
   LONG_USAGE=false
   REPO=${ALF_REPO:=''}
   ALIASES_FILE=${ALF_ALIASES_FILE:=~/.bash_aliases}
