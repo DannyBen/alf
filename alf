@@ -40,6 +40,10 @@ usage() {
   if $LONG_USAGE; then
     printf "    Open your alf.conf for editing\n\n"
   fi
+  printf "  alf w|which CODE [SUBCODE]\n"
+  if $LONG_USAGE; then
+    printf "    Shows the alias command\n\n"
+  fi
   printf "  alf -u|--upgrade|upgrade\n"
   if $LONG_USAGE; then
     printf "    Upgrade alf to latest version\n\n"
@@ -63,7 +67,7 @@ find_config() {
   fi
 
   if [[ ! -f $CONFIG_FILE ]]; then
-    printf "ERROR: Cannot find config file.\n\n"
+    printf "ERROR: Cannot find config file\n\n"
     echo "You should either:"
     echo "- Run this command in a folder with 'alf.conf' file, or"
     echo "- Run 'alf connect' to properly connect to a remote config"
@@ -141,7 +145,7 @@ generate() {
 
 make_full_repo_path() {
   if [[ -z $REPO ]]; then
-    echo "ERROR: Please provide a repo name or URL."
+    echo "ERROR: Please provide a repo name or URL"
     exit 1
   elif [[ $REPO =~ ':' ]]; then
     REPO_URL=$REPO
@@ -235,6 +239,42 @@ connect() {
   save
 }
 
+show() {
+  if [[ -z $CODE ]]; then
+    echo "ERROR: Please provide a code"
+    exit 1
+  fi
+  find_config
+  regex="^($CODE):\s*(.+)$"
+  regex2="^(\s+)([a-z0-9\-]+):\s*(.+)$"
+  regex3="^(\s+)($SUBCODE):\s*(.+)$"
+  cmd1=""
+
+  while IFS= read -r line || [ -n "$line" ]; do
+    if [[ $line =~ $regex ]]; then
+      cmd1="${BASH_REMATCH[2]}"
+      if [[ -z $SUBCODE ]]; then
+        echo $cmd1
+        exit 0
+      fi
+    elif [[ -n $cmd1 ]]; then
+      if [[ $line =~ $regex2 ]]; then
+        if [[ $line =~ $regex3 ]]; then
+          cmd2="${BASH_REMATCH[3]}"
+          echo "$cmd1 $cmd2"
+          exit 0
+        fi
+      else
+        echo "Error: No such alias: $CODE $SUBCODE"
+        exit 1
+      fi
+    fi
+  done < $CONFIG_FILE
+  
+  echo "Error: No such alias: $CODE $SUBCODE"
+  exit 1
+}
+
 save() {
   find_config
   echo "Saving to $ALIASES_FILE"
@@ -260,6 +300,7 @@ run() {
     s | save     ) save ;;
     u | upload   ) upload ;;
     e | edit     ) edit ;;
+    w | which    ) CODE=$2; SUBCODE=$3; show ;;
     -u | --upgrade | upgrade ) upgrade ;;
     -h | --help    | help    ) LONG_USAGE=true; usage ;;
     -v | --version | version ) echo $VERSION ;;
