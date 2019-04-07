@@ -268,11 +268,11 @@ show() {
       if [[ $line =~ $regex2 ]]; then
         if [[ $line =~ $regex3 ]]; then
           cmd2="${BASH_REMATCH[3]}"
-          # if [[ $cmd2 =~ ^! ]]; then
-          #   echo ${cmd2:1}
-          # else
+          if [[ $cmd2 =~ ^! ]]; then
+            echo ${cmd2:1}
+          else
             echo "$cmd1 $cmd2"
-          # fi
+          fi
           exit 0
         fi
       else
