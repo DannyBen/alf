@@ -127,10 +127,17 @@ generate() {
       if [[ -n $ali2 ]]; then
         echo "  $cond [[ \$1 = \"$ali2\" ]]; then"
         echo "    shift"
-        if [[ $cmd2 =~ \$ ]]; then
-          echo "    $cmd1 $cmd2"
+        
+        if [[ $cmd2 =~ ^! ]]; then
+          cmd=${cmd2:1}
         else
-          echo "    $cmd1 $cmd2 \"\$@\""
+          cmd="$cmd1 $cmd2"
+        fi
+
+        if [[ $cmd2 =~ \$ ]]; then
+          echo "    $cmd"
+        else
+          echo "    $cmd \"\$@\""
         fi
         cond="elif"
       else
@@ -261,7 +268,11 @@ show() {
       if [[ $line =~ $regex2 ]]; then
         if [[ $line =~ $regex3 ]]; then
           cmd2="${BASH_REMATCH[3]}"
-          echo "$cmd1 $cmd2"
+          if [[ $cmd2 =~ ^! ]]; then
+            echo ${cmd2:1}
+          else
+            echo "$cmd1 $cmd2"
+          fi
           exit 0
         fi
       else

@@ -30,8 +30,10 @@ place it somewhere in your path, and make it executable.
 ### 2. Create your own `alf-conf` repository  
 
 The easiest way to use alf is to create a repository on github, call it 
-`alf-conf`, and put an `alf.conf` file in it. See the [`alf.conf`](alf.conf)
-file as a starting point, or fork my [alf-conf][conf] repository.
+`alf-conf`, and put an `alf.conf` file in it.
+
+- See the [alf.conf](alf.conf) file as a starting point, or
+- Fork my [alf-conf][conf] repository
 
 ### 3. Connect alf to your repository
 
