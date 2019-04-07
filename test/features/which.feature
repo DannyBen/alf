@@ -28,3 +28,8 @@ Scenario: Run alf which CODE SUBCODE with invalid code
    When I run "alf which g no"
    Then the output should say "Error: No such alias: g no"
     And the exit code should mean failure
+
+Scenario: Run alf which CODE SUBCODE with escaped code
+   When I run "alf which dc deploy"
+   Then the output should say "docker stack deploy -c docker-compose.yml"
+    And the exit code should mean success

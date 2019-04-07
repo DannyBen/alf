@@ -56,3 +56,19 @@ say() {
     echo "$@"
   fi
 }
+
+unalias dc 1>/dev/null 2>&1
+dc() {
+  if [[ $1 = "ls" ]]; then
+    shift
+    docker-compose config --services "$@"
+  elif [[ $1 = "deploy" ]]; then
+    shift
+    docker stack deploy -c docker-compose.yml "$@"
+  elif [[ $1 = "upd" ]]; then
+    shift
+    docker-compose up -d "$@"
+  else
+    docker-compose "$@"
+  fi
+}
