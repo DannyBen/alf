@@ -252,32 +252,26 @@ show() {
     exit 1
   fi
   find_config
-  regex="^($CODE):\s*(.+)$"
-  regex2="^(\s+)([a-z0-9\-]+):\s*(.+)$"
-  regex3="^(\s+)($SUBCODE):\s*(.+)$"
+  regex_exact_code="^($CODE):\s*(.+)$"
+  regex_exact_subcode="^(\s+)($SUBCODE):\s*(.+)$"
   cmd1=""
 
   while IFS= read -r line || [ -n "$line" ]; do
-    if [[ $line =~ $regex ]]; then
+    if [[ $line =~ $regex_exact_code ]]; then
       cmd1="${BASH_REMATCH[2]}"
       if [[ -z $SUBCODE ]]; then
         echo $cmd1
         exit 0
       fi
     elif [[ -n $cmd1 ]]; then
-      if [[ $line =~ $regex2 ]]; then
-        if [[ $line =~ $regex3 ]]; then
-          cmd2="${BASH_REMATCH[3]}"
-          if [[ $cmd2 =~ ^! ]]; then
-            echo ${cmd2:1}
-          else
-            echo "$cmd1 $cmd2"
-          fi
-          exit 0
+      if [[ $line =~ $regex_exact_subcode ]]; then
+        cmd2="${BASH_REMATCH[3]}"
+        if [[ $cmd2 =~ ^! ]]; then
+          echo ${cmd2:1}
+        else
+          echo "$cmd1 $cmd2"
         fi
-      else
-        echo "Error: No such alias: $CODE $SUBCODE"
-        exit 1
+        exit 0
       fi
     fi
   done < $CONFIG_FILE

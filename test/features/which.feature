@@ -33,3 +33,8 @@ Scenario: Run alf which CODE SUBCODE with escaped code
    When I run "alf which dc deploy"
    Then the output should match "^docker stack deploy -c docker-compose.yml$"
     And the exit code should mean success
+
+Scenario: Run alf which CODE SUBCODE on a separated code
+   When I run "alf which dc upd"
+   Then the output should match "^docker-compose up -d"
+    And the exit code should mean success
