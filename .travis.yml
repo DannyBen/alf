@@ -7,7 +7,7 @@ before_script:
 - export PATH=$PATH:$PWD
 
 script:
-- shellcheck op
+- shellcheck alf
 - cd test 
 - bundle
 - bundle exec cucumber
