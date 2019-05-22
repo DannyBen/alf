@@ -4,7 +4,7 @@
 # ---------------------------------------------------------------
 usage() { 
   if $LONG_USAGE; then
-    printf "alf $VERSION - Your Little Bash Alias Friend\n\n"
+    printf "alf %s - Your Little Bash Alias Friend\n\n" "$VERSION"
   fi
   printf "Usage:\n"
   printf "  alf c|connect REPO [-y]\n"
@@ -62,7 +62,7 @@ find_config() {
   REPO_PATH="$PWD/alf-conf"
   CONFIG_FILE="alf.conf"
   if [[ -f $RC_FILE ]]; then
-    REPO_PATH=$(<$RC_FILE)
+    REPO_PATH=$(<"$RC_FILE")
     CONFIG_FILE=$REPO_PATH/alf.conf
   fi
 
@@ -146,7 +146,7 @@ generate() {
         echo "$ali1() {"
       fi
     fi
-  done < $CONFIG_FILE
+  done < "$CONFIG_FILE"
   generate_last_cmd
 }
 
@@ -172,7 +172,7 @@ download() {
     echo "Please connect alf to a repository first"
     exit 1
   fi
-  pushd $REPO_PATH > /dev/null
+  pushd "$REPO_PATH" > /dev/null
   echo "Pulling from repository to $REPO_PATH"
   git pull
   popd > /dev/null
@@ -186,7 +186,7 @@ upload() {
     echo "Please connect alf to a repository first"
     exit 1
   fi
-  pushd $REPO_PATH > /dev/null
+  pushd "$REPO_PATH" > /dev/null
   echo "Pushing $REPO_PATH to repository"
   git commit -am "automatic push"
   git push
@@ -210,7 +210,7 @@ connect() {
       echo "Would you like to connect to GitHub via SSH or HTTPS?"
       echo ""
       printf "[S]SH, [H]TTPS or [A]bort (default): "
-      read answer
+      read -r answer
       
       if [[ $answer =~ [Ss] ]]; then
         REPO_URL="git@github.com:$REPO_URL"
@@ -225,7 +225,7 @@ connect() {
       fi
     else
       printf "Continue? [yN] "
-      read answer
+      read -r answer
     fi
   else
     answer=y
@@ -235,7 +235,7 @@ connect() {
     if [[ -d ./alf-conf ]]; then
       echo "Skipping clone, directory already exists"
     else
-      git clone $REPO_URL ./alf-conf
+      git clone "$REPO_URL" ./alf-conf
     fi
     echo "$PWD/alf-conf" > "$RC_FILE"
     echo "Storing location in $RC_FILE"
@@ -260,21 +260,21 @@ show() {
     if [[ $line =~ $regex_exact_code ]]; then
       cmd1="${BASH_REMATCH[2]}"
       if [[ -z $SUBCODE ]]; then
-        echo $cmd1
+        echo "$cmd1"
         exit 0
       fi
     elif [[ -n $cmd1 ]]; then
       if [[ $line =~ $regex_exact_subcode ]]; then
         cmd2="${BASH_REMATCH[3]}"
         if [[ $cmd2 =~ ^! ]]; then
-          echo ${cmd2:1}
+          echo "${cmd2:1}"
         else
           echo "$cmd1 $cmd2"
         fi
         exit 0
       fi
     fi
-  done < $CONFIG_FILE
+  done < "$CONFIG_FILE"
   
   echo "Error: No such alias: $CODE $SUBCODE"
   exit 1
@@ -283,14 +283,14 @@ show() {
 save() {
   find_config
   echo "Saving to $ALIASES_FILE"
-  generate > $ALIASES_FILE
+  generate > "$ALIASES_FILE"
   echo "To apply new aliases to the current session, run:"
   echo "$ source ~/.bash_aliases"
 }
 
 edit() {
   find_config
-  ${EDITOR:-vi} $CONFIG_FILE
+  ${EDITOR:-vi} "$CONFIG_FILE"
 }
 
 upgrade() {
@@ -308,7 +308,7 @@ run() {
     w | which    ) CODE=$2; SUBCODE=$3; show ;;
     -u | --upgrade | upgrade ) upgrade ;;
     -h | --help    | help    ) LONG_USAGE=true; usage ;;
-    -v | --version | version ) echo $VERSION ;;
+    -v | --version | version ) echo "$VERSION" ;;
     * ) usage ;;
   esac
 }
@@ -323,4 +323,4 @@ initialize() {
 }
 
 initialize
-run $@
+run "$@"

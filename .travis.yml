@@ -1,14 +1,13 @@
 language: ruby
 
 rvm:
-  - 2.4.1
+- 2.4.1
 
 before_script: 
-  - export PATH=$PATH:$PWD
-  - cd test 
-  - bundle
+- export PATH=$PATH:$PWD
 
-script: bundle exec cucumber
-
-notifications:
-  email: false
+script:
+- shellcheck alf
+- cd test 
+- bundle
+- bundle exec cucumber
