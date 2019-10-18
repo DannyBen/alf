@@ -72,3 +72,16 @@ dc() {
     docker-compose "$@"
   fi
 }
+
+unalias dns 1>/dev/null 2>&1
+dns() {
+  if [[ $1 = "check" ]]; then
+    shift
+    host -t ns "$@"
+  elif [[ $1 = "flush" ]]; then
+    shift
+    sudo systemd-resolve --flush-caches "$@"
+  else
+    echo this alias requires a subcommand
+  fi
+}

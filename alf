@@ -77,7 +77,9 @@ find_config() {
 
 generate_last_cmd() {
   if [[ -n $lastcmd ]]; then
-    if [[ $lastcmd =~ \$ ]]; then
+    if [[ $lastcmd =~ ^! ]]; then
+      fullcmd="echo this alias requires a subcommand"
+    elif [[ $lastcmd =~ \$ ]]; then
       fullcmd=$lastcmd
     else
       fullcmd="$lastcmd \"\$@\""
@@ -97,7 +99,7 @@ generate_last_cmd() {
 }
 
 generate() {
-  regex="^(\s*)([a-z0-9\-]+):\s*(.+)$"
+  regex="^( *)([a-z0-9\-]+): *(.+)$"
   cond="if"
   lastcmd=""
   find_config
@@ -112,7 +114,7 @@ generate() {
       if [[ -z $indent ]]; then
         ali1="${BASH_REMATCH[2]}"
         cmd1="${BASH_REMATCH[3]}"
-        local_regex="^$ali1(\s+|$)"
+        local_regex="^$ali1( +|$)"
         if [[ $cmd1 =~ $local_regex ]]; then
           cmd1="command $cmd1"
         fi
@@ -130,6 +132,8 @@ generate() {
         
         if [[ $cmd2 =~ ^! ]]; then
           cmd=${cmd2:1}
+        elif [[ $cmd1 =~ ^! ]]; then
+          cmd="$cmd2"
         else
           cmd="$cmd1 $cmd2"
         fi
@@ -252,8 +256,8 @@ show() {
     exit 1
   fi
   find_config
-  regex_exact_code="^($CODE):\s*(.+)$"
-  regex_exact_subcode="^(\s+)($SUBCODE):\s*(.+)$"
+  regex_exact_code="^($CODE): *(.+)$"
+  regex_exact_subcode="^( +)($SUBCODE): *(.+)$"
   cmd1=""
 
   while IFS= read -r line || [ -n "$line" ]; do
