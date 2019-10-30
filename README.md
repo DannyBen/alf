@@ -39,10 +39,10 @@ place it somewhere in your path, and make it executable.
 Using with GitHub-hosted configuration (recommended)
 --------------------------------------------------
 
-### 1. Create your own `alf-conf` repository  
-
 The easiest way to use alf is to create a repository on github, call it 
 `alf-conf`, and put an `alf.conf` file in it.
+
+### 1. Create your own `alf-conf` repository  
 
 - See the [alf.conf](alf.conf) file as a starting point, or
 - Fork my [alf-conf][conf] repository
@@ -59,6 +59,9 @@ The easiest way to use alf is to create a repository on github, call it
 
 Using without GitHub
 --------------------------------------------------
+
+If you want to try alf before creating your Github repo, use this method to
+create your `bash_aliases` file from a local configuration file.
 
 ### 1. Create your `alf.conf` file
 
