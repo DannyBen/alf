@@ -22,17 +22,24 @@ Features
   config file to GitHub.
 
 
-Getting Started
+![Demo](/demo/cast.svg)
+
+
+Installation
 --------------------------------------------------
 
-### 1. Install the `alf` executable script
+Install the `alf` executable script:
 
     $ bash <(curl -s https://raw.githubusercontent.com/DannyBen/alf/master/setup)
 
 If you prefer to install manually, simply download the [alf](/alf) file,
 place it somewhere in your path, and make it executable.
 
-### 2. Create your own `alf-conf` repository  
+
+Using with GitHub-hosted configuration (recommended)
+--------------------------------------------------
+
+### 1. Create your own `alf-conf` repository  
 
 The easiest way to use alf is to create a repository on github, call it 
 `alf-conf`, and put an `alf.conf` file in it.
@@ -40,12 +47,30 @@ The easiest way to use alf is to create a repository on github, call it
 - See the [alf.conf](alf.conf) file as a starting point, or
 - Fork my [alf-conf][conf] repository
 
-### 3. Connect alf to your repository
+### 2. Connect alf to your repository
 
     $ alf connect <your github user>
 
+### 3. Save and source your aliases
 
-Usage
+    $ alf save
+    $ source ~/.bash_aliases
+
+
+Using without GitHub
+--------------------------------------------------
+
+### 1. Create your `alf.conf` file
+
+See the sample [alf.conf](alf.conf) file as a starting point.
+
+### 2. Save and source your aliases
+
+    $ alf save
+    $ source ~/.bash_aliases
+
+
+Additional usage patterns
 --------------------------------------------------
 
 ```
