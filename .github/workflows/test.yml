@@ -13,8 +13,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # - name: Setup PATH
-    #   run: echo "::add-path::$PWD"
+    - name: Setup PATH
+      run: echo "::add-path::$PWD"
 
     - name: Setup Ruby
       uses: actions/setup-ruby@v1

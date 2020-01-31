@@ -5,7 +5,7 @@ Alf - Your Little Bash Alias Friend
 ==================================================
 
 ![Version](https://img.shields.io/badge/version-0.3.2-blue.svg)
-[![Build](https://img.shields.io/travis/DannyBen/alf.svg)](https://travis-ci.org/DannyBen/alf)
+[![Build Status](https://github.com/DannyBen/alf/workflows/Test/badge.svg)](https://github.com/DannyBen/alf/actions?query=workflow%3ATest)
 
 </div>
 
