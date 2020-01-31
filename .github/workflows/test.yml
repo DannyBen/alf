@@ -1,0 +1,35 @@
+name: Test
+on:
+  pull_request:
+  push: { branches: master }
+
+jobs:
+  test:
+    name: Run test suite
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # - name: Setup PATH
+    #   run: echo "::add-path::$PWD"
+
+    - name: Setup Ruby
+      uses: actions/setup-ruby@v1
+      with: { ruby-version: '2.6' }
+
+    - name: Bundle install
+      working-directory: ./test
+      run: |
+        gem install bundler
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+
+    - name: Run cucumber tests
+      working-directory: ./test
+      run: bundle exec cucumber
+
+    - name: Run shellcheck tests
+      run: shellcheck alf
