@@ -1,0 +1,24 @@
+name: Test
+on:
+  pull_request:
+  push: { branches: master }
+
+jobs:
+  test:
+    name: Run test suite
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run shellcheck tests
+      run: shellcheck alf
+
+    - name: Build container for approval tests
+      run: docker-compose build
+
+    - name: Run approval tests
+      run: docker-compose run ci
+

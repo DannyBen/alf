@@ -1,0 +1,5 @@
+Cloning into './alf-conf'...
+Storing location in ./alfrc
+Saving to /root/.bash_aliases
+To apply new aliases to the current session, run:
+$ source ~/.bash_aliases

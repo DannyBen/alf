@@ -1,0 +1,5 @@
+ERROR: Cannot find config file
+
+You should either:
+- Run this command in a folder with 'alf.conf' file, or
+- Run 'alf connect' to properly connect to a remote config
