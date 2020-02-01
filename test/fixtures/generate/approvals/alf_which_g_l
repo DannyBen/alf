@@ -1,0 +1,1 @@
+git log --all --graph --date=relative

@@ -1,0 +1,10 @@
+This operation will:
+
+  clone  JohnSnow/winterfell.git
+     to  ./alf-conf
+  write  /app/test/fixtures/connect/alf-conf
+     to  ./alfrc
+
+Would you like to connect to GitHub via SSH or HTTPS?
+
+[S]SH, [H]TTPS or [A]bort (default): Aborting

@@ -1,0 +1,11 @@
+Usage:
+  alf c|connect REPO [-y]
+  alf d|download
+  alf u|upload
+  alf g|generate
+  alf s|save
+  alf e|edit
+  alf w|which CODE [SUBCODE]
+  alf -u|--upgrade|upgrade
+  alf -h|--help|help
+  alf -v|--version|version

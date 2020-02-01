@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  # docker-compose run bash
+  bash: &default
+    build: .
+    image: dannyben/alf
+    volumes: [".:/app"]
+
+  # docker-compose run test
+  # TEST=connect docker-compose run test
+  test: &test
+    <<: *default
+    environment: { TEST }
+    command: bash test/test.sh
+
+  # docker-compose run ci
+  ci:
+    <<: *test
+    volumes: []
+

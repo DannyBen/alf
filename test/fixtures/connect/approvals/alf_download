@@ -1,0 +1,5 @@
+Pulling from repository to /app/test/fixtures/connect/alf-conf
+Already up to date.
+Saving to /root/.bash_aliases
+To apply new aliases to the current session, run:
+$ source ~/.bash_aliases
