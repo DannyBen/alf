@@ -32,7 +32,6 @@ approve() {
     echo "--- [$(blue "diff: $cmd")] ---"
     user_approval "$cmd" "$actual" "$approval_file"
   fi
-  return $last_exit_code
 }
 
 describe() {
