@@ -17,5 +17,5 @@ describe "alf save (when alf.conf is not present)"
   set +e   # allow non zero exit
   approve "alf save"
   expect_exit_code 1
-  set -e
   [[ -f aliases.txt ]] && fail "Expected file aliases.txt not to exist"
+  set -e
