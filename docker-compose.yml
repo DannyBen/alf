@@ -5,7 +5,9 @@ services:
   bash: &default
     build: .
     image: dannyben/alf
-    volumes: [".:/app"]
+    volumes: 
+    - .:/app
+    - ./alf:/usr/local/bin/alf
 
   # docker-compose run test
   # TEST=connect docker-compose run test

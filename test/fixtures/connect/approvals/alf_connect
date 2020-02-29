@@ -1,1 +1,2 @@
-ERROR: Please provide a repo name or URL
+missing required argument: REPO
+usage: alf connect REPO [options]
