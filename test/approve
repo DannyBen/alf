@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Run this from the main repo directory
 
-set -e
 cd ./test
 source "approvals.bash"
 
@@ -10,6 +9,8 @@ if [[ $TEST ]]; then
 else
   for file in *_spec.sh ; do
     magenta "\nFILE $file"
-    ./$file
+    ./$file || fail "Aborted test loop"
   done
 fi
+
+green "\nAll tests have passed!"

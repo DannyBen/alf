@@ -2,6 +2,7 @@ This operation will:
 
   clone  JohnSnow/winterfell.git
      to  ./alf-conf
+
   write  /app/test/fixtures/connect/alf-conf
      to  ./alfrc
 

@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
-set -e
 source 'approvals.bash'
 
 export ALF_RC_FILE="./alfrc"
+
+describe "alf download --help"
+  approve "alf download --help"
+  expect_exit_code 1
 
 describe "alf download"
   cd ./fixtures/connect
@@ -14,8 +17,6 @@ describe "alf download"
 describe "alf download (without repo connection)"
   cd ./fixtures/empty-dir
   rm -rf ./alf-conf
-  set +e   # allow non zero exit code
   approve "alf download"
   expect_exit_code 1
-  set -e
 

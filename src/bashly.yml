@@ -1,0 +1,75 @@
+name: alf
+help: Your Little Bash Alias Friend
+version: 0.4.0
+
+environment_variables:
+- name: alf_rc_file
+  help: |
+    Path to alfrc file
+    This file holds the location of the alf-conf repository
+    Default: ~/.alfrc
+
+- name: alf_aliases_file
+  help: |
+    Path to bash_aliases file
+    This file will be generated when calling 'alf save'
+    Default: ~/.bash_aliases
+
+commands:
+- name: connect
+  short: c
+  help: Connect to a remote git repository
+
+  args:
+  - name: repo
+    required: true
+    help: |
+      Remote GitHub repository to connect to. This can be one of:
+      
+      - Your username on GitHub. In this case, the repository is expected to
+        be named 'alf-conf'
+      - Your username/repo on GitHub
+      - Any other full URL to a repository
+
+  flags:
+  - long: --yes
+    short: -y
+    help: Perform the operation without prompting for confirmation
+
+  examples:
+  - alf connect you --yes
+  - alf connect you/alf-config
+
+- name: download
+  short: d
+  help: Perform git pull on the connected repo
+
+- name: upload
+  short: u
+  help: Perform git commit and push on the connected repo
+
+- name: generate
+  short: g
+  help: Generate aliases to stdout
+
+- name: save
+  short: s
+  help: Generate aliases to ~/.bash_aliases
+
+- name: edit
+  short: e
+  help: Open your alf.conf for editing
+
+- name: which
+  short: w
+  help: Show the alias command
+
+  args:
+  - name: code
+    required: true
+    help: Show the command for this alias code
+  - name: subcode
+    help: Show the command for this alias sub-code
+
+- name: upgrade
+  help: Upgrade alf to the latest version

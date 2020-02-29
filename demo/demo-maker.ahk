@@ -9,6 +9,7 @@ Index := 1
 
 ; NOTE: This should be executed in the demo folder
 
+Commands.Push("cd demo")
 Commands.Push("rm cast.json {;} rm alf.conf {;} asciinema rec cast.json")
 Commands.Push("alf")
 

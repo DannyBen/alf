@@ -1,0 +1,11 @@
+alf generate - Generate aliases to stdout
+
+Shortcut: g
+
+Usage:
+  alf generate [options]
+  alf generate --help | -h
+
+Options:
+  --help, -h
+    Show this help

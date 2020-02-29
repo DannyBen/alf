@@ -1,1 +1,2 @@
-ERROR: Please provide a code
+missing required argument: CODE
+usage: alf which CODE [SUBCODE] [options]

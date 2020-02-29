@@ -1,0 +1,18 @@
+alf which - Show the alias command
+
+Shortcut: w
+
+Usage:
+  alf which CODE [SUBCODE] [options]
+  alf which --help | -h
+
+Options:
+  --help, -h
+    Show this help
+
+Arguments:
+  CODE
+    Show the command for this alias code
+
+  SUBCODE
+    Show the command for this alias sub-code

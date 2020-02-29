@@ -1,0 +1,27 @@
+alf connect - Connect to a remote git repository
+
+Shortcut: c
+
+Usage:
+  alf connect REPO [options]
+  alf connect --help | -h
+
+Options:
+  --help, -h
+    Show this help
+
+  --yes, -y
+    Perform the operation without prompting for confirmation
+
+Arguments:
+  REPO
+    Remote GitHub repository to connect to. This can be one of:
+    
+    - Your username on GitHub. In this case, the repository is expected to
+      be named 'alf-conf'
+    - Your username/repo on GitHub
+    - Any other full URL to a repository
+
+Examples:
+  alf connect you --yes
+  alf connect you/alf-config
