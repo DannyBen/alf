@@ -9,7 +9,7 @@ environment_variables:
     This file holds the location of the alf-conf repository
     Default: ~/.alfrc
 
-- name: ALF_ALIASES_FILE
+- name: alf_aliases_file
   help: |
     Path to bash_aliases file
     This file will be generated when calling 'alf save'
