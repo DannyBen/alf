@@ -12,7 +12,7 @@ approve() {
   approval=$(printf "%b" "$cmd" | tr -s -c "[:alnum:]" _)
   approval_file="$approvals_dir/${2:-"$approval"}"
 
-  [[ -d "$approvals_dir" ]] || mkdir approvals
+  [[ -d "$approvals_dir" ]] || mkdir "$approvals_dir"
 
   if [[ -f "$approval_file" ]]; then
     expected=$(cat "$approval_file")
@@ -50,7 +50,7 @@ pass() {
 }
 
 expect_exit_code() {
-  if [[ $last_exit_code == $1 ]]; then
+  if [[ $last_exit_code == "$1" ]]; then
     pass "exit $last_exit_code"
   else
     fail "Expected exit code $1, got $last_exit_code"
