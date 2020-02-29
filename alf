@@ -596,7 +596,7 @@ alf_which_command() {
 # :command.function
 alf_upgrade_command() {
   # :src/upgrade_command.sh
-  bash <(curl -s https://raw.githubusercontent.com/DannyBen/alf/master/setup)
+  exec bash <(curl -s https://raw.githubusercontent.com/DannyBen/alf/master/setup)
 }
 
 # :command.parse_requirements

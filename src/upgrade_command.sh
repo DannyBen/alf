@@ -1,1 +1,1 @@
-bash <(curl -s https://raw.githubusercontent.com/DannyBen/alf/master/setup)
+exec bash <(curl -s https://raw.githubusercontent.com/DannyBen/alf/master/setup)
