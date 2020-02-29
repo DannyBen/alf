@@ -24,6 +24,9 @@ Features
 
 ![Demo](/demo/cast.svg)
 
+Alf was developed using the [Bashly Command Line Framework][bashly].
+
+
 
 Installation
 --------------------------------------------------
@@ -136,3 +139,4 @@ to contribute, feel free to [open an issue][issues].
 [issues]: https://github.com/DannyBen/alf/issues
 [conf]: https://github.com/DannyBen/alf-conf
 [opcode]: https://github.com/DannyBen/opcode
+[bashly]: https://github.com/dannyben/bashly
