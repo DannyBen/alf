@@ -9,7 +9,7 @@ if [[ $TEST ]]; then
 else
   for file in *_spec.sh ; do
     magenta "\nFILE $file"
-    ./$file
+    ./$file || fail "Aborted test loop"
   done
 fi
 

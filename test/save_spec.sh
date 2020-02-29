@@ -19,4 +19,6 @@ describe "alf save (when alf.conf is not present)"
   rm -f "aliases.txt"
   approve "alf save"
   expect_exit_code 1
-  [[ -f aliases.txt ]] && fail "Expected file aliases.txt not to exist"
+  if [[ -f aliases.txt ]] ; then
+    fail "Expected file aliases.txt not to exist"
+  fi

@@ -46,6 +46,7 @@ fail() {
 
 pass() {
   green "PASS $*"
+  return 0
 }
 
 expect_exit_code() {

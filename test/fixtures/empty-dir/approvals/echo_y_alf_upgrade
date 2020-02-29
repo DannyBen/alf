@@ -1,0 +1,4 @@
+This operation will download the alf bash script to /usr/local/bin/alf.
+Continue? [yN]
+Downloading from github.com/DannyBen/alf...
+Done. Type 'alf --help' for more info.

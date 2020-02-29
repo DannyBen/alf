@@ -9,7 +9,7 @@ describe "alf upgrade --help"
 describe "alf upgrade (answer no)"
   approve "echo n | alf upgrade"
 
-# describe "alf upgrade (answer yes)"
-#   curl() { echo "stubbed curl: $*"; }
-#   approve "echo y | alf upgrade"
-#   unset -f curl
+describe "alf upgrade (answer yes)"
+  cp /usr/local/bin/alf /usr/local/bin/alf-before-upgrade
+  approve "echo y | alf upgrade"
+  mv /usr/local/bin/alf-before-upgrade /usr/local/bin/alf
