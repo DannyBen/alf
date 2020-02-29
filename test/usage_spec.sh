@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set +e # all tests here exit with 1
 source 'approvals.bash'
 cd ./fixtures/empty-dir
 

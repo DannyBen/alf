@@ -14,7 +14,7 @@ services:
   test: &test
     <<: *default
     environment: { TEST }
-    command: bash test/test.sh
+    command: bash test/approve
 
   # docker-compose run ci
   ci:

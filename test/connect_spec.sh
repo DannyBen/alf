@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 source 'approvals.bash'
 
 cd ./fixtures/connect
@@ -7,16 +6,12 @@ export ALF_RC_FILE="./alfrc"
 rm -rf alf-conf
 
 describe "alf connect --help"
-  set +e  # expect non zero exit code 
   approve "alf connect --help"
   expect_exit_code 1
-  set -e  
 
 describe "alf connect (no repo)"
-  set +e  # expect failure
   approve "alf connect"
   expect_exit_code 1
-  set -e
 
 describe "alf connect <github username>"
   approve "echo a | alf connect JohnSnow"

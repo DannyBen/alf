@@ -44,9 +44,13 @@ fail() {
   exit 1
 }
 
+pass() {
+  green "PASS $*"
+}
+
 expect_exit_code() {
   if [[ $last_exit_code == $1 ]]; then
-    green "PASS exit $last_exit_code"
+    pass "exit $last_exit_code"
   else
     fail "Expected exit code $1, got $last_exit_code"
   fi
@@ -75,7 +79,7 @@ user_approval() {
   printf "\r"
   if [[ $response =~ [Aa] ]]; then
     printf "%b\n" "$actual" > "$approval_file"
-    green "PASS $cmd"
+    pass "$cmd"
   else
     fail "$cmd"
   fi

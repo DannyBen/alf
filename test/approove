@@ -13,4 +13,4 @@ else
   done
 fi
 
-green "All tests have passed!"
+green "\nAll tests have passed!"

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# set -e
 source 'approvals.bash'
 
 unset ALF_RC_FILE
