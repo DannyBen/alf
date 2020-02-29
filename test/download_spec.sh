@@ -4,6 +4,12 @@ source 'approvals.bash'
 
 export ALF_RC_FILE="./alfrc"
 
+describe "alf download --help"
+  set +e  # expect non zero exit code 
+  approve "alf download --help"
+  expect_exit_code 1
+  set -e  
+
 describe "alf download"
   cd ./fixtures/connect
   [[ -d alf-conf ]] || alf connect DannyBen -y

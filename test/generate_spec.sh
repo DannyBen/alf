@@ -4,6 +4,12 @@ source 'approvals.bash'
 
 unset ALF_RC_FILE
 
+describe "alf generate --help"
+  set +e  # expect non zero exit code 
+  approve "alf generate --help"
+  expect_exit_code 1
+  set -e  
+
 describe "alf generate (when alf.conf is present)"
   cd ./fixtures/generate
   approve "alf generate"

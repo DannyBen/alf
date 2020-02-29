@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Run this from the main repo directory
 
-set -e
 cd ./test
 source "approvals.bash"
 
@@ -13,3 +12,5 @@ else
     ./$file
   done
 fi
+
+green "All tests have passed!"

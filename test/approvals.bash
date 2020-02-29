@@ -1,17 +1,18 @@
-# approvals.bash v0.2.5
+# approvals.bash v0.2.6
 #
 # Interactive approval testing for Bash.
 # https://github.com/DannyBen/approvals.bash
 approve() {
   local expected approval approval_file actual cmd
+  approvals_dir=${APPROVALS_DIR:=approvals}
   
   cmd=$1
   actual=$(eval "$cmd" 2>&1)  
   last_exit_code=$?
   approval=$(printf "%b" "$cmd" | tr -s -c "[:alnum:]" _)
-  approval_file="approvals/${2:-"$approval"}"
+  approval_file="$approvals_dir/${2:-"$approval"}"
 
-  [[ -d "approvals" ]] || mkdir approvals
+  [[ -d "$approvals_dir" ]] || mkdir approvals
 
   if [[ -f "$approval_file" ]]; then
     expected=$(cat "$approval_file")

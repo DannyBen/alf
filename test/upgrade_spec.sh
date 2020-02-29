@@ -3,8 +3,16 @@ set -e
 source 'approvals.bash'
 cd ./fixtures/empty-dir
 
-describe "Run alf --upgrade (answer no)"
-  approve "echo n | alf --upgrade"
+describe "alf upgrade --help"
+  set +e  # expect non zero exit code 
+  approve "alf upgrade --help"
+  expect_exit_code 1
+  set -e  
 
-describe "Run alf --upgrade (answer yes)"
-  approve "echo y | alf --upgrade"
+describe "alf upgrade (answer no)"
+  approve "echo n | alf upgrade"
+
+# describe "alf upgrade (answer yes)"
+#   curl() { echo "stubbed curl: $*"; }
+#   approve "echo y | alf upgrade"
+#   unset -f curl

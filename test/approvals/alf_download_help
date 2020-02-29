@@ -1,0 +1,11 @@
+alf download - Perform git pull on the connected repo
+
+Shortcut: d
+
+Usage:
+  alf download [options]
+  alf download --help | -h
+
+Options:
+  --help, -h
+    Show this help

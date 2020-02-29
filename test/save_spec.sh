@@ -5,6 +5,12 @@ source 'approvals.bash'
 unset ALF_RC_FILE
 export ALF_ALIASES_FILE="aliases.txt"
 
+describe "alf save --help"
+  set +e  # expect non zero exit code 
+  approve "alf save --help"
+  expect_exit_code 1
+  set -e  
+
 describe "alf save (when alf.conf is present)"
   cd ./fixtures/generate
   rm -f "aliases.txt"

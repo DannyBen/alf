@@ -1,0 +1,11 @@
+alf save - Generate aliases to ~/.bash_aliases
+
+Shortcut: s
+
+Usage:
+  alf save [options]
+  alf save --help | -h
+
+Options:
+  --help, -h
+    Show this help

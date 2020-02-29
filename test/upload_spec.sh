@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
-# set -e
+set +e # all tests here exit with 1
 source 'approvals.bash'
 
 export ALF_RC_FILE="./alfrc"
+
+describe "alf upload --help"
+  approve "alf upload --help"
+  expect_exit_code 1
 
 describe "alf upload"
   cd ./fixtures/connect
