@@ -2,6 +2,19 @@ name: alf
 help: Your Little Bash Alias Friend
 version: 0.4.0
 
+environment_variables:
+- name: alf_rc_file
+  help: |
+    Path to alfrc file
+    This file holds the location of the alf-conf repository
+    Default: ~/.alfrc
+
+- name: ALF_ALIASES_FILE
+  help: |
+    Path to bash_aliases file
+    This file will be generated when calling 'alf save'
+    Default: ~/.bash_aliases
+
 commands:
 - name: connect
   short: c

@@ -21,3 +21,14 @@ Options:
 
   --version, -v
     Show version number
+
+Environment Variables:
+  ALF_RC_FILE
+    Path to alfrc file
+    This file holds the location of the alf-conf repository
+    Default: ~/.alfrc
+
+  ALF_ALIASES_FILE
+    Path to bash_aliases file
+    This file will be generated when calling 'alf save'
+    Default: ~/.bash_aliases

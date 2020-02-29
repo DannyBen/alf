@@ -44,6 +44,19 @@ alf_usage() {
     printf "    Show version number\n"
     echo
 
+    # :command.usage_environment_variables
+    printf "Environment Variables:\n"
+    
+    # :environment_variable.usage
+    echo "  ALF_RC_FILE"
+    printf "    Path to alfrc file\n    This file holds the location of the alf-conf repository\n    Default: ~/.alfrc\n"
+    echo
+    
+    # :environment_variable.usage
+    echo "  ALF_ALIASES_FILE"
+    printf "    Path to bash_aliases file\n    This file will be generated when calling 'alf save'\n    Default: ~/.bash_aliases\n"
+    echo
+
   fi
 }
 
@@ -406,19 +419,6 @@ generate_last_cmd() {
   fi
 }
 
-# :src/lib/make_full_repo_path.sh
-make_full_repo_path() {
-  if [[ $repo =~ ':' ]]; then
-    repo_url=$repo
-  elif [[ $repo =~ '/' ]]; then
-    partial_github_url=1
-    repo_url="$repo.git"
-  else
-    partial_github_url=1
-    repo_url="$repo/alf-conf.git"
-  fi
-}
-
 # :src/lib/save_config.sh
 save_config() {
   find_config
@@ -437,7 +437,16 @@ alf_connect_command() {
   repo=${args[repo]}
   force=${args[--yes]}
   
-  make_full_repo_path
+  if [[ $repo =~ ':' ]]; then
+    repo_url=$repo
+  elif [[ $repo =~ '/' ]]; then
+    partial_github_url=1
+    repo_url="$repo.git"
+  else
+    partial_github_url=1
+    repo_url="$repo/alf-conf.git"
+  fi
+  
   if [[ ! $force ]]; then
     echo "This operation will:"
     echo ""
@@ -1084,7 +1093,6 @@ initialize() {
   set -e  
 
   # :src/initialize.sh
-  repo=${ALF_REPO:=''}
   aliases_file=${ALF_ALIASES_FILE:=~/.bash_aliases}
   rc_file=${ALF_RC_FILE:=~/.alfrc}
   set -e
