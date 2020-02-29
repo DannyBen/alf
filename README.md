@@ -38,6 +38,8 @@ Install the `alf` executable script:
 If you prefer to install manually, simply download the [alf](/alf) file,
 place it somewhere in your path, and make it executable.
 
+Note that alf requires bash 4.0 or higher (`brew install bash` for mac users).
+
 
 Using with GitHub-hosted configuration (recommended)
 --------------------------------------------------
