@@ -382,7 +382,7 @@ generate_config() {
   generate_last_cmd
 }
 
-# :src/lib/generate_last_command.sh
+# :src/lib/generate_last_cmd.sh
 generate_last_cmd() {
   if [[ -n $lastcmd ]]; then
     if [[ $lastcmd =~ ^! ]]; then
