@@ -4,7 +4,7 @@
 Alf - Your Little Bash Alias Friend
 ==================================================
 
-![Version](https://img.shields.io/badge/version-0.3.2-blue.svg)
+![Version](https://img.shields.io/badge/version-0.4.0-blue.svg)
 [![Build Status](https://github.com/DannyBen/alf/workflows/Test/badge.svg)](https://github.com/DannyBen/alf/actions?query=workflow%3ATest)
 
 </div>
@@ -49,12 +49,16 @@ The easiest way to use alf is to create a repository on github, call it
 
 ### 2. Connect alf to your repository
 
-    $ alf connect <your github user>
+```shell
+$ alf connect <your github user>
+```
 
 ### 3. Save and source your aliases
 
-    $ alf save
-    $ source ~/.bash_aliases
+```shell
+$ alf save
+$ source ~/.bash_aliases  # this normally already exists in your ~/.bashrc
+```
 
 
 Using without GitHub
@@ -81,53 +85,54 @@ $ alf --help
 alf - Your Little Bash Alias Friend
 
 Usage:
-  alf c|connect REPO [-y]
-    Connect to a remote git repository.
-    REPO can be:
-    - Your username on GitHub. In this case, we will assume the
-      repository is named 'alf-conf'
-    - Your username/repo on GitHub
-    - Any other full URL to a repository
-    In case the -y flag is specified, the operation will be
-    executed without prompting for confirmation.
+  alf [command] [options]
+  alf [command] --help | -h
+  alf --version | -v
 
-  alf d|download
-    Perform 'git pull' on a previously connected repo
+Commands:
+  connect    Connect to a remote git repository
+  download   Perform git pull on the connected repo
+  upload     Perform git commit and push on the connected repo
+  generate   Generate aliases to stdout
+  save       Generate aliases to ~/.bash_aliases
+  edit       Open your alf.conf for editing
+  which      Show the alias command
+  upgrade    Upgrade alf to the latest version
 
-  alf u|upload
-    Perform 'git commit' and 'git push' on a previously connected
-    repo
+Options:
+  --help, -h
+    Show this help
 
-  alf g|generate
-    Generate aliases from the config file in the connected repo
-    to stdout
-
-  alf s|save
-    Generate aliases and save to ~/.bash_aliases
-
-  alf e|edit
-    Open your alf.conf for editing
-
-  alf w|which CODE [SUBCODE]
-    Shows the alias command
-
-  alf -u|--upgrade|upgrade
-    Upgrade alf to latest version
-
-  alf -h|--help|help
-    Show this message
-
-  alf -v|--version|version
+  --version, -v
     Show version number
+
+Environment Variables:
+  ALF_RC_FILE
+    Path to alfrc file
+    This file holds the location of the alf-conf repository
+    Default: ~/.alfrc
+
+  ALF_ALIASES_FILE
+    Path to bash_aliases file
+    This file will be generated when calling 'alf save'
+    Default: ~/.bash_aliases
 ```
 
----
+Related Projects
+--------------------------------------------------
 
 For a similar project, but for command shortcuts on a per-directory basis, 
 see [opcode][opcode].
 
 
+Contributing / Support
+--------------------------------------------------
+
+If you experience any issue, have a question or a suggestion, or if you wish
+to contribute, feel free to [open an issue][issues].
+
 ---
 
+[issues]: https://github.com/DannyBen/alf/issues
 [conf]: https://github.com/DannyBen/alf-conf
 [opcode]: https://github.com/DannyBen/opcode
