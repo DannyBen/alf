@@ -3,7 +3,7 @@ alf which - Show the alias command
 Shortcut: w
 
 Usage:
-  alf which CODE [SUBCODE] [options]
+  alf which CODE [SUBCODE]
   alf which --help | -h
 
 Options:

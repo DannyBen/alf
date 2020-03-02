@@ -1,7 +1,7 @@
 alf - Your Little Bash Alias Friend
 
 Usage:
-  alf [command] [options]
+  alf [command]
   alf [command] --help | -h
   alf --version | -v
 
@@ -25,10 +25,5 @@ Options:
 Environment Variables:
   ALF_RC_FILE
     Path to alfrc file
-    This file holds the location of the alf-conf repository
+    This file holds the path to the alf-conf repository
     Default: ~/.alfrc
-
-  ALF_ALIASES_FILE
-    Path to bash_aliases file
-    This file will be generated when calling 'alf save'
-    Default: ~/.bash_aliases

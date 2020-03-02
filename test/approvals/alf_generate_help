@@ -3,7 +3,7 @@ alf generate - Generate aliases to stdout
 Shortcut: g
 
 Usage:
-  alf generate [options]
+  alf generate
   alf generate --help | -h
 
 Options:

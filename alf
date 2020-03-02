@@ -18,7 +18,7 @@ alf_usage() {
   fi
 
   printf "Usage:\n"
-  printf "  alf [command] [options]\n"
+  printf "  alf [command]\n"
   printf "  alf [command] --help | -h\n"
   printf "  alf --version | -v\n"
   echo
@@ -49,12 +49,7 @@ alf_usage() {
     
     # :environment_variable.usage
     echo "  ALF_RC_FILE"
-    printf "    Path to alfrc file\n    This file holds the location of the alf-conf repository\n    Default: ~/.alfrc\n"
-    echo
-    
-    # :environment_variable.usage
-    echo "  ALF_ALIASES_FILE"
-    printf "    Path to bash_aliases file\n    This file will be generated when calling 'alf save'\n    Default: ~/.bash_aliases\n"
+    printf "    Path to alfrc file\n    This file holds the path to the alf-conf repository\n    Default: ~/.alfrc\n"
     echo
 
   fi
@@ -121,7 +116,7 @@ alf_download_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  alf download [options]\n"
+  printf "  alf download\n"
   printf "  alf download --help | -h\n"
   echo
 
@@ -149,7 +144,7 @@ alf_upload_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  alf upload [options]\n"
+  printf "  alf upload\n"
   printf "  alf upload --help | -h\n"
   echo
 
@@ -177,7 +172,7 @@ alf_generate_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  alf generate [options]\n"
+  printf "  alf generate\n"
   printf "  alf generate --help | -h\n"
   echo
 
@@ -205,7 +200,7 @@ alf_save_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  alf save [options]\n"
+  printf "  alf save\n"
   printf "  alf save --help | -h\n"
   echo
 
@@ -214,6 +209,14 @@ alf_save_usage() {
     # :command.usage_fixed_flags
     echo "  --help, -h"
     printf "    Show this help\n"
+    echo
+
+    # :command.usage_environment_variables
+    printf "Environment Variables:\n"
+    
+    # :environment_variable.usage
+    echo "  ALF_ALIASES_FILE"
+    printf "    Path to bash_aliases file\n    Aliases will be saved to this file\n    Default: ~/.bash_aliases\n"
     echo
 
   fi
@@ -233,7 +236,7 @@ alf_edit_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  alf edit [options]\n"
+  printf "  alf edit\n"
   printf "  alf edit --help | -h\n"
   echo
 
@@ -261,7 +264,7 @@ alf_which_usage() {
   echo
 
   printf "Usage:\n"
-  printf "  alf which CODE [SUBCODE] [options]\n"
+  printf "  alf which CODE [SUBCODE]\n"
   printf "  alf which --help | -h\n"
   echo
 
@@ -299,7 +302,7 @@ alf_upgrade_usage() {
   fi
 
   printf "Usage:\n"
-  printf "  alf upgrade [options]\n"
+  printf "  alf upgrade\n"
   printf "  alf upgrade --help | -h\n"
   echo
 
@@ -1010,7 +1013,7 @@ alf_which_parse_requirements() {
     args[code]=$1
     shift
   else
-    printf "missing required argument: CODE\nusage: alf which CODE [SUBCODE] [options]\n"
+    printf "missing required argument: CODE\nusage: alf which CODE [SUBCODE]\n"
     exit 1
   fi
   # :command.required_flags_filter

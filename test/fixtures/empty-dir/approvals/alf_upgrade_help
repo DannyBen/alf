@@ -1,7 +1,7 @@
 alf upgrade - Upgrade alf to the latest version
 
 Usage:
-  alf upgrade [options]
+  alf upgrade
   alf upgrade --help | -h
 
 Options:
