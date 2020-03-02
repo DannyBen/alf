@@ -3,7 +3,7 @@ alf edit - Open your alf.conf for editing
 Shortcut: e
 
 Usage:
-  alf edit [options]
+  alf edit
   alf edit --help | -h
 
 Options:

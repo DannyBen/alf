@@ -3,9 +3,15 @@ alf save - Generate aliases to ~/.bash_aliases
 Shortcut: s
 
 Usage:
-  alf save [options]
+  alf save
   alf save --help | -h
 
 Options:
   --help, -h
     Show this help
+
+Environment Variables:
+  ALF_ALIASES_FILE
+    Path to bash_aliases file
+    Aliases will be saved to this file
+    Default: ~/.bash_aliases

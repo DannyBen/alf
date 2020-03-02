@@ -1,7 +1,7 @@
 alf - Your Little Bash Alias Friend
 
 Usage:
-  alf [command] [options]
+  alf [command]
   alf [command] --help | -h
   alf --version | -v
 
