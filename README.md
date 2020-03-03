@@ -11,7 +11,7 @@ Alf - Your Little Bash Alias Friend
 
 ---
 
-Alf enhances your bash alias management. Alf was developed using the
+Alf enhances your bash alias management. It was developed using the
 [Bashly Command Line Framework][bashly].
 
 Features
