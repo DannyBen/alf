@@ -122,12 +122,6 @@ Environment Variables:
     Default: ~/.alfrc
 ```
 
-Related Projects
---------------------------------------------------
-
-For a similar project, but for command shortcuts on a per-directory basis, 
-see [opcode][opcode].
-
 
 Uninstalling
 --------------------------------------------------
@@ -144,6 +138,13 @@ rm -f ~/.alfrc
 # Remove .bash_aliases (exists only if you have performed `alf save`)
 rm -f ~/.bash_aliases
 ```
+
+
+Related Projects
+--------------------------------------------------
+
+For a similar project, but for command shortcuts on a per-directory basis, 
+see [opcode][opcode].
 
 
 Contributing / Support
