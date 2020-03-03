@@ -11,21 +11,24 @@ Alf - Your Little Bash Alias Friend
 
 ---
 
-Alf enhances your bash alias management.
+Alf enhances your bash alias management. It was developed using the
+[Bashly Command Line Framework][bashly].
 
 Features
 --------------------------------------------------
 
-- Create aliases by using a config file
-- Create aliases for sub-commands (for example, `g s` for `git status`)
+- Create aliases by using a config file.
+- Create aliases for sub-commands (for example, `g s` for `git status`).
 - Synchronize your aliases across hosts or users by uploading your 
   config file to GitHub.
+- Does not alter anything in your system except for creating the
+  `~/.bash_aliases` file, which is normally already sourced by your login
+  process.
 
+Demo
+--------------------------------------------------
 
 ![Demo](/demo/cast.svg)
-
-Alf was developed using the [Bashly Command Line Framework][bashly].
-
 
 
 Installation
@@ -124,6 +127,23 @@ Related Projects
 
 For a similar project, but for command shortcuts on a per-directory basis, 
 see [opcode][opcode].
+
+
+Uninstalling
+--------------------------------------------------
+
+To uninstall alf:
+
+```shell
+# Remove the shell script
+sudo rm /usr/local/bin/alf
+
+# Remove .alfrc (exists only if you have performed `alf connect`)
+rm -f ~/.alfrc
+
+# Remove .bash_aliases (exists only if you have performed `alf save`)
+rm -f ~/.bash_aliases
+```
 
 
 Contributing / Support
