@@ -11,10 +11,13 @@ Options:
     Show this help
 
   --ssh
-    Connect non-interactively using SSH
+    Connect to GitHub non-interactively using SSH (implies --yes)
 
   --https
-    Connect non-interactively using HTTPS
+    Connect to GitHub non-interactively using HTTPS (implies --yes)
+
+  --yes, -y
+    Connect to any remote repository non-interactively
 
 Arguments:
   REPO
@@ -28,3 +31,4 @@ Arguments:
 Examples:
   alf connect you --ssh
   alf connect you/alf-config
+  alf connect https://You@bitbucket.org/YourUser/rush-repo.git --yes

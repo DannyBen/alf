@@ -1,4 +1,5 @@
 repo=${args[repo]}
+force=${args[--yes]}
 force_ssh=${args[--ssh]}
 force_https=${args[--https]}
 
@@ -20,6 +21,16 @@ if [[ $force_ssh ]]; then
 elif [[ $force_https ]]; then
   answer=y
   [[ $partial_github_url ]] && repo_url="https://github.com/$repo_url"
+  echo "Connecting to $repo_url"
+
+elif [[ $force ]] ; then
+  if [[ $partial_github_url ]] ; then
+    echo "Error: Cannot determine the full URL for the repository"
+    echo "To connect to GitHub use --ssh or --https"
+    echo "To connect to another repository, provide the full URL"
+    exit 1
+  fi
+  answer=y
   echo "Connecting to $repo_url"
 
 else

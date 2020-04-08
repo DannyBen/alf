@@ -1,6 +1,6 @@
 name: alf
 help: Your Little Bash Alias Friend
-version: 0.5.0
+version: 0.4.2
 
 environment_variables:
 - name: alf_rc_file
@@ -27,14 +27,19 @@ commands:
 
   flags:
   - long: --ssh
-    help: Connect non-interactively using SSH
+    help: Connect to GitHub non-interactively using SSH (implies --yes)
 
   - long: --https
-    help: Connect non-interactively using HTTPS
+    help: Connect to GitHub non-interactively using HTTPS (implies --yes)
+
+  - long: --yes
+    short: -y
+    help: Connect to any remote repository non-interactively
 
   examples:
   - alf connect you --ssh
   - alf connect you/alf-config
+  - alf connect https://You@bitbucket.org/YourUser/rush-repo.git --yes
 
 - name: download
   short: d
