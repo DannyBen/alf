@@ -36,7 +36,7 @@ Installation
 
 Install the `alf` executable script:
 
-    $ bash <(curl -s https://raw.githubusercontent.com/DannyBen/alf/master/setup)
+    $ bash <(curl -Ls get.dannyb.co/alf/setup)
 
 If you prefer to install manually, simply download the [alf](/alf) file,
 place it somewhere in your path, and make it executable.
