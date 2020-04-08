@@ -1,6 +1,6 @@
 name: alf
 help: Your Little Bash Alias Friend
-version: 0.4.1
+version: 0.5.0
 
 environment_variables:
 - name: alf_rc_file
@@ -26,12 +26,14 @@ commands:
       - Any other full URL to a repository
 
   flags:
-  - long: --yes
-    short: -y
-    help: Perform the operation without prompting for confirmation
+  - long: --ssh
+    help: Connect non-interactively using SSH
+
+  - long: --https
+    help: Connect non-interactively using HTTPS
 
   examples:
-  - alf connect you --yes
+  - alf connect you --ssh
   - alf connect you/alf-config
 
 - name: download

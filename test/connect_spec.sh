@@ -22,9 +22,16 @@ describe "alf connect <github username>/<github repo>"
 describe "alf connect <git url>"
   approve "echo a | alf connect https://bitbucket.com/JohnSnow/winterfell"
 
-describe "alf connect <anything> -y (non interactive)"
+describe "alf connect <git url> --https (non interactive)"
   rm -f ./alfrc
-  approve "alf connect https://github.com/DannyBen/alf-conf.git -y"
+  approve "alf connect https://github.com/DannyBen/alf-conf.git --https"
+  [[ -d alf-conf ]] || fail "Expected to have alf-conf directory"
+  [[ -f alf-conf/alf.conf ]] || fail "Expected to have alf-conf/alf.conf file"
+  approve "cat alfrc"
+
+describe "alf connect <github username> --https (non interactive)"
+  rm -f ./alfrc
+  approve "alf connect DannyBen --https"
   [[ -d alf-conf ]] || fail "Expected to have alf-conf directory"
   [[ -f alf-conf/alf.conf ]] || fail "Expected to have alf-conf/alf.conf file"
   approve "cat alfrc"

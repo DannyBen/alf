@@ -10,8 +10,11 @@ Options:
   --help, -h
     Show this help
 
-  --yes, -y
-    Perform the operation without prompting for confirmation
+  --ssh
+    Connect non-interactively using SSH
+
+  --https
+    Connect non-interactively using HTTPS
 
 Arguments:
   REPO
@@ -23,5 +26,5 @@ Arguments:
     - Any other full URL to a repository
 
 Examples:
-  alf connect you --yes
+  alf connect you --ssh
   alf connect you/alf-config
