@@ -7,12 +7,14 @@ services:
     image: dannyben/alf
     volumes: 
     - .:/app
-    # - ./alf:/usr/local/bin/alf
+    - ./alf:/usr/local/bin/alf
 
   # docker-compose run test
   # TEST=connect docker-compose run test
   test: &test
     <<: *default
+    volumes: 
+    - .:/app
     environment: { TEST }
     command: bash test/approve
 

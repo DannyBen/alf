@@ -1,0 +1,6 @@
+Connecting to https://github.com/DannyBen/alf-conf.git
+Skipping clone, directory already exists
+Storing location in ./alfrc
+Saving to /root/.bash_aliases
+To apply the new aliases to the current session, run:
+$ source ~/.bash_aliases

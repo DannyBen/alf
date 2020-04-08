@@ -81,8 +81,18 @@ alf_connect_usage() {
     echo
     # :command.usage_flags
     # :flag.usage
+    echo "  --ssh"
+    printf "    Connect to GitHub non-interactively using SSH (implies --yes)\n"
+    echo
+    
+    # :flag.usage
+    echo "  --https"
+    printf "    Connect to GitHub non-interactively using HTTPS (implies --yes)\n"
+    echo
+    
+    # :flag.usage
     echo "  --yes, -y"
-    printf "    Perform the operation without prompting for confirmation\n"
+    printf "    Connect to any remote repository non-interactively\n"
     echo
     # :command.usage_args
     printf "Arguments:\n"
@@ -95,8 +105,9 @@ alf_connect_usage() {
     # :command.usage_examples
     printf "Examples:\n"
     
-    printf "  alf connect you --yes\n"
+    printf "  alf connect you --ssh\n"
     printf "  alf connect you/alf-config\n"
+    printf "  alf connect https://You@bitbucket.org/YourUser/rush-repo.git --yes\n"
     echo
 
   fi
@@ -429,7 +440,7 @@ save_config() {
   echo "Saving to $aliases_file"
   generate_config > "$aliases_file"
 
-  echo "To apply new aliases to the current session, run:"
+  echo "To apply the new aliases to the current session, run:"
   echo "$ source ~/.bash_aliases"
 }
 
@@ -439,6 +450,8 @@ alf_connect_command() {
   # :src/connect_command.sh
   repo=${args[repo]}
   force=${args[--yes]}
+  force_ssh=${args[--ssh]}
+  force_https=${args[--https]}
   
   if [[ $repo =~ ':' ]]; then
     repo_url=$repo
@@ -450,7 +463,27 @@ alf_connect_command() {
     repo_url="$repo/alf-conf.git"
   fi
   
-  if [[ ! $force ]]; then
+  if [[ $force_ssh ]]; then
+    answer=y
+    [[ $partial_github_url ]] && repo_url="git@github.com:$repo_url"
+    echo "Connecting to $repo_url"
+  
+  elif [[ $force_https ]]; then
+    answer=y
+    [[ $partial_github_url ]] && repo_url="https://github.com/$repo_url"
+    echo "Connecting to $repo_url"
+  
+  elif [[ $force ]] ; then
+    if [[ $partial_github_url ]] ; then
+      echo "Error: Cannot determine the full URL for the repository"
+      echo "To connect to GitHub use --ssh or --https"
+      echo "To connect to another repository, provide the full URL"
+      exit 1
+    fi
+    answer=y
+    echo "Connecting to $repo_url"
+  
+  else
     echo "This operation will:"
     echo ""
     if [[ ! -d ./alf-conf ]]; then
@@ -483,8 +516,6 @@ alf_connect_command() {
       printf "Continue? [yN] "
       read -r answer
     fi
-  else
-    answer=y
   fi
   
   if [[ $answer =~ [Yy] ]]; then
@@ -492,9 +523,7 @@ alf_connect_command() {
       echo "Skipping clone, directory already exists"
     else
       git clone "$repo_url" ./alf-conf
-      echo ""
     fi
-    echo ""
     echo "$PWD/alf-conf" > "$rc_file"
     echo "Storing location in $rc_file"
   else
@@ -745,6 +774,18 @@ alf_connect_parse_requirements() {
   while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
+    # :flag.case
+    --ssh )
+      args[--ssh]=1
+      shift
+      ;;
+  
+    # :flag.case
+    --https )
+      args[--https]=1
+      shift
+      ;;
+  
     # :flag.case
     --yes | -y )
       args[--yes]=1
@@ -1091,7 +1132,7 @@ alf_upgrade_parse_requirements() {
 
 # :command.initialize
 initialize() {
-  version="0.4.1"
+  version="0.4.2"
   long_usage=''
   set -e  
 

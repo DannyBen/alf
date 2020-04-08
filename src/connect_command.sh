@@ -1,5 +1,7 @@
 repo=${args[repo]}
 force=${args[--yes]}
+force_ssh=${args[--ssh]}
+force_https=${args[--https]}
 
 if [[ $repo =~ ':' ]]; then
   repo_url=$repo
@@ -11,7 +13,27 @@ else
   repo_url="$repo/alf-conf.git"
 fi
 
-if [[ ! $force ]]; then
+if [[ $force_ssh ]]; then
+  answer=y
+  [[ $partial_github_url ]] && repo_url="git@github.com:$repo_url"
+  echo "Connecting to $repo_url"
+
+elif [[ $force_https ]]; then
+  answer=y
+  [[ $partial_github_url ]] && repo_url="https://github.com/$repo_url"
+  echo "Connecting to $repo_url"
+
+elif [[ $force ]] ; then
+  if [[ $partial_github_url ]] ; then
+    echo "Error: Cannot determine the full URL for the repository"
+    echo "To connect to GitHub use --ssh or --https"
+    echo "To connect to another repository, provide the full URL"
+    exit 1
+  fi
+  answer=y
+  echo "Connecting to $repo_url"
+
+else
   echo "This operation will:"
   echo ""
   if [[ ! -d ./alf-conf ]]; then
@@ -44,8 +66,6 @@ if [[ ! $force ]]; then
     printf "Continue? [yN] "
     read -r answer
   fi
-else
-  answer=y
 fi
 
 if [[ $answer =~ [Yy] ]]; then
@@ -53,9 +73,7 @@ if [[ $answer =~ [Yy] ]]; then
     echo "Skipping clone, directory already exists"
   else
     git clone "$repo_url" ./alf-conf
-    echo ""
   fi
-  echo ""
   echo "$PWD/alf-conf" > "$rc_file"
   echo "Storing location in $rc_file"
 else
