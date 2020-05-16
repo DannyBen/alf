@@ -1,7 +1,6 @@
 generate_completions() {
   ali1_regex="^([a-z0-9\-]+):"
   ali2_regex="^ +([a-z0-9\-]+):"
-  last=""
   find_config
 
   echo "# Completions"
