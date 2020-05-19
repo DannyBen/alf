@@ -52,5 +52,8 @@ generate_config() {
     fi
   done < "$config_file"
   generate_last_cmd
+
+  echo ""
+  generate_completions
 }
 

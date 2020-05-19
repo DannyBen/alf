@@ -85,3 +85,10 @@ dns() {
     echo this alias requires a subcommand
   fi
 }
+
+# Completions
+complete -W "s l p" g
+complete -W "help" abc
+complete -W "again" say
+complete -W "ls deploy upd" dc
+complete -W "check flush" dns
