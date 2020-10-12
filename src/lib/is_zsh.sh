@@ -1,3 +1,3 @@
 is_zsh() {
-  ps | grep zsh > /dev/null
+  pgrep zsh > /dev/null
 }

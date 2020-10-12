@@ -473,7 +473,7 @@ generate_last_cmd() {
 
 # :src/lib/is_zsh.sh
 is_zsh() {
-  ps | grep zsh > /dev/null
+  pgrep zsh > /dev/null
 }
 
 # :src/lib/save_config.sh
