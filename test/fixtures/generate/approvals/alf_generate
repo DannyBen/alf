@@ -87,7 +87,7 @@ dns() {
 }
 
 # Completions
-(ps | grep 183 | grep zsh > /dev/null) && autoload -U +X compinit && compinit && autoload -U +X bashcompinit && bashcompinit
+(ps | grep $$ | grep zsh > /dev/null) && autoload -U +X compinit && compinit && autoload -U +X bashcompinit && bashcompinit
 complete -W "s l p" g
 complete -W "help" abc
 complete -W "again" say
