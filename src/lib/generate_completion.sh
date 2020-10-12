@@ -5,6 +5,12 @@ generate_completions() {
 
   echo "# Completions"
 
+  if is_zsh; then
+    echo "autoload -U +X compinit && compinit"
+    echo "autoload -U +X bashcompinit && bashcompinit"
+    echo ""
+  fi
+
   while IFS= read -r line || [ -n "$line" ]; do
     if [[ $line =~ $ali1_regex ]]; then
       ali="${BASH_REMATCH[1]}"
