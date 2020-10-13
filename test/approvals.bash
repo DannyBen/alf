@@ -1,4 +1,4 @@
-# approvals.bash v0.2.6
+# approvals.bash v0.2.7
 #
 # Interactive approval testing for Bash.
 # https://github.com/DannyBen/approvals.bash
@@ -76,7 +76,7 @@ user_approval() {
 
   echo 
   printf "[A]pprove? \n"
-  read -r -n 1 response
+  response=$(bash -c "read -n 1 key; echo \$key")
   printf "\r"
   if [[ $response =~ [Aa] ]]; then
     printf "%b\n" "$actual" > "$approval_file"

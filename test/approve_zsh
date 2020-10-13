@@ -13,3 +13,5 @@ describe "generated aliases in zsh"
   source 'aliases.txt'
   approve "say again zsh-works"
   popd
+
+green "\nSanity test on ZSH passed!"
