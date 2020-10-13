@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-  # docker-compose run bash
   bash:
     build: .
     <<: &default
@@ -16,7 +15,6 @@ services:
       PS1: "zsh %/ $$ "
     entrypoint: zsh
 
-  # docker-compose run test
   # TEST=connect docker-compose run test
   test: &test
     <<: *default
@@ -29,8 +27,11 @@ services:
     <<: *zsh
     command: test/approve_zsh
 
-  # docker-compose run ci
   ci:
     <<: *test
+    volumes: []
+
+  ci_zsh:
+    <<: *zsh
     volumes: []
 

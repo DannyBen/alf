@@ -20,5 +20,7 @@ jobs:
       run: docker-compose build
 
     - name: Run approval tests
-      run: docker-compose run ci
+      run: |
+        docker-compose run ci
+        docker-compose run ci_zsh
 
