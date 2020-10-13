@@ -23,7 +23,7 @@ services:
     environment: { TEST }
     command: test/approve
 
-  test_zsh:
+  test_zsh: &test_zsh
     <<: *zsh
     command: test/approve_zsh
 
@@ -32,6 +32,6 @@ services:
     volumes: []
 
   ci_zsh:
-    <<: *zsh
+    <<: *test_zsh
     volumes: []
 
