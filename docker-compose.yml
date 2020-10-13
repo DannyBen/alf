@@ -31,7 +31,3 @@ services:
     <<: *test
     volumes: []
 
-  ci_zsh:
-    <<: *test_zsh
-    volumes: []
-
