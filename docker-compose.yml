@@ -2,12 +2,19 @@ version: '3'
 
 services:
   # docker-compose run bash
-  bash: &default
+  bash:
     build: .
-    image: dannyben/alf
-    volumes: 
-    - .:/app
-    - ./alf:/usr/local/bin/alf
+    <<: &default
+      image: dannyben/alf
+      volumes: 
+      - .:/app
+      - ./alf:/usr/local/bin/alf
+
+  zsh: &zsh
+    <<: *default
+    environment:
+      PS1: "zsh %/ $$ "
+    entrypoint: zsh
 
   # docker-compose run test
   # TEST=connect docker-compose run test
@@ -16,7 +23,11 @@ services:
     volumes: 
     - .:/app
     environment: { TEST }
-    command: bash test/approve
+    command: test/approve
+
+  test_zsh:
+    <<: *zsh
+    command: test/approve_zsh
 
   # docker-compose run ci
   ci:

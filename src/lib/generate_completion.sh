@@ -4,7 +4,7 @@ generate_completions() {
   find_config
 
   echo "# Completions"
-  echo '(ps | grep $$ | grep zsh > /dev/null) && autoload -U +X compinit && compinit && autoload -U +X bashcompinit && bashcompinit'
+  echo '[[ -n $ZSH_VERSION ]] && autoload -U +X compinit && compinit && autoload -U +X bashcompinit && bashcompinit'
 
   while IFS= read -r line || [ -n "$line" ]; do
     if [[ $line =~ $ali1_regex ]]; then

@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+# Run this from the main repo directory
+
+source 'test/approvals.bash'
+
+unset ALF_RC_FILE
+export ALF_ALIASES_FILE="aliases.txt"
+
+describe "generated aliases in zsh"
+  pushd test/fixtures/generate > /dev/null
+  rm -f "aliases.txt"
+  approve "alf save"
+  source 'aliases.txt'
+  approve "say again zsh-works"
+  popd
