@@ -4,6 +4,7 @@ generate_completions() {
   find_config
 
   echo "# Completions"
+  # shellcheck disable=SC2016
   echo '[[ -n $ZSH_VERSION ]] && autoload -U +X compinit && compinit && autoload -U +X bashcompinit && bashcompinit'
 
   while IFS= read -r line || [ -n "$line" ]; do
