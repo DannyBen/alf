@@ -9,7 +9,7 @@ else
 fi
 
 if [[ -f "$rc_file" ]]; then
-  alfrc_content="$(<"$rc_file")"
+  alfrc_content="exists with '$(<"$rc_file")'"
 else
   alfrc_content="does not exist"
 fi

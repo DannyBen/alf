@@ -12,7 +12,7 @@ Paths:
   config path:       /app/test/fixtures/connect/alf-conf/alf.conf
 
 Files:
-  alfrc:             /app/test/fixtures/connect/alf-conf
+  alfrc:             exists with '/app/test/fixtures/connect/alf-conf'
   aliases:           exists
 
 GitHub:
