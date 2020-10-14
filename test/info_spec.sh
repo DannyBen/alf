@@ -3,7 +3,7 @@ source 'approvals.bash'
 
 unset ALF_RC_FILE
 unset ALF_ALIASES_FILE
-rm ~/.bash_aliases
+rm -f /root/.bash_aliases
 
 describe "alf info --help"
   approve "alf info --help"
