@@ -694,10 +694,6 @@ alf_upgrade_command() {
 # :command.function
 alf_info_command() {
   # :src/info_command.sh
-  # inforow() {
-  #   printf "%-30s %s\n" "$1:" "$2"
-  # }
-  
   find_config
   
   if [[ -d "$repo_path/.git" ]]; then

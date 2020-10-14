@@ -1,7 +1,3 @@
-# inforow() {
-#   printf "%-30s %s\n" "$1:" "$2"
-# }
-
 find_config
 
 if [[ -d "$repo_path/.git" ]]; then
