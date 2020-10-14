@@ -1,0 +1,19 @@
+Executable:
+  path:              /usr/local/bin/alf
+
+Environment:
+  ALF_RC_FILE:       unset
+  ALF_ALIASES_FILE:  unset
+
+Paths:
+  alfrc path:        /root/.alfrc
+  aliases path:      /root/.bash_aliases
+  repo path:         /app/test/fixtures/sample/alf-conf
+  config path:       alf.conf
+
+Files:
+  alfrc:             does not exist
+  aliases:           does not exist
+
+GitHub:
+  remote:            unset

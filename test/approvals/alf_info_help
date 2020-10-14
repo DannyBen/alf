@@ -1,0 +1,9 @@
+alf info - Show all alf related system facts
+
+Usage:
+  alf info
+  alf info --help | -h
+
+Options:
+  --help, -h
+    Show this help
