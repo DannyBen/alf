@@ -8,11 +8,12 @@ describe "alf generate --help"
   expect_exit_code 1
 
 describe "alf generate (when alf.conf is present)"
-  cd ./fixtures/generate
+  pushd ./fixtures/generate > /dev/nll
   approve "alf generate"
-  cd ../../
+  popd > /dev/null
 
 describe "alf generate (when alf.conf is not present)"
-  cd "fixtures/empty-dir"
+  pushd ./fixtures/empty-dir > /dev/null
   approve "alf generate"
   expect_exit_code 1
+  popd > /dev/null

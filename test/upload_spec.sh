@@ -8,13 +8,14 @@ describe "alf upload --help"
   expect_exit_code 1
 
 describe "alf upload"
-  cd ./fixtures/connect
+  pushd ./fixtures/connect > /dev/null
   [[ -d alf-conf ]] || alf connect DannyBen -y
   [[ -d alf-conf ]] || fail "Expected alf-conf directory to exist"
   approve "alf upload"
-  cd ../../
+  popd > /dev/null
 
 describe "alf upload (without repo connection)"
-  cd ./fixtures/empty-dir
+  pushd ./fixtures/empty-dir > /dev/null
   rm -rf ./alf-conf
   approve "alf upload"
+  popd > /dev/null

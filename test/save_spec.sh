@@ -9,16 +9,17 @@ describe "alf save --help"
   expect_exit_code 1
 
 describe "alf save (when alf.conf is present)"
-  cd ./fixtures/generate
+  pushd ./fixtures/generate > /dev/null
   rm -f "aliases.txt"
   approve "alf save"
-  cd ../../
+  popd > /dev/null
 
 describe "alf save (when alf.conf is not present)"
-  cd ./fixtures/empty-dir
+  pushd ./fixtures/empty-dir > /dev/null
   rm -f "aliases.txt"
   approve "alf save"
   expect_exit_code 1
   if [[ -f aliases.txt ]] ; then
     fail "Expected file aliases.txt not to exist"
   fi
+  popd > /dev/null

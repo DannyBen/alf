@@ -15,7 +15,7 @@ describe "alf info (when files do not exist)"
   popd > /dev/null
 
 describe "alf info (when files exist)"
-  pushd ./fixtures/connect > /dev/null
+  pushd ./fixtures/info > /dev/null
   export ALF_RC_FILE="./alfrc"
   export ALF_ALIASES_FILE="./aliases.txt"
   approve "alf info"
