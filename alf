@@ -1166,7 +1166,7 @@ alf_upgrade_parse_requirements() {
 
 # :command.initialize
 initialize() {
-  version="0.4.3"
+  version=""
   long_usage=''
   set -e  
 
