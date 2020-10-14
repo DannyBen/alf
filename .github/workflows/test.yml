@@ -22,3 +22,6 @@ jobs:
     - name: Run approval tests
       run: docker-compose run ci
 
+    - name: Run sanity test in zsh
+      run: docker-compose run test_zsh
+

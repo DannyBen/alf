@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk --no-cache add bash git diffutils grep curl
+RUN apk --no-cache add bash git diffutils grep curl zsh
 
 ENV PS1 "\n\n>> alf \W \$ "
 

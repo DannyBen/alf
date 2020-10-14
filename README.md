@@ -24,6 +24,7 @@ Features
 - Does not alter anything in your system except for creating the
   `~/.bash_aliases` file, which is normally already sourced by your login
   process.
+- Works with bash and zsh.
 
 Demo
 --------------------------------------------------
@@ -137,6 +138,22 @@ rm -f ~/.alfrc
 
 # Remove .bash_aliases (exists only if you have performed `alf save`)
 rm -f ~/.bash_aliases
+```
+
+
+Compatibility
+--------------------------------------------------
+
+Alf was tested on **bash** and **zsh** (and might work with other shells).
+
+In all cases, bash version 4.0 or higher must be installed, since alf uses
+associative arrays which are not available in older versions.
+
+If your shell does not automatically source `~/.bash_aliases` on startup, you
+should add this line to your startup script:
+
+```shell
+source ~/.bash_aliases
 ```
 
 
