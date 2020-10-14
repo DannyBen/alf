@@ -81,3 +81,6 @@ commands:
 
 - name: upgrade
   help: Upgrade alf to the latest version
+
+- name: info
+  help: Show all alf related system facts
