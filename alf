@@ -32,6 +32,7 @@ alf_usage() {
   echo "  edit       Open your alf.conf for editing"
   echo "  which      Show the alias command"
   echo "  upgrade    Upgrade alf to the latest version"
+  echo "  info       Show all alf related system facts"
   echo
 
   if [[ -n $long_usage ]]; then
@@ -315,6 +316,31 @@ alf_upgrade_usage() {
   printf "Usage:\n"
   printf "  alf upgrade\n"
   printf "  alf upgrade --help | -h\n"
+  echo
+
+  if [[ -n $long_usage ]]; then
+    printf "Options:\n"
+    # :command.usage_fixed_flags
+    echo "  --help, -h"
+    printf "    Show this help\n"
+    echo
+
+  fi
+}
+
+# :command.usage
+alf_info_usage() {
+  if [[ -n $long_usage ]]; then
+    printf "alf info - Show all alf related system facts\n"
+    echo 
+  else
+    printf "alf info - Show all alf related system facts\n"
+    echo 
+  fi
+
+  printf "Usage:\n"
+  printf "  alf info\n"
+  printf "  alf info --help | -h\n"
   echo
 
   if [[ -n $long_usage ]]; then
@@ -665,6 +691,53 @@ alf_upgrade_command() {
   exec bash <(curl -s https://raw.githubusercontent.com/DannyBen/alf/master/setup)
 }
 
+# :command.function
+alf_info_command() {
+  # :src/info_command.sh
+  find_config
+  
+  if [[ -d "$repo_path/.git" ]]; then
+    pushd "$repo_path" > /dev/null
+    remote="$(git config --get remote.origin.url)"
+    popd > /dev/null
+  else
+    remote="unset"
+  fi
+  
+  if [[ -f "$rc_file" ]]; then
+    alfrc_content="$(<"$rc_file")"
+  else
+    alfrc_content="does not exist"
+  fi
+  
+  if [[ -f "$aliases_file" ]]; then
+    bash_aliases_status="exists"
+  else
+    bash_aliases_status="does not exist"
+  fi
+  
+  echo "Executable:"
+  echo "  path:              $(which alf)"
+  echo 
+  echo "Environment:"
+  echo "  ALF_RC_FILE:       ${ALF_RC_FILE:-unset}"
+  echo "  ALF_ALIASES_FILE:  ${ALF_ALIASES_FILE:-unset}"
+  echo 
+  echo "Paths:"
+  echo "  alfrc path:        $rc_file"
+  echo "  aliases path:      $aliases_file"
+  echo "  repo path:         $repo_path"
+  echo "  config path:       $config_file"
+  echo 
+  echo "Files:"
+  echo "  alfrc:             $alfrc_content"
+  echo "  aliases:           $bash_aliases_status"
+  echo 
+  echo "GitHub:"
+  echo "  remote:            $remote"
+  echo 
+}
+
 # :command.parse_requirements
 parse_requirements() {
   # :command.fixed_flag_filter
@@ -743,6 +816,13 @@ parse_requirements() {
     action="upgrade"
     shift
     alf_upgrade_parse_requirements "$@"
+    shift $#
+    ;;    
+  
+  info )
+    action="info"
+    shift
+    alf_info_parse_requirements "$@"
     shift $#
     ;;    
   
@@ -1164,6 +1244,49 @@ alf_upgrade_parse_requirements() {
   # :command.default_assignments
 }
 
+# :command.parse_requirements
+alf_info_parse_requirements() {
+  # :command.fixed_flag_filter
+  case "$1" in
+  --version | -v )
+    version_command
+    exit
+    ;;
+  
+  --help | -h )
+    long_usage=yes
+    alf_info_usage
+    exit 1
+    ;;
+  
+  esac
+  # :command.environment_variables_filter
+  # :command.dependencies_filter
+  # :command.command_filter
+  action="info"
+  # :command.required_args_filter
+  # :command.required_flags_filter
+  # :command.parse_requirements_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
+  
+    -* )
+      printf "invalid option: %s\n" "$key"
+      exit 1
+      ;;
+  
+    * )
+      # :command.parse_requirements_case
+      printf "invalid argument: %s\n" "$key"
+      exit 1
+      ;;
+  
+    esac
+  done
+  # :command.default_assignments
+}
+
 # :command.initialize
 initialize() {
   version="0.4.4"
@@ -1171,8 +1294,8 @@ initialize() {
   set -e  
 
   # :src/initialize.sh
-  aliases_file=${ALF_ALIASES_FILE:=~/.bash_aliases}
-  rc_file=${ALF_RC_FILE:=~/.alfrc}
+  aliases_file=${ALF_ALIASES_FILE:-~/.bash_aliases}
+  rc_file=${ALF_RC_FILE:-~/.alfrc}
   set -e
 }
 
@@ -1243,6 +1366,14 @@ run() {
       alf_upgrade_usage
     else
       alf_upgrade_command
+    fi
+  
+  elif [[ $action == "info" ]]; then
+    if [[ ${args[--help]} ]]; then
+      long_usage=yes
+      alf_info_usage
+    else
+      alf_info_command
     fi
   
   elif [[ ${args[--version]} ]]; then

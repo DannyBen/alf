@@ -1,0 +1,19 @@
+Executable:
+  path:              /usr/local/bin/alf
+
+Environment:
+  ALF_RC_FILE:       ./alfrc
+  ALF_ALIASES_FILE:  ./aliases.txt
+
+Paths:
+  alfrc path:        ./alfrc
+  aliases path:      ./aliases.txt
+  repo path:         /app/test/fixtures/connect/alf-conf
+  config path:       /app/test/fixtures/connect/alf-conf/alf.conf
+
+Files:
+  alfrc:             /app/test/fixtures/connect/alf-conf
+  aliases:           exists
+
+GitHub:
+  remote:            https://github.com/DannyBen/alf-conf.git
