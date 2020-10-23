@@ -1,5 +1,5 @@
 generate_config() {
-  regex="^( *)([a-z0-9\-]+): *(.+)$"
+  regex="^( *)([a-zA-Z0-9\-]+): *(.+)$"
   cond="if"
   lastcmd=""
   find_config
