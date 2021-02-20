@@ -21,7 +21,7 @@ else
 fi
 
 echo "Executable:"
-echo "  path:              $(which alf)"
+echo "  path:              $(command -v alf)"
 echo 
 echo "Environment:"
 echo "  ALF_RC_FILE:       ${ALF_RC_FILE:-unset}"
