@@ -9,7 +9,8 @@ WORKDIR /app
 COPY . .
 COPY alf /usr/local/bin/alf
 
-RUN git config --global user.email "tester@testland.com" && \
+RUN git config --global pull.rebase false && \
+    git config --global user.email "tester@testland.com" && \
     git config --global user.name "Approval Tester"
 
 RUN chmod +x /usr/local/bin/alf
