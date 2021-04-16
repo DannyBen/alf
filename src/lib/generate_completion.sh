@@ -7,7 +7,6 @@ generate_completions() {
   echo '
 # Enable bash completions in zsh
 if [[ -n ${ZSH_VERSION-} ]]; then
-  autoload -U +X bashcompinit && bashcompinit
   if ! command -v compinit > /dev/null; then
     autoload -U +X compinit && if [[ ${ZSH_DISABLE_COMPFIX-} = true ]]; then
       compinit -u
@@ -15,6 +14,7 @@ if [[ -n ${ZSH_VERSION-} ]]; then
       compinit
     fi
   fi
+  autoload -U +X bashcompinit && bashcompinit
 fi
 '
   echo '# Completions'
