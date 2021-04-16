@@ -389,9 +389,21 @@ generate_completions() {
   ali2_regex="^ +([a-z0-9\-]+):"
   find_config
 
-  echo "# Completions"
   # shellcheck disable=SC2016
-  echo '[[ -n $ZSH_VERSION ]] && autoload -U +X compinit && compinit && autoload -U +X bashcompinit && bashcompinit'
+  echo '
+# Enable bash completions in zsh
+if [[ -n ${ZSH_VERSION-} ]]; then
+  autoload -U +X bashcompinit && bashcompinit
+  if ! command -v compinit > /dev/null; then
+    autoload -U +X compinit && if [[ ${ZSH_DISABLE_COMPFIX-} = true ]]; then
+      compinit -u
+    else
+      compinit
+    fi
+  fi
+fi
+'
+  echo '# Completions'
 
   while IFS= read -r line || [ -n "$line" ]; do
     if [[ $line =~ $ali1_regex ]]; then
@@ -860,6 +872,7 @@ parse_requirements() {
     esac
   done
   # :command.default_assignments
+  # :command.whitelist_filter
 }
 
 # :command.parse_requirements
@@ -933,6 +946,7 @@ alf_connect_parse_requirements() {
     esac
   done
   # :command.default_assignments
+  # :command.whitelist_filter
 }
 
 # :command.parse_requirements
@@ -976,6 +990,7 @@ alf_download_parse_requirements() {
     esac
   done
   # :command.default_assignments
+  # :command.whitelist_filter
 }
 
 # :command.parse_requirements
@@ -1019,6 +1034,7 @@ alf_upload_parse_requirements() {
     esac
   done
   # :command.default_assignments
+  # :command.whitelist_filter
 }
 
 # :command.parse_requirements
@@ -1062,6 +1078,7 @@ alf_generate_parse_requirements() {
     esac
   done
   # :command.default_assignments
+  # :command.whitelist_filter
 }
 
 # :command.parse_requirements
@@ -1105,6 +1122,7 @@ alf_save_parse_requirements() {
     esac
   done
   # :command.default_assignments
+  # :command.whitelist_filter
 }
 
 # :command.parse_requirements
@@ -1148,6 +1166,7 @@ alf_edit_parse_requirements() {
     esac
   done
   # :command.default_assignments
+  # :command.whitelist_filter
 }
 
 # :command.parse_requirements
@@ -1206,6 +1225,7 @@ alf_which_parse_requirements() {
     esac
   done
   # :command.default_assignments
+  # :command.whitelist_filter
 }
 
 # :command.parse_requirements
@@ -1249,6 +1269,7 @@ alf_upgrade_parse_requirements() {
     esac
   done
   # :command.default_assignments
+  # :command.whitelist_filter
 }
 
 # :command.parse_requirements
@@ -1292,6 +1313,7 @@ alf_info_parse_requirements() {
     esac
   done
   # :command.default_assignments
+  # :command.whitelist_filter
 }
 
 # :command.initialize
@@ -1383,11 +1405,6 @@ run() {
       alf_info_command
     fi
   
-  elif [[ ${args[--version]} ]]; then
-    version_command
-  elif [[ ${args[--help]} ]]; then
-    long_usage=yes
-    alf_usage
   elif [[ $action == "root" ]]; then
     root_command
   fi

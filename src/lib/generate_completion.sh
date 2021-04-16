@@ -3,9 +3,21 @@ generate_completions() {
   ali2_regex="^ +([a-z0-9\-]+):"
   find_config
 
-  echo "# Completions"
   # shellcheck disable=SC2016
-  echo '[[ -n $ZSH_VERSION ]] && autoload -U +X compinit && compinit && autoload -U +X bashcompinit && bashcompinit'
+  echo '
+# Enable bash completions in zsh
+if [[ -n ${ZSH_VERSION-} ]]; then
+  autoload -U +X bashcompinit && bashcompinit
+  if ! command -v compinit > /dev/null; then
+    autoload -U +X compinit && if [[ ${ZSH_DISABLE_COMPFIX-} = true ]]; then
+      compinit -u
+    else
+      compinit
+    fi
+  fi
+fi
+'
+  echo '# Completions'
 
   while IFS= read -r line || [ -n "$line" ]; do
     if [[ $line =~ $ali1_regex ]]; then
