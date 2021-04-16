@@ -14,5 +14,3 @@ RUN git config --global pull.rebase false && \
     git config --global user.name "Approval Tester"
 
 RUN chmod +x /usr/local/bin/alf
-
-ENTRYPOINT bash

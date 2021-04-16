@@ -1,6 +1,6 @@
 name: alf
 help: Your Little Bash Alias Friend
-version: 0.4.6
+version: 0.4.7
 
 environment_variables:
 - name: alf_rc_file
