@@ -86,22 +86,11 @@ dns() {
   fi
 }
 
-
-# Enable bash completions in zsh
-if [[ -n ${ZSH_VERSION-} ]]; then
-  if ! command -v compinit > /dev/null; then
-    autoload -U +X compinit && if [[ ${ZSH_DISABLE_COMPFIX-} = true ]]; then
-      compinit -u
-    else
-      compinit
-    fi
-  fi
-  autoload -U +X bashcompinit && bashcompinit
-fi
-
 # Completions
-complete -W "s l p" g
-complete -W "help" abc
-complete -W "again" say
-complete -W "ls deploy upd" dc
-complete -W "check flush" dns
+if command -v complete &> /dev/null ; then
+  complete -W "s l p" g
+  complete -W "help" abc
+  complete -W "again" say
+  complete -W "ls deploy upd" dc
+  complete -W "check flush" dns
+fi
