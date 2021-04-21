@@ -157,6 +157,20 @@ should add this line to your startup script:
 source ~/.bash_aliases
 ```
 
+### ZSH Users
+
+Oh-My-Zsh users may skip this step.
+
+If you would like to have autocompletion for alf's sub-aliases and you are using
+zsh, you should enable completion by adding this to your `~/.zshrc` (if is it not
+already there) before sourcing `.bash_aliases`:
+
+```bash
+# Load completion functions
+autoload -Uz +X compinit && compinit
+autoload -Uz +X bashcompinit && bashcompinit
+```
+
 
 Related Projects
 --------------------------------------------------
