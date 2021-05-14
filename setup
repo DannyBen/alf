@@ -1,29 +1,21 @@
 #!/usr/bin/env bash
-echo "This operation will download the alf bash script to /usr/local/bin/alf."
-echo "Continue? [yN]"
-read -n1 answer
 
-if [[ $answer =~ [Yy] ]]; then
-  echo "Downloading from github.com/DannyBen/alf..."
+# Figure out if we need sudo or not
+sudo=''
+if [[ $EUID -ne 0 ]]; then
+  sudo='sudo'
+fi
 
-  CURL_COMMAND="curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf"
-  
-  if [[ $EUID -ne 0 ]]; then
-    # not root, need sudo
-    sudo bash -c "$CURL_COMMAND"
-    sudo chmod a+x /usr/local/bin/alf
-  else
-    # root
-    bash -c "$CURL_COMMAND"
-    chmod a+x /usr/local/bin/alf
-  fi
+# Download script from Github
+echo "=== Saving executable to /usr/local/bin/alf"
+curl_command="curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf"
+$sudo bash -c "$curl_command"
+$sudo chmod a+x /usr/local/bin/alf
 
-  if type alf > /dev/null; then
-    echo "Done. Type 'alf --help' for more info."
-  else
-    echo "Failed downloading."
-    exit 1
-  fi
+# Verify
+if type alf > /dev/null; then
+  echo "=== Done. Type 'alf --help' for more info."
 else
-  echo "Aborting"
+  echo "=== Setup failed."
+  exit 1
 fi
