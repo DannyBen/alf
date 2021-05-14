@@ -6,10 +6,7 @@ describe "alf upgrade --help"
   approve "alf upgrade --help"
   expect_exit_code 1
 
-describe "alf upgrade (answer no)"
-  approve "echo n | alf upgrade"
-
-describe "alf upgrade (answer yes)"
+describe "alf upgrade"
   cp /usr/local/bin/alf /usr/local/bin/alf-before-upgrade
-  approve "echo y | alf upgrade"
+  approve "alf upgrade"
   mv /usr/local/bin/alf-before-upgrade /usr/local/bin/alf
