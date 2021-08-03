@@ -73,7 +73,7 @@ $ source ~/.bash_aliases  # this normally already exists in your ~/.bashrc
 Using without GitHub
 --------------------------------------------------
 
-If you want to try alf before creating your Github repo, use this method to
+If you want to try alf before creating your github repo, use this method to
 create your `bash_aliases` file from a local configuration file.
 
 ### 1. Create your `alf.conf` file
@@ -191,4 +191,4 @@ to contribute, feel free to [open an issue][issues].
 [conf]: https://github.com/DannyBen/alf-conf
 [template]: https://github.com/DannyBen/alf-conf/generate
 [opcode]: https://github.com/DannyBen/opcode
-[bashly]: https://github.com/dannyben/bashly
+[bashly]: https://bashly.dannyb.co
