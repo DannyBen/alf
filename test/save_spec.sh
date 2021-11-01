@@ -6,7 +6,6 @@ export ALF_ALIASES_FILE="aliases.txt"
 
 describe "alf save --help"
   approve "alf save --help"
-  expect_exit_code 1
 
 describe "alf save (when alf.conf is present)"
   pushd ./fixtures/generate > /dev/null

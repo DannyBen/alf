@@ -5,7 +5,6 @@ unset ALF_RC_FILE
 
 describe "alf generate --help"
   approve "alf generate --help"
-  expect_exit_code 1
 
 describe "alf generate (when alf.conf is present)"
   pushd ./fixtures/generate > /dev/nll

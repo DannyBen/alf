@@ -5,7 +5,6 @@ export ALF_RC_FILE="./alfrc"
 
 describe "alf download --help"
   approve "alf download --help"
-  expect_exit_code 1
 
 describe "alf download"
   pushd ./fixtures/connect > /dev/null

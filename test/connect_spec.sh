@@ -7,7 +7,6 @@ rm -rf alf-conf
 
 describe "alf connect --help"
   approve "alf connect --help"
-  expect_exit_code 1
 
 describe "alf connect (no repo)"
   approve "alf connect"

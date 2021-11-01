@@ -7,7 +7,6 @@ rm -f /root/.bash_aliases
 
 describe "alf info --help"
   approve "alf info --help"
-  expect_exit_code 1
 
 describe "alf info (when files do not exist)"
   pushd ./fixtures/sample > /dev/null

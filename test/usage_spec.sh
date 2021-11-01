@@ -8,4 +8,3 @@ describe "alf (usage)"
 
 describe "alf --help"
   approve "alf --help"
-  expect_exit_code 1

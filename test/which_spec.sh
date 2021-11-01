@@ -6,7 +6,6 @@ cd ./fixtures/generate
 
 describe "alf which --help"
   approve "alf which --help"
-  expect_exit_code 1
 
 describe "Run alf which without parameters"
   approve "alf which"

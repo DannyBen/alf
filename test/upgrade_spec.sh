@@ -4,7 +4,6 @@ cd ./fixtures/empty-dir
 
 describe "alf upgrade --help"
   approve "alf upgrade --help"
-  expect_exit_code 1
 
 describe "alf upgrade"
   cp /usr/local/bin/alf /usr/local/bin/alf-before-upgrade
