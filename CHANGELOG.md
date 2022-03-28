@@ -1,16 +1,11 @@
 Change Log
 ========================================
 
-Untagged - Latest
-----------------------------------------
-
-- Fix tilde display error in sourcing instructions on CentOS
-
-
 v0.4.10 - 2022-03-28
 ----------------------------------------
 
 - Make setup non-interactive
+- Fix tilde display error in sourcing instructions on CentOS
 
 
 v0.4.9 - 2021-04-21
