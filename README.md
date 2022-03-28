@@ -3,7 +3,7 @@
 
 # Alf - Your Little Bash Alias Friend
 
-![Version](https://img.shields.io/badge/version-0.4.9-blue.svg)
+![Version](https://img.shields.io/badge/version-0.4.10-blue.svg)
 [![Build Status](https://github.com/DannyBen/alf/workflows/Test/badge.svg)](https://github.com/DannyBen/alf/actions?query=workflow%3ATest)
 
 </div>
