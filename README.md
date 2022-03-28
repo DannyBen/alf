@@ -1,8 +1,7 @@
 <div align='center'>
 <img src='alf-logo.svg' width=300>
 
-Alf - Your Little Bash Alias Friend
-==================================================
+# Alf - Your Little Bash Alias Friend
 
 ![Version](https://img.shields.io/badge/version-0.4.9-blue.svg)
 [![Build Status](https://github.com/DannyBen/alf/workflows/Test/badge.svg)](https://github.com/DannyBen/alf/actions?query=workflow%3ATest)
@@ -14,8 +13,8 @@ Alf - Your Little Bash Alias Friend
 Alf enhances your bash alias management. It was developed using the
 [Bashly Command Line Framework][bashly].
 
-Features
---------------------------------------------------
+
+## Features
 
 - Create aliases by using a config file.
 - Create aliases for sub-commands (for example, `g s` for `git status`).
@@ -26,18 +25,17 @@ Features
   process.
 - Works with bash and zsh.
 
-Demo
---------------------------------------------------
+
+## Demo
 
 ![Demo](/demo/cast.svg)
 
 
-Installation
---------------------------------------------------
+## Installation
 
 Install the `alf` executable script:
 
-    $ bash <(curl -Ls get.dannyb.co/alf/setup)
+    $ curl -Ls get.dannyb.co/alf/setup | bash
 
 If you prefer to install manually, simply download the [alf](/alf) file,
 place it somewhere in your path, and make it executable.
@@ -45,8 +43,7 @@ place it somewhere in your path, and make it executable.
 Note that alf requires bash 4.0 or higher (`brew install bash` for mac users).
 
 
-Using with GitHub-hosted configuration (recommended)
---------------------------------------------------
+## Using with GitHub-hosted configuration (recommended)
 
 The easiest way to use alf is to create a repository on github, call it 
 `alf-conf`, and put an `alf.conf` file in it.
@@ -70,8 +67,7 @@ $ source ~/.bash_aliases  # this normally already exists in your ~/.bashrc
 ```
 
 
-Using without GitHub
---------------------------------------------------
+## Using without GitHub
 
 If you want to try alf before creating your github repo, use this method to
 create your `bash_aliases` file from a local configuration file.
@@ -86,8 +82,7 @@ See the sample [alf.conf](alf.conf) file as a starting point.
     $ source ~/.bash_aliases
 
 
-Additional usage patterns
---------------------------------------------------
+## Additional usage patterns
 
 ```
 $ alf --help
@@ -125,8 +120,7 @@ Environment Variables:
 ```
 
 
-Uninstalling
---------------------------------------------------
+## Uninstalling
 
 To uninstall alf:
 
@@ -142,8 +136,7 @@ rm -f ~/.bash_aliases
 ```
 
 
-Compatibility
---------------------------------------------------
+## Compatibility
 
 Alf was tested on **bash** and **zsh** (and might work with other shells).
 
@@ -172,15 +165,13 @@ autoload -Uz +X bashcompinit && bashcompinit
 ```
 
 
-Related Projects
---------------------------------------------------
+## Related Projects
 
 For a similar project, but for command shortcuts on a per-directory basis, 
 see [opcode][opcode].
 
 
-Contributing / Support
---------------------------------------------------
+## Contributing / Support
 
 If you experience any issue, have a question or a suggestion, or if you wish
 to contribute, feel free to [open an issue][issues].
