@@ -1,6 +1,12 @@
 Change Log
 ========================================
 
+Untagged - Latest
+----------------------------------------
+
+- Fix tilde display error in sourcing instructions on CentOS
+
+
 v0.4.10 - 2022-03-28
 ----------------------------------------
 
