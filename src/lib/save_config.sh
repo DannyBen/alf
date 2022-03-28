@@ -1,7 +1,8 @@
 save_config() {
   find_config
 
-  friendly_aliases_file="${aliases_file/#$HOME/\~}"
+  tilde='~'
+  friendly_aliases_file="${aliases_file/#$HOME/$tilde}"
 
   echo "Saving to $aliases_file"
   generate_config > "$aliases_file"
