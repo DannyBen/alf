@@ -1,6 +1,6 @@
 alf which - Show the alias command
 
-Shortcut: w
+Alias: w
 
 Usage:
   alf which CODE [SUBCODE]

@@ -1,6 +1,6 @@
 alf generate - Generate aliases to stdout
 
-Shortcut: g
+Alias: g
 
 Usage:
   alf generate

@@ -1,6 +1,6 @@
 name: alf
 help: Your Little Bash Alias Friend
-version: 0.4.10
+version: 0.4.11
 
 environment_variables:
 - name: alf_rc_file
@@ -11,7 +11,7 @@ environment_variables:
 
 commands:
 - name: connect
-  short: c
+  alias: c
   help: Connect to a remote git repository
 
   args:
@@ -42,19 +42,19 @@ commands:
   - alf connect https://You@bitbucket.org/YourUser/rush-repo.git --yes
 
 - name: download
-  short: d
+  alias: [d, pull]
   help: Perform git pull on the connected repo
 
 - name: upload
-  short: u
+  alias: [u, push]
   help: Perform git commit and push on the connected repo
 
 - name: generate
-  short: g
+  alias: g
   help: Generate aliases to stdout
 
 - name: save
-  short: s
+  alias: s
   help: Generate aliases to ~/.bash_aliases
 
   environment_variables:
@@ -65,11 +65,11 @@ commands:
       Default: ~/.bash_aliases
 
 - name: edit
-  short: e
+  alias: e
   help: Open your alf.conf for editing
 
 - name: which
-  short: w
+  alias: w
   help: Show the alias command
 
   args:

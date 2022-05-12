@@ -1,6 +1,6 @@
 alf upload - Perform git commit and push on the connected repo
 
-Shortcut: u
+Alias: u, push
 
 Usage:
   alf upload

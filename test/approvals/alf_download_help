@@ -1,6 +1,6 @@
 alf download - Perform git pull on the connected repo
 
-Shortcut: d
+Alias: d, pull
 
 Usage:
   alf download

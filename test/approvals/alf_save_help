@@ -1,6 +1,6 @@
 alf save - Generate aliases to ~/.bash_aliases
 
-Shortcut: s
+Alias: s
 
 Usage:
   alf save

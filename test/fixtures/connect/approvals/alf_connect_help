@@ -1,6 +1,6 @@
 alf connect - Connect to a remote git repository
 
-Shortcut: c
+Alias: c
 
 Usage:
   alf connect REPO [options]
