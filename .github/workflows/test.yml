@@ -17,11 +17,11 @@ jobs:
       run: shellcheck alf
 
     - name: Build container for approval tests
-      run: docker-compose build
+      run: docker compose build
 
     - name: Run approval tests
-      run: docker-compose run ci
+      run: docker compose run ci
 
     - name: Run sanity test in zsh
-      run: docker-compose run test_zsh
+      run: docker compose run test_zsh
 
