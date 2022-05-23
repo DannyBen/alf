@@ -24,9 +24,12 @@ services:
 
   test_zsh: &test_zsh
     <<: *zsh
+    environment: { CI, GITHUB_ACTIONS }
     command: test/approve_zsh
 
   ci:
     <<: *test
+    environment:
+      CI: 1
     volumes: []
 

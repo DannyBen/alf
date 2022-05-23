@@ -16,3 +16,8 @@ describe "alf generate (when alf.conf is not present)"
   approve "alf generate"
   expect_exit_code 1
   popd > /dev/null
+
+describe "alf generate (when alf.conf does not include subcommands)"
+  pushd ./fixtures/no-subcommands > /dev/null
+  approve "alf generate"
+  popd > /dev/null

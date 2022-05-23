@@ -54,6 +54,8 @@ generate_config() {
   generate_last_cmd
 
   echo ""
-  generate_completions
+  if has_subcommands; then
+    generate_completions
+  fi
 }
 
