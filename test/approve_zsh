@@ -6,12 +6,13 @@ source 'test/approvals.bash'
 unset ALF_RC_FILE
 export ALF_ALIASES_FILE="aliases.txt"
 
-describe "generated aliases in zsh"
-  pushd test/fixtures/generate > /dev/null
-  rm -f "aliases.txt"
-  approve "alf save"
-  source 'aliases.txt'
-  approve "say again zsh-works"
-  popd
+context "in zsh"
+  describe "generated aliases in zsh"
+    pushd test/fixtures/generate > /dev/null
+    rm -f "aliases.txt"
+    approve "alf save"
+    source 'aliases.txt'
+    approve "say again zsh-works"
+    popd
 
 green "\nSanity test on ZSH passed!"

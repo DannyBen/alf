@@ -5,11 +5,11 @@ cd ./test
 source "approvals.bash"
 
 if [[ $TEST ]]; then
-  ./${TEST}_spec.sh
+  "./${TEST}_spec.sh"
 else
   for file in *_spec.sh ; do
-    magenta "\nFILE $file"
-    ./$file || fail "Aborted test loop"
+    context "$file"
+    "./$file" || fail "Aborted test loop"
   done
 fi
 
