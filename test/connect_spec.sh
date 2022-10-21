@@ -9,7 +9,7 @@ describe "alf connect --help"
   approve "alf connect --help"
 
 describe "alf connect (no repo)"
-  approve "alf connect"
+  approve "alf connect" || return 0
   expect_exit_code 1
 
 describe "alf connect <github username>"
@@ -23,7 +23,8 @@ describe "alf connect <git url>"
 
 describe "alf connect <github username> --yes (disallowed)"
   rm -f ./alfrc
-  approve "alf connect DannyBen --yes"
+  approve "alf connect DannyBen --yes" || return 0
+  expect_exit_code 1
 
 describe "alf connect <git url> --yes (non interactive)"
   rm -f ./alfrc

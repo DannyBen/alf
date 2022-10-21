@@ -8,7 +8,7 @@ describe "alf which --help"
   approve "alf which --help"
 
 describe "Run alf which without parameters"
-  approve "alf which"
+  approve "alf which" || return 0
   expect_exit_code 1
 
 describe "Run alf which CODE"
@@ -16,15 +16,15 @@ describe "Run alf which CODE"
   expect_exit_code 0
 
 describe "Run alf which CODE SUBCODE"
-  approve "alf which g l"
+  approve "alf which g l" || return 0
   expect_exit_code 0
 
 describe "Run alf which CODE with invalid code"
-  approve "alf which no"
+  approve "alf which no" || return 0
   expect_exit_code 1
 
 describe "Run alf which CODE SUBCODE with invalid code"
-  approve "alf which g no"
+  approve "alf which g no" || return 0
   expect_exit_code 1
 
 describe "Run alf which CODE SUBCODE with escaped code"

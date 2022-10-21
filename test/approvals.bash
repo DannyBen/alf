@@ -1,4 +1,4 @@
-# approvals.bash v0.3.0
+# approvals.bash v0.3.1
 #
 # Interactive approval testing for Bash.
 # https://github.com/DannyBen/approvals.bash
@@ -90,6 +90,19 @@ user_approval() {
     fail "$cmd"
   fi
 }
+
+onexit() {
+  exitcode=$?
+  if [[ "$exitcode" == 0 ]]; then
+    green "\nFinished successfully"
+  else
+    red "\nFinished with failures"
+  fi
+  exit $exitcode
+}
+
+set -e
+trap 'onexit' EXIT
 
 if diff --help | grep -- --color > /dev/null 2>&1; then
   diff_cmd="diff --unified --color=always"

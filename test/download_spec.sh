@@ -16,7 +16,7 @@ describe "alf download"
 describe "alf download (without repo connection)"
   pushd ./fixtures/empty-dir > /dev/null
   rm -rf ./alf-conf
-  approve "alf download"
+  approve "alf download" || return 0
   expect_exit_code 1
   popd > /dev/null
 

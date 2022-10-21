@@ -12,5 +12,3 @@ else
     "./$file" || fail "Aborted test loop"
   done
 fi
-
-green "\nAll tests have passed!"
