@@ -1,4 +1,4 @@
-# approvals.bash v0.3.1
+# approvals.bash v0.3.2
 #
 # Interactive approval testing for Bash.
 # https://github.com/DannyBen/approvals.bash
@@ -101,8 +101,13 @@ onexit() {
   exit $exitcode
 }
 
+onerror() {
+  fail "Caller: $(caller)"
+}
+
 set -e
 trap 'onexit' EXIT
+trap 'onerror' ERR
 
 if diff --help | grep -- --color > /dev/null 2>&1; then
   diff_cmd="diff --unified --color=always"
