@@ -3,7 +3,7 @@ alf connect - Connect to a remote git repository
 Alias: c
 
 Usage:
-  alf connect REPO [options]
+  alf connect REPO [OPTIONS]
   alf connect --help | -h
 
 Options:

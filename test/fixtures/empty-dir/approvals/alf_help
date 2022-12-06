@@ -1,8 +1,8 @@
 alf - Your Little Bash Alias Friend
 
 Usage:
-  alf [command]
-  alf [command] --help | -h
+  alf COMMAND
+  alf [COMMAND] --help | -h
   alf --version | -v
 
 Commands:
