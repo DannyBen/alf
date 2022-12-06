@@ -1433,7 +1433,7 @@ alf_info_parse_requirements() {
 
 # :command.initialize
 initialize() {
-  version="0.4.12"
+  version="0.4.13"
   long_usage=''
   set -e
 
