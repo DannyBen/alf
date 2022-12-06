@@ -1,2 +1,2 @@
 missing required argument: REPO
-usage: alf connect REPO [options]
+usage: alf connect REPO [OPTIONS]
