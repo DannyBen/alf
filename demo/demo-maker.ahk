@@ -1,48 +1,56 @@
 ; --------------------------------------------------
 ; This script generates the demo svg
+; NOTE: This should be executed in the demo folder
 ; --------------------------------------------------
 #SingleInstance Force
 SetkeyDelay 0, 50
 
-Commands := []
-Index := 1
+Return
 
-; NOTE: This should be executed in the demo folder
-
-Commands.Push("cd demo")
-Commands.Push("rm cast.json {;} rm alf.conf {;} asciinema rec cast.json")
-Commands.Push("alf")
-
-Commands.Push("{#} Create a simple alf.conf file")
-Commands.Push("vi alf.conf")
-Commands.Push("ig: git`n  s: status`n  c: add . --all && git commit -am`n`ndir: ls`n")
-
-Commands.Push("{#} Generate and save ~/.bash_aliases")
-Commands.Push("alf save")
-Commands.Push("source ~/.bash_aliases")
-
-Commands.Push("{#} Inspect any of your aliases")
-Commands.Push("alf which g s")
-
-Commands.Push("{#} The new aliases and sub-aliases are available")
-Commands.Push("g --version")
-Commands.Push("g s")
-
-Commands.Push("{#} ... and accept arguments")
-Commands.Push("dir -1")
-
-Commands.Push("exit")
-Commands.Push("cat cast.json | svg-term --out cast.svg --window")
+Type(Command, Delay=2000) {
+  Send % Command
+  Sleep 500
+  Send {Enter}
+  Sleep Delay
+}
 
 F12::
-  Send % Commands[Index]
-  Index := Index + 1
+  Type("{#} Press F11 to abort at any time")
+  Type("cd demo")
+  Type("rm cast.json {;} rm alf.conf {;} asciinema rec cast.json")
+  Type("alf")
+
+  Type("{#} Create a simple alf.conf file")
+  Type("vi alf.conf")
+  Type("ig: git`n  s: status`n  c: add . --all && git commit -am`n`ndir: ls`n")
+  Type("{Escape}:exit")
+
+  Type("{#} Generate and save ~/.bash_aliases")
+  Type("alf save")
+  Type("source ~/.bash_aliases")
+
+  Type("{#} Inspect any of your aliases")
+  Type("alf which g s")
+
+  Type("{#} The new aliases and sub-aliases are available")
+  Type("g --version")
+  Type("g s")
+
+  Type("{#} ... and accept arguments")
+  Type("dir -1")
+
+  Type("exit")
+  ; Type("cat cast.json | svg-term --out cast.svg --window")
+  Type("agg --font-size 20 cast.json cast.gif")
+  Sleep 400
+  Type("cd ..")
+  Type("{#} Done")
 return
 
 ^F12::
   Reload
 return
 
-^x::
+F11::
   ExitApp
 return

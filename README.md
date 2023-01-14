@@ -28,7 +28,7 @@ Alf enhances your bash alias management. It was developed using the
 
 ## Demo
 
-![Demo](/demo/cast.svg)
+![Demo](/demo/cast.gif)
 
 
 ## Installation
