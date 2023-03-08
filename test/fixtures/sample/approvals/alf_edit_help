@@ -2,10 +2,10 @@ alf edit - Open your alf.conf for editing
 
 Alias: e
 
-Usage:
+[1mUsage:[0m
   alf edit
   alf edit --help | -h
 
-Options:
+[1mOptions:[0m
   --help, -h
     Show this help

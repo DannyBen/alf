@@ -2,15 +2,15 @@ alf save - Generate aliases to ~/.bash_aliases
 
 Alias: s
 
-Usage:
+[1mUsage:[0m
   alf save
   alf save --help | -h
 
-Options:
+[1mOptions:[0m
   --help, -h
     Show this help
 
-Environment Variables:
+[1mEnvironment Variables:[0m
   ALF_ALIASES_FILE
     Path to bash_aliases file
     Aliases will be saved to this file

@@ -24,7 +24,7 @@ while IFS= read -r line || [ -n "$line" ]; do
       exit 0
     fi
   fi
-done < "$config_file"
+done <"$config_file"
 
 echo "Error: No such alias: $code $subcode"
 exit 1

@@ -2,10 +2,10 @@ alf generate - Generate aliases to stdout
 
 Alias: g
 
-Usage:
+[1mUsage:[0m
   alf generate
   alf generate --help | -h
 
-Options:
+[1mOptions:[0m
   --help, -h
     Show this help

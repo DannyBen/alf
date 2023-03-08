@@ -1,9 +1,9 @@
 find_config
 
 if [[ -d "$repo_path/.git" ]]; then
-  pushd "$repo_path" > /dev/null
+  pushd "$repo_path" >/dev/null
   remote="$(git config --get remote.origin.url)"
-  popd > /dev/null
+  popd >/dev/null
 else
   remote="unset"
 fi

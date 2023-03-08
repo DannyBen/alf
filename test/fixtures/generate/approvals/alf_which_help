@@ -2,15 +2,15 @@ alf which - Show the alias command
 
 Alias: w
 
-Usage:
+[1mUsage:[0m
   alf which CODE [SUBCODE]
   alf which --help | -h
 
-Options:
+[1mOptions:[0m
   --help, -h
     Show this help
 
-Arguments:
+[1mArguments:[0m
   CODE
     Show the command for this alias code
 

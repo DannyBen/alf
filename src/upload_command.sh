@@ -6,8 +6,8 @@ if [[ ! -f $rc_file ]]; then
   exit 1
 fi
 
-pushd "$repo_path" > /dev/null
+pushd "$repo_path" >/dev/null
 echo "Pushing $repo_path to repository"
 git commit -am "automatic push"
 git push
-popd > /dev/null
+popd >/dev/null

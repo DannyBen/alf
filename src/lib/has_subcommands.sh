@@ -7,7 +7,7 @@ has_subcommands() {
     if [[ $line =~ $regex ]]; then
       return 0
     fi
-  done < "$config_file"
+  done <"$config_file"
 
   return 1
 }
