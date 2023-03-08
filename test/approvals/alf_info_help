@@ -1,9 +1,9 @@
 alf info - Show all alf related system facts
 
-Usage:
+[1mUsage:[0m
   alf info
   alf info --help | -h
 
-Options:
+[1mOptions:[0m
   --help, -h
     Show this help

@@ -2,14 +2,11 @@ alf connect - Connect to a remote git repository
 
 Alias: c
 
-Usage:
+[1mUsage:[0m
   alf connect REPO [OPTIONS]
   alf connect --help | -h
 
-Options:
-  --help, -h
-    Show this help
-
+[1mOptions:[0m
   --ssh
     Connect to GitHub non-interactively using SSH (implies --yes)
 
@@ -19,7 +16,10 @@ Options:
   --yes, -y
     Connect to any remote repository non-interactively
 
-Arguments:
+  --help, -h
+    Show this help
+
+[1mArguments:[0m
   REPO
     Remote GitHub repository to connect to. This can be one of:
     
@@ -28,7 +28,7 @@ Arguments:
     - Your username/repo on GitHub
     - Any other full URL to a repository
 
-Examples:
+[1mExamples:[0m
   alf connect you --ssh
   alf connect you/alf-config
   alf connect https://You@bitbucket.org/YourUser/rush-repo.git --yes

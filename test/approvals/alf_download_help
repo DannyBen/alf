@@ -2,10 +2,10 @@ alf download - Perform git pull on the connected repo
 
 Alias: d, pull
 
-Usage:
+[1mUsage:[0m
   alf download
   alf download --help | -h
 
-Options:
+[1mOptions:[0m
   --help, -h
     Show this help

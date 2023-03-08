@@ -1,0 +1,6 @@
+usage_colors:
+  caption: bold
+  command: green
+  # arg: bold
+  # flag: bold
+  # environment_variable: bold

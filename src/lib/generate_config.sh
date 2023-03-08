@@ -50,7 +50,7 @@ generate_config() {
         echo "$ali1() {"
       fi
     fi
-  done < "$config_file"
+  done <"$config_file"
   generate_last_cmd
 
   echo ""

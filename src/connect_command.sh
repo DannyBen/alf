@@ -23,8 +23,8 @@ elif [[ $force_https ]]; then
   [[ $partial_github_url ]] && repo_url="https://github.com/$repo_url"
   echo "Connecting to $repo_url"
 
-elif [[ $force ]] ; then
-  if [[ $partial_github_url ]] ; then
+elif [[ $force ]]; then
+  if [[ $partial_github_url ]]; then
     echo "Error: Cannot determine the full URL for the repository"
     echo "To connect to GitHub use --ssh or --https"
     echo "To connect to another repository, provide the full URL"
@@ -74,7 +74,7 @@ if [[ $answer =~ [Yy] ]]; then
   else
     git clone "$repo_url" ./alf-conf
   fi
-  echo "$PWD/alf-conf" > "$rc_file"
+  echo "$PWD/alf-conf" >"$rc_file"
   echo "Storing location in $rc_file"
 else
   echo "Aborting"
