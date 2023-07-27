@@ -8,15 +8,17 @@ generate_last_cmd() {
       fullcmd="$lastcmd \"\$@\""
     fi
 
-    if [[ $cond = "if" ]]; then
+    if [[ $state = "simple" ]]; then
       echo "  $fullcmd"
       echo "}"
     else
-      echo "  else"
-      echo "    $fullcmd"
-      echo "  fi"
+      echo "    *)"
+      echo "      $fullcmd"
+      echo "      ;;"
+      echo "  esac"
       echo "}"
-      cond="if"
+      state="simple"
+      case_open="false"
     fi
   fi
 }

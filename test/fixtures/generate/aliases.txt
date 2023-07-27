@@ -8,18 +8,23 @@ dir() {
 
 unalias g 1>/dev/null 2>&1
 g() {
-  if [[ $1 = "s" ]]; then
-    shift
-    git status "$@"
-  elif [[ $1 = "l" ]]; then
-    shift
-    git log --all --graph --date=relative "$@"
-  elif [[ $1 = "p" ]]; then
-    shift
-    git push "$@"
-  else
-    git "$@"
-  fi
+  case "$1" in
+    s)
+      shift
+      git status "$@"
+      ;;
+    l)
+      shift
+      git log --all --graph --date=relative "$@"
+      ;;
+    p)
+      shift
+      git push "$@"
+      ;;
+    *)
+      git "$@"
+      ;;
+  esac
 }
 
 unalias gg 1>/dev/null 2>&1
@@ -34,12 +39,15 @@ ag() {
 
 unalias abc 1>/dev/null 2>&1
 abc() {
-  if [[ $1 = "help" ]]; then
-    shift
-    command abc --help "$@"
-  else
-    command abc "$@"
-  fi
+  case "$1" in
+    help)
+      shift
+      command abc --help "$@"
+      ;;
+    *)
+      command abc "$@"
+      ;;
+  esac
 }
 
 unalias reverse 1>/dev/null 2>&1
@@ -49,41 +57,53 @@ reverse() {
 
 unalias say 1>/dev/null 2>&1
 say() {
-  if [[ $1 = "again" ]]; then
-    shift
-    echo $1 $1
-  else
-    echo "$@"
-  fi
+  case "$1" in
+    again)
+      shift
+      echo $1 $1
+      ;;
+    *)
+      echo "$@"
+      ;;
+  esac
 }
 
 unalias dc 1>/dev/null 2>&1
 dc() {
-  if [[ $1 = "ls" ]]; then
-    shift
-    docker-compose config --services "$@"
-  elif [[ $1 = "deploy" ]]; then
-    shift
-    docker stack deploy -c docker-compose.yml "$@"
-  elif [[ $1 = "upd" ]]; then
-    shift
-    docker-compose up -d "$@"
-  else
-    docker-compose "$@"
-  fi
+  case "$1" in
+    ls)
+      shift
+      docker-compose config --services "$@"
+      ;;
+    deploy)
+      shift
+      docker stack deploy -c docker-compose.yml "$@"
+      ;;
+    upd)
+      shift
+      docker-compose up -d "$@"
+      ;;
+    *)
+      docker-compose "$@"
+      ;;
+  esac
 }
 
 unalias dns 1>/dev/null 2>&1
 dns() {
-  if [[ $1 = "check" ]]; then
-    shift
-    host -t ns "$@"
-  elif [[ $1 = "flush" ]]; then
-    shift
-    sudo systemd-resolve --flush-caches "$@"
-  else
-    echo this alias requires a subcommand
-  fi
+  case "$1" in
+    check)
+      shift
+      host -t ns "$@"
+      ;;
+    flush)
+      shift
+      sudo systemd-resolve --flush-caches "$@"
+      ;;
+    *)
+      echo this alias requires a subcommand
+      ;;
+  esac
 }
 
 # Completions
