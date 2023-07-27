@@ -591,7 +591,6 @@ generate_config() {
         fi
         echo "      ;;"
       else
-        case_open="false"
         echo ""
         echo "unalias $ali1 1>/dev/null 2>&1"
         echo "$ali1() {"
@@ -627,6 +626,7 @@ generate_last_cmd() {
       echo "  esac"
       echo "}"
       state="simple"
+      case_open="false"
     fi
   fi
 }
@@ -1480,7 +1480,7 @@ alf_info_parse_requirements() {
 
 # :command.initialize
 initialize() {
-  version="0.5.0"
+  version="0.5.1"
   long_usage=''
   set -e
 
