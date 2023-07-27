@@ -51,7 +51,6 @@ generate_config() {
         fi
         echo "      ;;"
       else
-        case_open="false"
         echo ""
         echo "unalias $ali1 1>/dev/null 2>&1"
         echo "$ali1() {"

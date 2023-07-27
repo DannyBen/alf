@@ -18,6 +18,7 @@ generate_last_cmd() {
       echo "  esac"
       echo "}"
       state="simple"
+      case_open="false"
     fi
   fi
 }
