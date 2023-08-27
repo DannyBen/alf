@@ -6,16 +6,34 @@ if [[ $EUID -ne 0 ]]; then
   sudo='sudo'
 fi
 
-# Download script from Github
-echo "=== Saving executable to /usr/local/bin/alf"
-curl_command="curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf"
-$sudo bash -c "$curl_command"
-$sudo chmod a+x /usr/local/bin/alf
+# Banner function
+banner() {
+  green='\033[1;32m'
+  reset='\033[0m'
+  echo -e "\n=== ${green}${1}${reset}\n"
+}
+
+# Prepare a temp directory
+temp_dir=$(mktemp -d)
+pushd "$temp_dir"
+banner "Cloning git repository (in ${temp_dir})"
+git clone --depth=1 https://github.com/DannyBen/alf.git
+
+banner "Copying executable to /usr/local/bin/alf"
+echo $sudo install -m 755 alf /usr/local/bin/
+
+banner "Copying man pages to /usr/local/bin/alf"
+for file in doc/*.1; do
+  $sudo cp "$(realpath "$file")" /usr/share/man/man1/;
+done
+
+popd
 
 # Verify
 if type alf >/dev/null; then
-  echo "=== Done. Type 'alf --help' for more info."
+  banner "Done. Type 'alf --help' for more info."
 else
-  echo "=== Setup failed."
+  banner "Setup failed."
   exit 1
 fi
+

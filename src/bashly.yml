@@ -2,11 +2,23 @@ name: alf
 help: Your Little Bash Alias Friend
 version: 0.5.1
 
+x_mandoc_authors: Danny Ben Shitrit <https://github.com/dannyben>
+
+x_mandoc_footer: |-
+  # SOURCE CODE
+
+  <https://github.com/dannyben/alf>
+
+  # ISSUE TRACKER
+  
+  <https://github.com/dannyben/alf/issues>
+
+
 environment_variables:
 - name: alf_rc_file
   help: |
-    Path to alfrc file
-    This file holds the path to the alf-conf repository
+    Path to alfrc file  
+    This file holds the path to the alf-conf repository  
     Default: ~/.alfrc
 
 commands:
@@ -20,8 +32,7 @@ commands:
     help: |
       Remote GitHub repository to connect to. This can be one of:
       
-      - Your username on GitHub. In this case, the repository is expected to
-        be named 'alf-conf'
+      - Your username on GitHub. In this case, the repository is expected to be named `alf-conf`
       - Your username/repo on GitHub
       - Any other full URL to a repository
 
@@ -60,8 +71,8 @@ commands:
   environment_variables:
   - name: alf_aliases_file
     help: |
-      Path to bash_aliases file
-      Aliases will be saved to this file
+      Path to bash_aliases file  
+      Aliases will be saved to this file  
       Default: ~/.bash_aliases
 
 - name: edit
