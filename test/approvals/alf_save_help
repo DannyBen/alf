@@ -12,6 +12,6 @@ Alias: s
 
 [1mEnvironment Variables:[0m
   ALF_ALIASES_FILE
-    Path to bash_aliases file  
-    Aliases will be saved to this file  
+    Path to bash_aliases file
+    Aliases will be saved to this file
     Default: ~/.bash_aliases

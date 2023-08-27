@@ -25,6 +25,6 @@ alf - Your Little Bash Alias Friend
 
 [1mEnvironment Variables:[0m
   ALF_RC_FILE
-    Path to alfrc file  
-    This file holds the path to the alf-conf repository  
+    Path to alfrc file
+    This file holds the path to the alf-conf repository
     Default: ~/.alfrc

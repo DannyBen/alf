@@ -6,39 +6,16 @@ if [[ $EUID -ne 0 ]]; then
   sudo='sudo'
 fi
 
-# Banner function
-banner() {
-  green='\033[1;32m'
-  reset='\033[0m'
-  echo -e "\n=== ${green}${1}${reset}"
-}
-
-# Prepare a temp directory
-temp_dir=$(mktemp -d)
-pushd "$temp_dir" > /dev/null
-banner "Cloning git repository"
-git clone --depth=1 https://github.com/DannyBen/alf.git .
-
-banner "Copying executable to /usr/local/bin/alf"
-$sudo cp -f alf /usr/local/bin/
-$sudo chmod +x /usr/local/bin/alf
-
-if [[ -d /usr/share/man/man1/ ]]; then
-  banner "Copying man pages to /usr/share/man/man1/"
-  for file in doc/*.1; do
-    $sudo cp "$file" "/usr/share/man/man1/$(basename file)"
-  done
-else
-  banner "Skipping man page installation"
-fi
-
-popd > /dev/null
+# Download script from Github
+echo "=== Saving executable to /usr/local/bin/alf"
+curl_command="curl -s https://raw.githubusercontent.com/DannyBen/alf/master/alf > /usr/local/bin/alf"
+$sudo bash -c "$curl_command"
+$sudo chmod a+x /usr/local/bin/alf
 
 # Verify
 if type alf >/dev/null; then
-  banner "Done. Type 'alf --help' for more info."
+  echo "=== Done. Type 'alf --help' for more info."
 else
-  banner "Setup failed."
+  echo "=== Setup failed."
   exit 1
 fi
-
