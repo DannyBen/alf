@@ -24,7 +24,7 @@ $sudo install -m 755 alf /usr/local/bin/
 
 banner "Copying man pages to /usr/local/bin/alf"
 for file in doc/*.1; do
-  $sudo cp "$(realpath "$file")" /usr/share/man/man1/;
+  $sudo cp "$(realpath "$file")" "/usr/share/man/man1/$file"
 done
 
 popd > /dev/null
