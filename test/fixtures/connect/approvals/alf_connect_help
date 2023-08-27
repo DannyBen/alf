@@ -23,8 +23,8 @@ Alias: c
   REPO
     Remote GitHub repository to connect to. This can be one of:
     
-    - Your username on GitHub. In this case, the repository is expected to
-      be named 'alf-conf'
+    - Your username on GitHub. In this case, the repository is expected to be
+    named `alf-conf`
     - Your username/repo on GitHub
     - Any other full URL to a repository
 

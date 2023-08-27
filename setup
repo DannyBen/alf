@@ -10,24 +10,24 @@ fi
 banner() {
   green='\033[1;32m'
   reset='\033[0m'
-  echo -e "\n=== ${green}${1}${reset}\n"
+  echo -e "\n=== ${green}${1}${reset}"
 }
 
 # Prepare a temp directory
 temp_dir=$(mktemp -d)
-pushd "$temp_dir"
+pushd "$temp_dir" > /dev/null
 banner "Cloning git repository (in ${temp_dir})"
-git clone --depth=1 https://github.com/DannyBen/alf.git
+git clone --depth=1 https://github.com/DannyBen/alf.git .
 
 banner "Copying executable to /usr/local/bin/alf"
-echo $sudo install -m 755 alf /usr/local/bin/
+$sudo install -m 755 alf /usr/local/bin/
 
 banner "Copying man pages to /usr/local/bin/alf"
 for file in doc/*.1; do
   $sudo cp "$(realpath "$file")" /usr/share/man/man1/;
 done
 
-popd
+popd > /dev/null
 
 # Verify
 if type alf >/dev/null; then
