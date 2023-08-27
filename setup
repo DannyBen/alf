@@ -20,12 +20,13 @@ banner "Cloning git repository (in ${temp_dir})"
 git clone --depth=1 https://github.com/DannyBen/alf.git .
 
 banner "Copying executable to /usr/local/bin/alf"
-$sudo install -m 755 alf /usr/local/bin/
+$sudo cp -f alf /usr/local/bin/
+$sudo chmod +x /usr/local/bin/alf
 
 if [[ -d /usr/share/man/man1/ ]]; then
-  banner "Copying man pages to /usr/local/bin/alf"
+  banner "Copying man pages to /usr/share/man/man1/"
   for file in doc/*.1; do
-    $sudo cp "$(realpath "$file")" "/usr/share/man/man1/$file"
+    $sudo cp "$file" "/usr/share/man/man1/$(basename file)"
   done
 else
   banner "Skipping man page installation"
