@@ -1,2 +1,9 @@
-=== Saving executable to /usr/local/bin/alf
-=== Done. Type 'alf --help' for more info.
+
+=== [1;32mCloning git repository (in /tmp/tmp.leONdF)[0m
+Cloning into '.'...
+
+=== [1;32mCopying executable to /usr/local/bin/alf[0m
+
+=== [1;32mSkipping man page installation[0m
+
+=== [1;32mDone. Type 'alf --help' for more info.[0m

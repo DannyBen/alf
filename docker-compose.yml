@@ -6,7 +6,7 @@ services:
       image: dannyben/alf
       volumes: 
       - .:/app
-      # - ./alf:/usr/local/bin/alf
+      - ./alf:/usr/local/bin/alf
 
   zsh: &zsh
     <<: *default

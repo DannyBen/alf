@@ -16,7 +16,7 @@ banner() {
 # Prepare a temp directory
 temp_dir=$(mktemp -d)
 pushd "$temp_dir" > /dev/null
-banner "Cloning git repository (in ${temp_dir})"
+banner "Cloning git repository"
 git clone --depth=1 https://github.com/DannyBen/alf.git .
 
 banner "Copying executable to /usr/local/bin/alf"
