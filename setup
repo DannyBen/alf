@@ -22,10 +22,14 @@ git clone --depth=1 https://github.com/DannyBen/alf.git .
 banner "Copying executable to /usr/local/bin/alf"
 $sudo install -m 755 alf /usr/local/bin/
 
-banner "Copying man pages to /usr/local/bin/alf"
-for file in doc/*.1; do
-  $sudo cp "$(realpath "$file")" "/usr/share/man/man1/$file"
-done
+if [[ -d /usr/share/man/man1/ ]]; then
+  banner "Copying man pages to /usr/local/bin/alf"
+  for file in doc/*.1; do
+    $sudo cp "$(realpath "$file")" "/usr/share/man/man1/$file"
+  done
+else
+  banner "Skipping man page installation"
+fi
 
 popd > /dev/null
 
