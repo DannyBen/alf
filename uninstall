@@ -19,40 +19,31 @@ section() {
   printf "\n=== %s\n" "$(green_bold "$@")"
 }
 
-copy() {
-  printf "%s => %s\n" "$(blue "$(printf '%-25s' "$1")")" "$2"
-  cp "$origin/$1" "$2"
-}
-
-sudo_copy() {
-  printf "%s => %s\n" "$(blue "$(printf '%-25s' "$1")")" "$2"
-  $sudo cp "$origin/$1" "$2"
-}
-
-copy_executable() {
-  sudo_copy "$1" "/usr/local/bin/"
-  $sudo chmod a+x "/usr/local/bin/$1"
-}
-
-copy_man() {
-  if [[ ! -d "/usr/local/share/man/man1/" ]]; then return; fi
-
-  for file in "$1"/*.1; do
-    sudo_copy "$file" "/usr/local/share/man/man1/"
-  done
-
-  if command_exist makewhatis; then
-    $sudo makewhatis /usr/local/man
-  fi
-}
-
 command_exist() {
   [[ -x "$(command -v "$1")" ]]
 }
 
-need() {
-  command_exist "$1" || fail "Cannot run $1"
-  printf "%s found\n" "$(blue "    $1")"
+rm_executable() {
+  if [[ -z "$1" ]]; then return; fi
+
+  printf "%s %s\n" "$(blue rm)" "$1"
+  $sudo rm -f "/usr/local/bin/$1"
+
+  if command_exist "$1"; then
+    fail "Command $1 still exists"
+  fi
+}
+
+rm_man() {
+  if [[ ! -d "/usr/local/share/man/man1/" ]]; then return; fi
+  if [[ -z "$1" ]]; then return; fi
+
+  printf "%s %s\n" "$(blue rm)" "/usr/local/share/man/man1/$1*.1"
+  $sudo rm -f /usr/local/share/man/man1/"$1"*.1
+
+  if command_exist makewhatis; then
+    $sudo makewhatis /usr/local/man
+  fi
 }
 
 onerror() {
@@ -75,24 +66,12 @@ initialize() {
   if [[ $EUID -ne 0 ]]; then
     sudo='sudo'
   fi
-
-  repo="$1"
-  repo_url="https://github.com/${repo}.git"
-  origin=$(mktemp -d)
 }
 
-section "Initializing"
-initialize "DannyBen/alf"
+initialize
 
-section "Checking for pre-requisites"
-need git
-
-section "Cloning $repo"
-git clone --depth 1 "$repo_url" "$origin"
-
-section "Copying files"
-copy_executable 'alf'
-copy_man 'doc'
+section "Removing files"
+rm_executable 'alf'
+rm_man 'alf'
 
 section "Done"
-alf --version

@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Run shellcheck tests
       run: shellcheck alf setup
@@ -25,3 +25,51 @@ jobs:
     - name: Run sanity test in zsh
       run: docker compose run test_zsh
 
+  ubuntu_setup:
+    name: Setup on Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Run setup
+      run: ./setup
+    - name: Run uninstall
+      run: ./uninstall
+
+  macos_setup:
+    name: Setup on macOS
+    runs-on: macos-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Upgrade the outdated bash
+      run: brew install bash
+    - name: Run setup
+      run: ./setup
+    - name: Run uninstall
+      run: ./uninstall
+
+  static_analysis:
+    name: Static analysis
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Rush needed for easy installation of latest shfmt
+    - name: Install rush
+      run: curl -Ls http://get.dannyb.co/rush/setup | bash
+
+    - name: Connect rush repo
+      run: rush clone dannyben --shallow --default
+
+    - name: Install shfmt and opcode
+      run: rush get shfmt && rush get opcode
+
+    - name: Run shellcheck tests
+      run: op shellcheck
+
+    - name: Run shfmt tests
+      run: op shfmt
