@@ -41,7 +41,9 @@ copy_man() {
     sudo_copy "$file" "/usr/local/share/man/man1/"
   done
 
-  $sudo makewhatis /usr/local/man || true
+  if command_exist makewhatis; then
+    $sudo makewhatis /usr/local/man
+  fi
 }
 
 command_exist() {

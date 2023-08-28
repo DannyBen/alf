@@ -41,7 +41,9 @@ rm_man() {
   printf "%s %s\n" "$(blue rm)" "/usr/local/share/man/man1/$1*.1"
   $sudo rm -f /usr/local/share/man/man1/"$1"*.1
 
-  $sudo makewhatis /usr/local/man || true
+  if command_exist makewhatis; then
+    $sudo makewhatis /usr/local/man
+  fi
 }
 
 onerror() {
