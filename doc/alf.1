@@ -14,7 +14,7 @@
 . ftr VB CB
 . ftr VBI CBI
 .\}
-.TH "alf" "1" "August 2023" "Version 0.5.1" "Your Little Bash Alias Friend"
+.TH "alf" "1" "August 2023" "Version 0.6.0" "Your Little Bash Alias Friend"
 .hy
 .SH NAME
 .PP
@@ -28,39 +28,50 @@ Your Little Bash Alias Friend
 .SH COMMANDS
 .SS alf connect
 .PP
-Connect to a remote git repository
+Connect to a remote git repository.
 .SS alf download
 .PP
-Perform git pull on the connected repo
+Perform git pull on the connected repo.
 .SS alf upload
 .PP
-Perform git commit and push on the connected repo
+Perform git commit and push on the connected repo.
 .SS alf generate
 .PP
-Generate aliases to stdout
+Generate aliases to stdout.
 .SS alf save
 .PP
-Generate aliases to \[ti]/.bash_aliases
+Generate aliases to \f[B]\[ti]/.bash_aliases\f[R].
 .SS alf edit
 .PP
-Open your alf.conf for editing
+Open your \f[B]alf.conf\f[R] for editing.
 .SS alf which
 .PP
-Show the alias command
+Show the alias command.
 .SS alf upgrade
 .PP
-Upgrade alf to the latest version
+Upgrade alf to the latest version.
 .SS alf info
 .PP
-Show all alf related system facts
+Show all alf related system facts.
 .SH ENVIRONMENT VARIABLES
 .SS ALF_RC_FILE
 .PP
-Path to alfrc file This file holds the path to the alf-conf repository
-Default: \[ti]/.alfrc
+Path to alfrc file.
+.PP
+This file holds the path to the alf-conf repository.
+.PP
+Default: \f[B]\[ti]/.alfrc\f[R]
 .SH SEE ALSO
 .PP
 \f[B]alf-connect\f[R](1), \f[B]alf-download\f[R](1),
 \f[B]alf-upload\f[R](1), \f[B]alf-generate\f[R](1),
 \f[B]alf-save\f[R](1), \f[B]alf-edit\f[R](1), \f[B]alf-which\f[R](1),
 \f[B]alf-upgrade\f[R](1), \f[B]alf-info\f[R](1)
+.SH SOURCE CODE
+.PP
+https://github.com/dannyben/alf
+.SH ISSUE TRACKER
+.PP
+https://github.com/dannyben/alf/issues
+.SH AUTHORS
+Danny Ben Shitrit <https://github.com/dannyben>.

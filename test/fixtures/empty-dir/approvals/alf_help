@@ -6,15 +6,15 @@ alf - Your Little Bash Alias Friend
   alf --version | -v
 
 [1mCommands:[0m
-  [32mconnect[0m    Connect to a remote git repository
-  [32mdownload[0m   Perform git pull on the connected repo
-  [32mupload[0m     Perform git commit and push on the connected repo
-  [32mgenerate[0m   Generate aliases to stdout
-  [32msave[0m       Generate aliases to ~/.bash_aliases
-  [32medit[0m       Open your alf.conf for editing
-  [32mwhich[0m      Show the alias command
-  [32mupgrade[0m    Upgrade alf to the latest version
-  [32minfo[0m       Show all alf related system facts
+  [32mconnect[0m    Connect to a remote git repository.
+  [32mdownload[0m   Perform git pull on the connected repo.
+  [32mupload[0m     Perform git commit and push on the connected repo.
+  [32mgenerate[0m   Generate aliases to stdout.
+  [32msave[0m       Generate aliases to `~/.bash_aliases`.
+  [32medit[0m       Open your `alf.conf` for editing.
+  [32mwhich[0m      Show the alias command.
+  [32mupgrade[0m    Upgrade alf to the latest version.
+  [32minfo[0m       Show all alf related system facts.
 
 [1mOptions:[0m
   --help, -h
@@ -25,6 +25,8 @@ alf - Your Little Bash Alias Friend
 
 [1mEnvironment Variables:[0m
   ALF_RC_FILE
-    Path to alfrc file
-    This file holds the path to the alf-conf repository
-    Default: ~/.alfrc
+    Path to alfrc file.
+    
+    This file holds the path to the alf-conf repository.
+    
+    Default: `~/.alfrc`

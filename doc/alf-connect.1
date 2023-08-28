@@ -14,53 +14,58 @@
 . ftr VB CB
 . ftr VBI CBI
 .\}
-.TH "alf" "1" "August 2023" "Version 0.5.1" "Your Little Bash Alias Friend"
+.TH "alf-connect" "1" "August 2023" "" "Connect to a remote git repository."
 .hy
 .SH NAME
 .PP
-\f[B]alf\f[R] - Your Little Bash Alias Friend
+\f[B]alf connect\f[R] - Connect to a remote git repository.
 .SH SYNOPSIS
 .PP
-\f[B]alf\f[R] COMMAND
+\f[B]alf connect\f[R] REPO OPTIONS
 .SH DESCRIPTION
 .PP
-Your Little Bash Alias Friend
-.SH COMMANDS
-.SS alf connect
+Connect to a remote git repository.
+.IP \[bu] 2
+Alias: \f[B]c\f[R]
+.SH ARGUMENTS
+.SS REPO
 .PP
-Connect to a remote git repository
-.SS alf download
+Remote GitHub repository to connect to.
 .PP
-Perform git pull on the connected repo
-.SS alf upload
+Can be one of:
+.IP \[bu] 2
+Your username on GitHub.
+In this case, the repository is expected to be named \f[B]alf-conf\f[R].
+.IP \[bu] 2
+Your username/repo on GitHub.
+.IP \[bu] 2
+Any other full URL to a repository.
+.IP \[bu] 2
+\f[I]Required\f[R]
+.SH OPTIONS
+.SS --ssh
 .PP
-Perform git commit and push on the connected repo
-.SS alf generate
+Connect to GitHub non-interactively using SSH (implies \f[B]--yes\f[R]).
+.SS --https
 .PP
-Generate aliases to stdout
-.SS alf save
+Connect to GitHub non-interactively using HTTPS (implies
+\f[B]--yes\f[R]).
+.SS --yes, -y
 .PP
-Generate aliases to \[ti]/.bash_aliases
-.SS alf edit
-.PP
-Open your alf.conf for editing
-.SS alf which
-.PP
-Show the alias command
-.SS alf upgrade
-.PP
-Upgrade alf to the latest version
-.SS alf info
-.PP
-Show all alf related system facts
-.SH ENVIRONMENT VARIABLES
-.SS ALF_RC_FILE
-.PP
-Path to alfrc file This file holds the path to the alf-conf repository
-Default: \[ti]/.alfrc
+Connect to any remote repository non-interactively.
+.SH DEPENDENCIES
+.SS git
+.SH EXAMPLES
+.IP
+.nf
+\f[C]
+alf connect you --ssh
+
+alf connect you/alf-config
+
+alf connect https://You\[at]bitbucket.org/YourUser/rush-repo.git --yes
+\f[R]
+.fi
 .SH SEE ALSO
 .PP
-\f[B]alf-connect\f[R](1), \f[B]alf-download\f[R](1),
-\f[B]alf-upload\f[R](1), \f[B]alf-generate\f[R](1),
-\f[B]alf-save\f[R](1), \f[B]alf-edit\f[R](1), \f[B]alf-which\f[R](1),
-\f[B]alf-upgrade\f[R](1), \f[B]alf-info\f[R](1)
+\f[B]alf\f[R](1)

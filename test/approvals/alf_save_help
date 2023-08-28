@@ -1,4 +1,4 @@
-alf save - Generate aliases to ~/.bash_aliases
+alf save - Generate aliases to `~/.bash_aliases`.
 
 Alias: s
 
@@ -12,6 +12,8 @@ Alias: s
 
 [1mEnvironment Variables:[0m
   ALF_ALIASES_FILE
-    Path to bash_aliases file
-    Aliases will be saved to this file
-    Default: ~/.bash_aliases
+    Path to bash_aliases file.
+    
+    Aliases will be saved to this file.
+    
+    Default: `~/.bash_aliases`

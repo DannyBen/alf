@@ -1,11 +1,11 @@
-% alf-save(1) | Generate aliases to ~/.bash_aliases
+% alf-save(1) | Generate aliases to `~/.bash_aliases`.
 % 
 % August 2023
 
 NAME
 ==================================================
 
-**alf save** - Generate aliases to ~/.bash_aliases
+**alf save** - Generate aliases to `~/.bash_aliases`.
 
 SYNOPSIS
 ==================================================
@@ -15,7 +15,7 @@ SYNOPSIS
 DESCRIPTION
 ==================================================
 
-Generate aliases to ~/.bash_aliases
+Generate aliases to **~/.bash_aliases**.
 
 - Alias: **s**
 
@@ -25,9 +25,11 @@ ENVIRONMENT VARIABLES
 ALF_ALIASES_FILE
 --------------------------------------------------
 
-Path to bash_aliases file
-Aliases will be saved to this file
-Default: ~/.bash_aliases
+Path to bash_aliases file.
+
+Aliases will be saved to this file.
+
+Default: **~/.bash_aliases**
 
 
 

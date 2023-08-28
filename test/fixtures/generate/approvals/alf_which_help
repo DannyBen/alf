@@ -1,4 +1,4 @@
-alf which - Show the alias command
+alf which - Show the alias command.
 
 Alias: w
 
@@ -12,7 +12,7 @@ Alias: w
 
 [1mArguments:[0m
   CODE
-    Show the command for this alias code
+    Show the command for this alias code.
 
   SUBCODE
-    Show the command for this alias sub-code
+    Show the command for this alias sub-code.
