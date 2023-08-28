@@ -39,7 +39,7 @@ rm_man() {
   if [[ -z "$1" ]]; then return; fi
 
   printf "%s %s\n" "$(blue rm)" "/usr/local/share/man/man1/$1*.1"
-  $sudo rm -f /usr/local/share/man/man1/$1*.1
+  $sudo rm -f /usr/local/share/man/man1/"$1"*.1
 
   $sudo makewhatis /usr/local/man || true
 }
