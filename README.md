@@ -35,7 +35,9 @@ Alf enhances your bash alias management. It was developed using the
 
 Install the `alf` executable script:
 
-    $ curl -Ls get.dannyb.co/alf/setup | bash
+```bash
+$ curl -Ls get.dannyb.co/alf/setup | bash
+```
 
 If you prefer to install manually, simply download the [alf](/alf) file,
 place it somewhere in your path, and make it executable.
@@ -78,9 +80,10 @@ See the sample [alf.conf](alf.conf) file as a starting point.
 
 ### 2. Save and source your aliases
 
-    $ alf save
-    $ source ~/.bash_aliases
-
+```bash
+$ alf save
+$ source ~/.bash_aliases
+```
 
 ## Additional usage patterns
 
@@ -125,14 +128,14 @@ Environment Variables:
 To uninstall alf:
 
 ```shell
-# Remove the shell script
-sudo rm /usr/local/bin/alf
+# Run the uninstall script 
+$ curl -Ls get.dannyb.co/alf/uninstall | bash
 
-# Remove .alfrc (exists only if you have performed `alf connect`)
-rm -f ~/.alfrc
+# Optionally, remove .alfrc (exists only if you have performed `alf connect`)
+$ rm -f ~/.alfrc
 
-# Remove .bash_aliases (exists only if you have performed `alf save`)
-rm -f ~/.bash_aliases
+# Optionally, remove .bash_aliases (exists only if you have performed `alf save`)
+$ rm -f ~/.bash_aliases
 ```
 
 
