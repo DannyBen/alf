@@ -1,11 +1,11 @@
-% alf-edit(1) | Open your alf.conf for editing
+% alf-edit(1) | Open your `alf.conf` for editing.
 % 
 % August 2023
 
 NAME
 ==================================================
 
-**alf edit** - Open your alf.conf for editing
+**alf edit** - Open your `alf.conf` for editing.
 
 SYNOPSIS
 ==================================================
@@ -15,7 +15,7 @@ SYNOPSIS
 DESCRIPTION
 ==================================================
 
-Open your alf.conf for editing
+Open your **alf.conf** for editing.
 
 - Alias: **e**
 

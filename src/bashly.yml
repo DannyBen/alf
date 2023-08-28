@@ -2,39 +2,55 @@ name: alf
 help: Your Little Bash Alias Friend
 version: 0.5.1
 
+x_mandoc_authors: Danny Ben Shitrit <https://github.com/dannyben>
+
+x_mandoc_footer: |-
+  # SOURCE CODE
+
+  https://github.com/dannyben/alf
+
+  # ISSUE TRACKER
+  
+  https://github.com/dannyben/alf/issues
+
 environment_variables:
 - name: alf_rc_file
   help: |
-    Path to alfrc file
-    This file holds the path to the alf-conf repository
-    Default: ~/.alfrc
+    Path to alfrc file.
+
+    This file holds the path to the alf-conf repository.
+
+    Default: `~/.alfrc`
 
 commands:
 - name: connect
   alias: c
-  help: Connect to a remote git repository
+  help: Connect to a remote git repository.
+  dependencies: [git]
 
   args:
   - name: repo
     required: true
     help: |
-      Remote GitHub repository to connect to. This can be one of:
+      Remote GitHub repository to connect to.
+
+      Can be one of:
       
-      - Your username on GitHub. In this case, the repository is expected to
-        be named 'alf-conf'
-      - Your username/repo on GitHub
-      - Any other full URL to a repository
+      - Your username on GitHub.
+        In this case, the repository is expected to be named `alf-conf`.
+      - Your username/repo on GitHub.
+      - Any other full URL to a repository.
 
   flags:
   - long: --ssh
-    help: Connect to GitHub non-interactively using SSH (implies --yes)
+    help: Connect to GitHub non-interactively using SSH (implies `--yes`).
 
   - long: --https
-    help: Connect to GitHub non-interactively using HTTPS (implies --yes)
+    help: Connect to GitHub non-interactively using HTTPS (implies `--yes`).
 
   - long: --yes
     short: -y
-    help: Connect to any remote repository non-interactively
+    help: Connect to any remote repository non-interactively.
 
   examples:
   - alf connect you --ssh
@@ -43,44 +59,50 @@ commands:
 
 - name: download
   alias: [d, pull]
-  help: Perform git pull on the connected repo
+  help: Perform git pull on the connected repo.
+  dependencies: [git]
 
 - name: upload
   alias: [u, push]
-  help: Perform git commit and push on the connected repo
+  help: Perform git commit and push on the connected repo.
+  dependencies: [git]
 
 - name: generate
   alias: g
-  help: Generate aliases to stdout
+  help: Generate aliases to stdout.
 
 - name: save
   alias: s
-  help: Generate aliases to ~/.bash_aliases
+  help: Generate aliases to `~/.bash_aliases`.
 
   environment_variables:
   - name: alf_aliases_file
     help: |
-      Path to bash_aliases file
-      Aliases will be saved to this file
-      Default: ~/.bash_aliases
+      Path to bash_aliases file.
+
+      Aliases will be saved to this file.
+
+      Default: `~/.bash_aliases`
 
 - name: edit
   alias: e
-  help: Open your alf.conf for editing
+  help: Open your `alf.conf` for editing.
 
 - name: which
   alias: w
-  help: Show the alias command
+  help: Show the alias command.
 
   args:
   - name: code
     required: true
-    help: Show the command for this alias code
+    help: Show the command for this alias code.
   - name: subcode
-    help: Show the command for this alias sub-code
+    help: Show the command for this alias sub-code.
 
 - name: upgrade
-  help: Upgrade alf to the latest version
+  help: Upgrade alf to the latest version.
+  dependencies: [curl]
 
 - name: info
-  help: Show all alf related system facts
+  help: Show all alf related system facts.
+  dependencies: [git]

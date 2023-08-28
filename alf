@@ -34,15 +34,15 @@ alf_usage() {
   echo
   # :command.usage_commands
   printf "%s\n" "$(bold "Commands:")"
-  printf "  %s   Connect to a remote git repository\n" "$(green "connect") "
-  printf "  %s   Perform git pull on the connected repo\n" "$(green "download")"
-  printf "  %s   Perform git commit and push on the connected repo\n" "$(green "upload")  "
-  printf "  %s   Generate aliases to stdout\n" "$(green "generate")"
-  printf "  %s   Generate aliases to ~/.bash_aliases\n" "$(green "save")    "
-  printf "  %s   Open your alf.conf for editing\n" "$(green "edit")    "
-  printf "  %s   Show the alias command\n" "$(green "which")   "
-  printf "  %s   Upgrade alf to the latest version\n" "$(green "upgrade") "
-  printf "  %s   Show all alf related system facts\n" "$(green "info")    "
+  printf "  %s   Connect to a remote git repository.\n" "$(green "connect") "
+  printf "  %s   Perform git pull on the connected repo.\n" "$(green "download")"
+  printf "  %s   Perform git commit and push on the connected repo.\n" "$(green "upload")  "
+  printf "  %s   Generate aliases to stdout.\n" "$(green "generate")"
+  printf "  %s   Generate aliases to \`~/.bash_aliases\`.\n" "$(green "save")    "
+  printf "  %s   Open your \`alf.conf\` for editing.\n" "$(green "edit")    "
+  printf "  %s   Show the alias command.\n" "$(green "which")   "
+  printf "  %s   Upgrade alf to the latest version.\n" "$(green "upgrade") "
+  printf "  %s   Show all alf related system facts.\n" "$(green "info")    "
   echo
 
   # :command.long_usage
@@ -62,7 +62,7 @@ alf_usage() {
 
     # :environment_variable.usage
     printf "  %s\n" "ALF_RC_FILE"
-    printf "    Path to alfrc file\n    This file holds the path to the alf-conf repository\n    Default: ~/.alfrc\n"
+    printf "    Path to alfrc file.\n    \n    This file holds the path to the alf-conf repository.\n    \n    Default: \`~/.alfrc\`\n"
     echo
 
   fi
@@ -71,11 +71,11 @@ alf_usage() {
 # :command.usage
 alf_connect_usage() {
   if [[ -n $long_usage ]]; then
-    printf "alf connect - Connect to a remote git repository\n"
+    printf "alf connect - Connect to a remote git repository.\n"
     echo
 
   else
-    printf "alf connect - Connect to a remote git repository\n"
+    printf "alf connect - Connect to a remote git repository.\n"
     echo
 
   fi
@@ -95,17 +95,17 @@ alf_connect_usage() {
     # :command.usage_flags
     # :flag.usage
     printf "  %s\n" "--ssh"
-    printf "    Connect to GitHub non-interactively using SSH (implies --yes)\n"
+    printf "    Connect to GitHub non-interactively using SSH (implies \`--yes\`).\n"
     echo
 
     # :flag.usage
     printf "  %s\n" "--https"
-    printf "    Connect to GitHub non-interactively using HTTPS (implies --yes)\n"
+    printf "    Connect to GitHub non-interactively using HTTPS (implies \`--yes\`).\n"
     echo
 
     # :flag.usage
     printf "  %s\n" "--yes, -y"
-    printf "    Connect to any remote repository non-interactively\n"
+    printf "    Connect to any remote repository non-interactively.\n"
     echo
 
     # :command.usage_fixed_flags
@@ -118,7 +118,7 @@ alf_connect_usage() {
 
     # :argument.usage
     printf "  %s\n" "REPO"
-    printf "    Remote GitHub repository to connect to. This can be one of:\n    \n    - Your username on GitHub. In this case, the repository is expected to\n      be named 'alf-conf'\n    - Your username/repo on GitHub\n    - Any other full URL to a repository\n"
+    printf "    Remote GitHub repository to connect to.\n    \n    Can be one of:\n    \n    - Your username on GitHub.\n      In this case, the repository is expected to be named \`alf-conf\`.\n    - Your username/repo on GitHub.\n    - Any other full URL to a repository.\n"
     echo
 
     # :command.usage_examples
@@ -134,11 +134,11 @@ alf_connect_usage() {
 # :command.usage
 alf_download_usage() {
   if [[ -n $long_usage ]]; then
-    printf "alf download - Perform git pull on the connected repo\n"
+    printf "alf download - Perform git pull on the connected repo.\n"
     echo
 
   else
-    printf "alf download - Perform git pull on the connected repo\n"
+    printf "alf download - Perform git pull on the connected repo.\n"
     echo
 
   fi
@@ -166,11 +166,11 @@ alf_download_usage() {
 # :command.usage
 alf_upload_usage() {
   if [[ -n $long_usage ]]; then
-    printf "alf upload - Perform git commit and push on the connected repo\n"
+    printf "alf upload - Perform git commit and push on the connected repo.\n"
     echo
 
   else
-    printf "alf upload - Perform git commit and push on the connected repo\n"
+    printf "alf upload - Perform git commit and push on the connected repo.\n"
     echo
 
   fi
@@ -198,11 +198,11 @@ alf_upload_usage() {
 # :command.usage
 alf_generate_usage() {
   if [[ -n $long_usage ]]; then
-    printf "alf generate - Generate aliases to stdout\n"
+    printf "alf generate - Generate aliases to stdout.\n"
     echo
 
   else
-    printf "alf generate - Generate aliases to stdout\n"
+    printf "alf generate - Generate aliases to stdout.\n"
     echo
 
   fi
@@ -230,11 +230,11 @@ alf_generate_usage() {
 # :command.usage
 alf_save_usage() {
   if [[ -n $long_usage ]]; then
-    printf "alf save - Generate aliases to ~/.bash_aliases\n"
+    printf "alf save - Generate aliases to \`~/.bash_aliases\`.\n"
     echo
 
   else
-    printf "alf save - Generate aliases to ~/.bash_aliases\n"
+    printf "alf save - Generate aliases to \`~/.bash_aliases\`.\n"
     echo
 
   fi
@@ -261,7 +261,7 @@ alf_save_usage() {
 
     # :environment_variable.usage
     printf "  %s\n" "ALF_ALIASES_FILE"
-    printf "    Path to bash_aliases file\n    Aliases will be saved to this file\n    Default: ~/.bash_aliases\n"
+    printf "    Path to bash_aliases file.\n    \n    Aliases will be saved to this file.\n    \n    Default: \`~/.bash_aliases\`\n"
     echo
 
   fi
@@ -270,11 +270,11 @@ alf_save_usage() {
 # :command.usage
 alf_edit_usage() {
   if [[ -n $long_usage ]]; then
-    printf "alf edit - Open your alf.conf for editing\n"
+    printf "alf edit - Open your \`alf.conf\` for editing.\n"
     echo
 
   else
-    printf "alf edit - Open your alf.conf for editing\n"
+    printf "alf edit - Open your \`alf.conf\` for editing.\n"
     echo
 
   fi
@@ -302,11 +302,11 @@ alf_edit_usage() {
 # :command.usage
 alf_which_usage() {
   if [[ -n $long_usage ]]; then
-    printf "alf which - Show the alias command\n"
+    printf "alf which - Show the alias command.\n"
     echo
 
   else
-    printf "alf which - Show the alias command\n"
+    printf "alf which - Show the alias command.\n"
     echo
 
   fi
@@ -333,12 +333,12 @@ alf_which_usage() {
 
     # :argument.usage
     printf "  %s\n" "CODE"
-    printf "    Show the command for this alias code\n"
+    printf "    Show the command for this alias code.\n"
     echo
 
     # :argument.usage
     printf "  %s\n" "SUBCODE"
-    printf "    Show the command for this alias sub-code\n"
+    printf "    Show the command for this alias sub-code.\n"
     echo
 
   fi
@@ -347,11 +347,11 @@ alf_which_usage() {
 # :command.usage
 alf_upgrade_usage() {
   if [[ -n $long_usage ]]; then
-    printf "alf upgrade - Upgrade alf to the latest version\n"
+    printf "alf upgrade - Upgrade alf to the latest version.\n"
     echo
 
   else
-    printf "alf upgrade - Upgrade alf to the latest version\n"
+    printf "alf upgrade - Upgrade alf to the latest version.\n"
     echo
 
   fi
@@ -376,11 +376,11 @@ alf_upgrade_usage() {
 # :command.usage
 alf_info_usage() {
   if [[ -n $long_usage ]]; then
-    printf "alf info - Show all alf related system facts\n"
+    printf "alf info - Show all alf related system facts.\n"
     echo
 
   else
-    printf "alf info - Show all alf related system facts\n"
+    printf "alf info - Show all alf related system facts.\n"
     echo
 
   fi
@@ -1049,6 +1049,14 @@ alf_connect_parse_requirements() {
     esac
   done
 
+  # :command.dependencies_filter
+  if command -v git >/dev/null 2>&1; then
+    deps['git']="$(command -v git | head -n1)"
+  else
+    printf "missing dependency: git\n" >&2
+    exit 1
+  fi
+
   # :command.command_filter
   action="connect"
 
@@ -1128,6 +1136,14 @@ alf_download_parse_requirements() {
     esac
   done
 
+  # :command.dependencies_filter
+  if command -v git >/dev/null 2>&1; then
+    deps['git']="$(command -v git | head -n1)"
+  else
+    printf "missing dependency: git\n" >&2
+    exit 1
+  fi
+
   # :command.command_filter
   action="download"
 
@@ -1171,6 +1187,14 @@ alf_upload_parse_requirements() {
 
     esac
   done
+
+  # :command.dependencies_filter
+  if command -v git >/dev/null 2>&1; then
+    deps['git']="$(command -v git | head -n1)"
+  else
+    printf "missing dependency: git\n" >&2
+    exit 1
+  fi
 
   # :command.command_filter
   action="upload"
@@ -1408,6 +1432,14 @@ alf_upgrade_parse_requirements() {
     esac
   done
 
+  # :command.dependencies_filter
+  if command -v curl >/dev/null 2>&1; then
+    deps['curl']="$(command -v curl | head -n1)"
+  else
+    printf "missing dependency: curl\n" >&2
+    exit 1
+  fi
+
   # :command.command_filter
   action="upgrade"
 
@@ -1451,6 +1483,14 @@ alf_info_parse_requirements() {
 
     esac
   done
+
+  # :command.dependencies_filter
+  if command -v git >/dev/null 2>&1; then
+    deps['git']="$(command -v git | head -n1)"
+  else
+    printf "missing dependency: git\n" >&2
+    exit 1
+  fi
 
   # :command.command_filter
   action="info"

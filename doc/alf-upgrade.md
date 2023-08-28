@@ -1,11 +1,11 @@
-% alf-upgrade(1) | Upgrade alf to the latest version
+% alf-upgrade(1) | Upgrade alf to the latest version.
 % 
 % August 2023
 
 NAME
 ==================================================
 
-**alf upgrade** - Upgrade alf to the latest version
+**alf upgrade** - Upgrade alf to the latest version.
 
 SYNOPSIS
 ==================================================
@@ -15,7 +15,14 @@ SYNOPSIS
 DESCRIPTION
 ==================================================
 
-Upgrade alf to the latest version
+Upgrade alf to the latest version.
+
+
+DEPENDENCIES
+==================================================
+
+curl
+--------------------------------------------------
 
 
 SEE ALSO

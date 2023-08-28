@@ -1,4 +1,4 @@
-alf connect - Connect to a remote git repository
+alf connect - Connect to a remote git repository.
 
 Alias: c
 
@@ -8,25 +8,27 @@ Alias: c
 
 [1mOptions:[0m
   --ssh
-    Connect to GitHub non-interactively using SSH (implies --yes)
+    Connect to GitHub non-interactively using SSH (implies `--yes`).
 
   --https
-    Connect to GitHub non-interactively using HTTPS (implies --yes)
+    Connect to GitHub non-interactively using HTTPS (implies `--yes`).
 
   --yes, -y
-    Connect to any remote repository non-interactively
+    Connect to any remote repository non-interactively.
 
   --help, -h
     Show this help
 
 [1mArguments:[0m
   REPO
-    Remote GitHub repository to connect to. This can be one of:
+    Remote GitHub repository to connect to.
     
-    - Your username on GitHub. In this case, the repository is expected to
-      be named 'alf-conf'
-    - Your username/repo on GitHub
-    - Any other full URL to a repository
+    Can be one of:
+    
+    - Your username on GitHub.
+      In this case, the repository is expected to be named `alf-conf`.
+    - Your username/repo on GitHub.
+    - Any other full URL to a repository.
 
 [1mExamples:[0m
   alf connect you --ssh

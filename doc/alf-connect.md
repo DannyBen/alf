@@ -1,11 +1,11 @@
-% alf-connect(1) | Connect to a remote git repository
+% alf-connect(1) | Connect to a remote git repository.
 % 
 % August 2023
 
 NAME
 ==================================================
 
-**alf connect** - Connect to a remote git repository
+**alf connect** - Connect to a remote git repository.
 
 SYNOPSIS
 ==================================================
@@ -15,7 +15,7 @@ SYNOPSIS
 DESCRIPTION
 ==================================================
 
-Connect to a remote git repository
+Connect to a remote git repository.
 
 - Alias: **c**
 
@@ -25,12 +25,14 @@ ARGUMENTS
 REPO
 --------------------------------------------------
 
-Remote GitHub repository to connect to. This can be one of:
+Remote GitHub repository to connect to.
 
-- Your username on GitHub. In this case, the repository is expected to
-  be named 'alf-conf'
-- Your username/repo on GitHub
-- Any other full URL to a repository
+Can be one of:
+
+- Your username on GitHub.
+  In this case, the repository is expected to be named **alf-conf**.
+- Your username/repo on GitHub.
+- Any other full URL to a repository.
 
 
 - *Required*
@@ -41,19 +43,26 @@ OPTIONS
 --ssh
 --------------------------------------------------
 
-Connect to GitHub non-interactively using SSH (implies --yes)
+Connect to GitHub non-interactively using SSH (implies **--yes**).
 
 
 --https
 --------------------------------------------------
 
-Connect to GitHub non-interactively using HTTPS (implies --yes)
+Connect to GitHub non-interactively using HTTPS (implies **--yes**).
 
 
 --yes, -y
 --------------------------------------------------
 
-Connect to any remote repository non-interactively
+Connect to any remote repository non-interactively.
+
+
+DEPENDENCIES
+==================================================
+
+git
+--------------------------------------------------
 
 
 EXAMPLES

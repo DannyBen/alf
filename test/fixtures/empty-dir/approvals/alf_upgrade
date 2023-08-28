@@ -1,2 +1,14 @@
-=== Saving executable to /usr/local/bin/alf
-=== Done. Type 'alf --help' for more info.
+
+=== [1;32mInitializing[0m
+
+=== [1;32mChecking for pre-requisites[0m
+[34m    git[0m found
+
+=== [1;32mCloning DannyBen/alf[0m
+Cloning into '/tmp/*
+
+=== [1;32mCopying files[0m
+[34malf                      [0m => /usr/local/bin/
+
+=== [1;32mDone[0m
+0.5.1
