@@ -78,8 +78,7 @@ initialize() {
 
   repo="$1"
   repo_url="https://github.com/${repo}.git"
-  pushd $(mktemp -d) > /dev/null
-  
+  pushd "$(mktemp -d)" >/dev/null  
 }
 
 section "Initializing"
