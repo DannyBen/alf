@@ -21,12 +21,12 @@ section() {
 
 copy() {
   printf "%s => %s\n" "$(blue "$(printf '%-25s' "$1")")" "$2"
-  cp "$origin/$1" "$2"
+  cp "$1" "$2"
 }
 
 sudo_copy() {
   printf "%s => %s\n" "$(blue "$(printf '%-25s' "$1")")" "$2"
-  $sudo cp "$origin/$1" "$2"
+  $sudo cp "$1" "$2"
 }
 
 copy_executable() {
@@ -78,7 +78,8 @@ initialize() {
 
   repo="$1"
   repo_url="https://github.com/${repo}.git"
-  origin=$(mktemp -d)
+  pushd $(mktemp -d) > /dev/null
+  
 }
 
 section "Initializing"
@@ -88,7 +89,7 @@ section "Checking for pre-requisites"
 need git
 
 section "Cloning $repo"
-git clone --depth 1 "$repo_url" "$origin"
+git clone --depth 1 "$repo_url" .
 
 section "Copying files"
 copy_executable 'alf'
