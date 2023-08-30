@@ -7,6 +7,6 @@ describe "alf upgrade --help"
 
 describe "alf upgrade"
   cp /usr/local/bin/alf /usr/local/bin/alf-before-upgrade
-  allow_diff 'tmp\..*'
+  # allow_diff 'tmp\..*'
   approve "alf upgrade"
   mv /usr/local/bin/alf-before-upgrade /usr/local/bin/alf

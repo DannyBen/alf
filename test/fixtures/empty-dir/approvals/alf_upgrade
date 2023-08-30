@@ -5,7 +5,7 @@
 [34m    git[0m found
 
 === [1;32mCloning DannyBen/alf[0m
-Cloning into '/tmp/*
+Cloning into '.'...
 
 === [1;32mCopying files[0m
 [34malf                      [0m => /usr/local/bin/
