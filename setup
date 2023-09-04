@@ -37,7 +37,7 @@ copy_executable() {
 copy_man() {
   if [[ ! -d "/usr/local/share/man/man1/" ]]; then return; fi
 
-  for file in "$1"/*.1; do
+  for file in "$1"/*.[1-8]; do
     sudo_copy "$file" "/usr/local/share/man/man1/"
   done
 
