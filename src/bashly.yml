@@ -3,7 +3,8 @@ help: Your Little Bash Alias Friend
 version: 0.6.0
 
 x_mandoc_authors: Danny Ben Shitrit <https://github.com/dannyben>
-
+x_mandoc_see_also: &alf-conf-man
+  - alf.conf(5)
 x_mandoc_footer: |-
   # SOURCE CODE
 
@@ -87,6 +88,7 @@ commands:
 - name: edit
   alias: e
   help: Open your `alf.conf` for editing.
+  x_mandoc_see_also: *alf-conf-man
 
 - name: which
   alias: w

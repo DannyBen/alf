@@ -1,6 +1,6 @@
 % alf(1) Version 0.6.0 | Your Little Bash Alias Friend
 % Danny Ben Shitrit \<https://github.com/dannyben\>
-% August 2023
+% September 2023
 
 NAME
 ==================================================
@@ -84,7 +84,7 @@ Default: **~/.alfrc**
 SEE ALSO
 ==================================================
 
-**alf-connect**(1), **alf-download**(1), **alf-upload**(1), **alf-generate**(1), **alf-save**(1), **alf-edit**(1), **alf-which**(1), **alf-upgrade**(1), **alf-info**(1)
+**alf-connect**(1), **alf-download**(1), **alf-upload**(1), **alf-generate**(1), **alf-save**(1), **alf-edit**(1), **alf-which**(1), **alf-upgrade**(1), **alf-info**(1), **alf.conf**(5)
 
 # SOURCE CODE
 

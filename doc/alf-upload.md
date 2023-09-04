@@ -1,6 +1,6 @@
 % alf-upload(1) | Perform git commit and push on the connected repo.
 % 
-% August 2023
+% September 2023
 
 NAME
 ==================================================
@@ -30,6 +30,5 @@ SEE ALSO
 ==================================================
 
 **alf**(1)
-
 
 

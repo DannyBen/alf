@@ -1,6 +1,6 @@
 % alf-upgrade(1) | Upgrade alf to the latest version.
 % 
-% August 2023
+% September 2023
 
 NAME
 ==================================================
@@ -29,6 +29,5 @@ SEE ALSO
 ==================================================
 
 **alf**(1)
-
 
 
