@@ -9,6 +9,17 @@ Cloning into '.'...
 
 === [1;32mCopying files[0m
 [34malf                      [0m => /usr/local/bin/
+[34mdoc/alf-connect.1        [0m => /usr/local/share/man/man1/
+[34mdoc/alf-download.1       [0m => /usr/local/share/man/man1/
+[34mdoc/alf-edit.1           [0m => /usr/local/share/man/man1/
+[34mdoc/alf-generate.1       [0m => /usr/local/share/man/man1/
+[34mdoc/alf-info.1           [0m => /usr/local/share/man/man1/
+[34mdoc/alf-save.1           [0m => /usr/local/share/man/man1/
+[34mdoc/alf-upgrade.1        [0m => /usr/local/share/man/man1/
+[34mdoc/alf-upload.1         [0m => /usr/local/share/man/man1/
+[34mdoc/alf-which.1          [0m => /usr/local/share/man/man1/
+[34mdoc/alf.1                [0m => /usr/local/share/man/man1/
+[34mdoc/alf.conf.5           [0m => /usr/local/share/man/man5/
 
 === [1;32mDone[0m
 0.6.0
