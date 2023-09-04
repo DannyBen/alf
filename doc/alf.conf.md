@@ -31,6 +31,7 @@ will be used as a prefix to all nested commands.
 ```
 g: git
   s: status
+  c: add . --all && git commit -am
   l: log --all --graph --date=relative
   p: push
 ```
@@ -79,6 +80,32 @@ dns: !
 This example provides two completely different aliases: **dns check** and 
 **dns flush**.
 
+Arguments
+--------------------------------------------------
+By default, all arguments that are provided in the input are passed on to the
+alias, using **"\$@"**. If your command contains the **\$** symbol, then the
+array of arguments will NOT be appended to the command.
+
+You can even provide a default value to the argument using the standard
+bash syntax, and use any bash construct, like inline functions.
+
+```
+count: find ${1:-.} -type f | wc -l
+binlink: sudo ln -fs "$(realpath $1)" "/usr/local/bin/$1"
+```
+
+Comments
+--------------------------------------------------
+
+Any line starting with **#** will be considered a comment. Do not use inline
+comments.
+
+```
+# good
+dir: ls -l
+
+dir: ls -l   # bad
+```
 
 SEE ALSO
 ==================================================

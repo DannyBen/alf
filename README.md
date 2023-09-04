@@ -122,6 +122,11 @@ Environment Variables:
     Default: ~/.alfrc
 ```
 
+## File format reference (`alf.conf`)
+
+- [Sample, documented `alf.conf` file](alf.conf)
+- [`alf.conf(5)` man page](doc/alf.conf.md)
+
 
 ## Uninstalling
 

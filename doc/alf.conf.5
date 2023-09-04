@@ -44,6 +44,7 @@ nested commands.
 \f[C]
 g: git
   s: status
+  c: add . --all && git commit -am
   l: log --all --graph --date=relative
   p: push
 \f[R]
@@ -92,6 +93,35 @@ dns: !
 .PP
 This example provides two completely different aliases: \f[B]dns
 check\f[R] and \f[B]dns flush\f[R].
+.SS Arguments
+.PP
+By default, all arguments that are provided in the input are passed on
+to the alias, using \f[B]\[dq]$\[at]\[dq]\f[R].
+If your command contains the \f[B]$\f[R] symbol, then the array of
+arguments will NOT be appended to the command.
+.PP
+You can even provide a default value to the argument using the standard
+bash syntax, and use any bash construct, like inline functions.
+.IP
+.nf
+\f[C]
+count: find ${1:-.} -type f | wc -l
+binlink: sudo ln -fs \[dq]$(realpath $1)\[dq] \[dq]/usr/local/bin/$1\[dq]
+\f[R]
+.fi
+.SS Comments
+.PP
+Any line starting with \f[B]#\f[R] will be considered a comment.
+Do not use inline comments.
+.IP
+.nf
+\f[C]
+# good
+dir: ls -l
+
+dir: ls -l   # bad
+\f[R]
+.fi
 .SH SEE ALSO
 .PP
 \f[B]alf\f[R](1)
