@@ -6,22 +6,16 @@ on:
 jobs:
   test:
     name: Run test suite
-
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
-
+      uses: actions/checkout@v4
     - name: Run shellcheck tests
       run: shellcheck alf setup
-
     - name: Build container for approval tests
       run: docker compose build
-
     - name: Run approval tests
       run: docker compose run ci
-
     - name: Run sanity test in zsh
       run: docker compose run test_zsh
 
@@ -30,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Run setup
       run: ./setup
     - name: Run uninstall
@@ -41,7 +35,7 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Upgrade the outdated bash
       run: brew install bash
     - name: Run setup
@@ -51,25 +45,18 @@ jobs:
 
   static_analysis:
     name: Static analysis
-
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
-
+      uses: actions/checkout@v4
     # Rush needed for easy installation of latest shfmt
     - name: Install rush
       run: curl -Ls http://get.dannyb.co/rush/setup | bash
-
     - name: Connect rush repo
       run: rush clone dannyben --shallow --default
-
     - name: Install shfmt and opcode
       run: rush get shfmt && rush get opcode
-
     - name: Run shellcheck tests
       run: op shellcheck
-
     - name: Run shfmt tests
       run: op shfmt
