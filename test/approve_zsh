@@ -15,4 +15,4 @@ context "in zsh"
     approve "say again zsh-works"
     popd
 
-green "\nSanity test on ZSH passed!"
+green "\nsanity test on ZSH passed!"

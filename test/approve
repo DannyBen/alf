@@ -9,6 +9,6 @@ if [[ $TEST ]]; then
 else
   for file in *_spec.sh ; do
     context "$file"
-    "./$file" || fail "Aborted test loop"
+    "./$file" || fail "aborted test loop"
   done
 fi
