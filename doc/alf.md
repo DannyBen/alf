@@ -1,4 +1,4 @@
-% alf(1) Version 0.6.0 | Your Little Bash Alias Friend
+% alf(1) Version 0.6.1 | Your Little Bash Alias Friend
 % Danny Ben Shitrit \<https://github.com/dannyben\>
 % February 2024
 
