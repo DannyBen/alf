@@ -1,6 +1,6 @@
 name: alf
 help: Your Little Bash Alias Friend
-version: 0.6.0
+version: 0.6.1
 
 x_mandoc_authors: Danny Ben Shitrit <https://github.com/dannyben>
 x_mandoc_see_also: &alf-conf-man
