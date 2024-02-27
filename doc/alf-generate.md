@@ -1,6 +1,6 @@
 % alf-generate(1) | Generate aliases to stdout.
 % 
-% September 2023
+% February 2024
 
 NAME
 ==================================================

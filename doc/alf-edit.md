@@ -1,6 +1,6 @@
 % alf-edit(1) | Open your `alf.conf` for editing.
 % 
-% September 2023
+% February 2024
 
 NAME
 ==================================================

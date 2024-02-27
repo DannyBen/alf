@@ -27,10 +27,11 @@ v0.4.12 - 2022-05-23
 - Fix completions error with configs that do not have subcommands
 
 
+<!-- break v0.4.11 -->
 v0.4.11 - 2022-05-12
 ----------------------------------------
 
-- Genearte with bashly 0.8.0
+- Generate with bashly 0.8.0
 
 
 v0.4.10 - 2022-03-28

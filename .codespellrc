@@ -1,0 +1,3 @@
+[codespell]
+skip = sublime*
+ignore-words-list = bu
