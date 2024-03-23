@@ -1,0 +1,5 @@
+# for git-changelog (https://github.com/dannyben/git-changelog)
+export CHANGELOG_COMMIT_URL=https://github.com/DannyBen/alf/commit/%h
+export CHANGELOG_COMPARE_URL=https://github.com/dannyben/alf/compare/%s
+
+PATH_add .
