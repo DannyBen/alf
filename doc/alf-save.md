@@ -1,6 +1,6 @@
 % alf-save(1) | Generate aliases to `~/.bash_aliases`.
 % 
-% February 2024
+% December 2024
 
 NAME
 ==================================================

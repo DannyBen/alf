@@ -1,6 +1,6 @@
 % alf-info(1) | Show all alf related system facts.
 % 
-% February 2024
+% December 2024
 
 NAME
 ==================================================
