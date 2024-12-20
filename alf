@@ -1435,7 +1435,6 @@ initialize() {
 # :command.run
 run() {
   declare -g -A args=()
-  declare -g -a other_args=()
   declare -g -a input=()
   normalize_input "$@"
   parse_requirements "${input[@]}"
