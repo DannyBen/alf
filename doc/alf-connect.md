@@ -1,6 +1,6 @@
 % alf-connect(1) | Connect to a remote git repository.
 % 
-% February 2024
+% December 2024
 
 NAME
 ==================================================

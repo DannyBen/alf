@@ -1,6 +1,6 @@
 % alf-upgrade(1) | Upgrade alf to the latest version.
 % 
-% February 2024
+% December 2024
 
 NAME
 ==================================================
