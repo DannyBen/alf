@@ -19,19 +19,18 @@ section() {
   printf "\n=== %s\n" "$(green_bold "$@")"
 }
 
-copy() {
-  printf "%s => %s\n" "$(blue "$(printf '%-25s' "$1")")" "$2"
-  cp "$1" "$2"
-}
-
 sudo_copy() {
   printf "%s => %s\n" "$(blue "$(printf '%-25s' "$1")")" "$2"
-  $sudo cp "$1" "$2"
+
+  if [[ -n "$3" ]]; then
+    $sudo install -m "$3" "$1" "$2"
+  else
+    $sudo install "$1" "$2"
+  fi
 }
 
 copy_executable() {
-  sudo_copy "$1" "/usr/local/bin/"
-  $sudo chmod a+x "/usr/local/bin/$1"
+  sudo_copy "$1" "/usr/local/bin/" "755"
 }
 
 copy_man() {
