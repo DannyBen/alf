@@ -186,6 +186,18 @@ to contribute, feel free to [open an issue][issues].
 
 ---
 
+<table>
+  <tr><td align="center" colspan="4"><strong>This repository is part of the Bash Productivity Suite</strong></td></tr>
+  <tr>
+    <td><a href="https://github.com/dannyben/alf"><img src="https://github.dannyben.com/assets/img/alf.png"></a></td>
+    <td><a href="https://github.com/dannyben/opcode"><img src="https://github.dannyben.com/assets/img/opcode.png"></a></td>
+    <td><a href="https://github.com/dannyben/fuzzycd"><img src="https://github.dannyben.com/assets/img/fuzzycd.png"></a></td>
+    <td><a href="https://github.com/dannyben/rush"><img src="https://github.dannyben.com/assets/img/rush.png"></a></td>
+  </tr>
+</table>
+
+---
+
 [issues]: https://github.com/DannyBen/alf/issues
 [conf]: https://github.com/DannyBen/alf-conf
 [template]: https://github.com/DannyBen/alf-conf/generate
