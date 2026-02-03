@@ -10,6 +10,8 @@
 
 ---
 
+![repocard](repocard.svg)
+
 Alf enhances your bash alias management. It was developed using the
 [Bashly Command Line Framework][bashly].
 
