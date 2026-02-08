@@ -3,14 +3,11 @@
 
 # Alf - Your Little Bash Alias Friend
 
-![Version](https://img.shields.io/badge/version-0.6.1-blue.svg)
-[![Build Status](https://github.com/DannyBen/alf/workflows/Test/badge.svg)](https://github.com/DannyBen/alf/actions?query=workflow%3ATest)
-
 </div>
 
 ---
 
-![repocard](repocard.svg)
+![repocard](https://repocard.dannyben.com/svg/alf.svg)
 
 Alf enhances your bash alias management. It was developed using the
 [Bashly Command Line Framework][bashly].
