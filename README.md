@@ -12,23 +12,20 @@
 Alf enhances your bash alias management. It was developed using the
 [Bashly Command Line Framework][bashly].
 
-
 ## Features
 
 - Create aliases by using a config file.
 - Create aliases for sub-commands (for example, `g s` for `git status`).
-- Synchronize your aliases across hosts or users by uploading your 
+- Synchronize your aliases across hosts or users by uploading your
   config file to GitHub.
 - Does not alter anything in your system except for creating the
   `~/.bash_aliases` file, which is normally already sourced by your login
   process.
 - Works with bash and zsh.
 
-
 ## Demo
 
 ![Demo](/demo/cast.gif)
-
 
 ## Installation
 
@@ -38,18 +35,24 @@ Install the `alf` executable script:
 $ curl -Ls get.dannyb.co/alf/setup | bash
 ```
 
+By default, alf is installed to `/usr/local`. To install to a different prefix
+(e.g. under your home directory to avoid needing `sudo`):
+
+```bash
+$ curl -Ls get.dannyb.co/alf/setup | PREFIX=~/.local bash
+```
+
 If you prefer to install manually, simply download the [alf](/alf) file,
 place it somewhere in your path, and make it executable.
 
 Note that alf requires bash 4.0 or higher (`brew install bash` for mac users).
 
-
 ## Using with GitHub-hosted configuration (recommended)
 
-The easiest way to use alf is to create a repository on github, call it 
+The easiest way to use alf is to create a repository on github, call it
 `alf-conf`, and put an `alf.conf` file in it.
 
-### 1. Create your own `alf-conf` repository  
+### 1. Create your own `alf-conf` repository
 
 - See the [alf.conf](alf.conf) file as a starting point, or
 - [Generate a template][template] from my [alf-conf][conf]
@@ -66,7 +69,6 @@ $ alf connect <your github user>
 $ alf save
 $ source ~/.bash_aliases  # this normally already exists in your ~/.bashrc
 ```
-
 
 ## Using without GitHub
 
@@ -126,14 +128,16 @@ Environment Variables:
 - [Sample, documented `alf.conf` file](alf.conf)
 - [`alf.conf(5)` man page](doc/alf.conf.md)
 
-
 ## Uninstalling
 
 To uninstall alf:
 
 ```shell
-# Run the uninstall script 
+# Run the uninstall script
 $ curl -Ls get.dannyb.co/alf/uninstall | bash
+
+# If you installed to a custom prefix, pass it here too
+$ curl -Ls get.dannyb.co/alf/uninstall | PREFIX=~/.local bash
 
 # Optionally, remove .alfrc (exists only if you have performed `alf connect`)
 $ rm -f ~/.alfrc
@@ -141,7 +145,6 @@ $ rm -f ~/.alfrc
 # Optionally, remove .bash_aliases (exists only if you have performed `alf save`)
 $ rm -f ~/.bash_aliases
 ```
-
 
 ## Compatibility
 
@@ -171,12 +174,10 @@ autoload -Uz +X compinit && compinit
 autoload -Uz +X bashcompinit && bashcompinit
 ```
 
-
 ## Related Projects
 
-For a similar project, but for command shortcuts on a per-directory basis, 
+For a similar project, but for command shortcuts on a per-directory basis,
 see [opcode][opcode].
-
 
 ## Contributing / Support
 
