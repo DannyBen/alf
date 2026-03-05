@@ -19,6 +19,8 @@ section() {
   printf "\n=== %s\n" "$(green_bold "$@")"
 }
 
+prefix="${PREFIX:-/usr/local}"
+
 command_exist() {
   [[ -x "$(command -v "$1")" ]]
 }
@@ -27,7 +29,7 @@ rm_executable() {
   if [[ -z "$1" ]]; then return; fi
 
   printf "%s %s\n" "$(blue rm)" "$1"
-  $sudo rm -f "/usr/local/bin/$1"
+  $sudo rm -f "$prefix/bin/$1"
 
   if command_exist "$1"; then
     fail "Command $1 still exists"
@@ -35,17 +37,17 @@ rm_executable() {
 }
 
 rm_man() {
-  if [[ ! -d "/usr/local/share/man/man1/" ]]; then return; fi
+  if [[ ! -d "$prefix/share/man/man1/" ]]; then return; fi
   if [[ -z "$1" ]]; then return; fi
 
-  printf "%s %s\n" "$(blue rm)" "/usr/local/share/man/man1/$1*.1"
-  $sudo rm -f /usr/local/share/man/man1/"$1"*.1
+  printf "%s %s\n" "$(blue rm)" "$prefix/share/man/man1/$1*.1"
+  $sudo rm -f "$prefix/share/man/man1/$1"*.1
 
-  printf "%s %s\n" "$(blue rm)" "/usr/local/share/man/man5/$1*.5"
-  $sudo rm -f /usr/local/share/man/man5/"$1"*.5
+  printf "%s %s\n" "$(blue rm)" "$prefix/share/man/man5/$1*.5"
+  $sudo rm -f "$prefix/share/man/man5/$1"*.5
 
   if command_exist makewhatis; then
-    $sudo makewhatis /usr/local/man
+    $sudo makewhatis "$prefix/share/man"
   fi
 }
 
@@ -64,10 +66,14 @@ initialize() {
   set -e
   trap 'onerror' ERR
 
-  # Figure out if we need sudo or not
+  # Only use sudo if the prefix is not under the user's home directory
   sudo=''
   if [[ $EUID -ne 0 ]]; then
-    sudo='sudo'
+    if [[ -n "$HOME" && ( "$prefix" == "$HOME" || "$prefix" == "$HOME"/* ) ]]; then
+      :
+    else
+      sudo='sudo'
+    fi
   fi
 }
 

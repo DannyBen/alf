@@ -19,6 +19,8 @@ section() {
   printf "\n=== %s\n" "$(green_bold "$@")"
 }
 
+prefix="${PREFIX:-/usr/local}"
+
 sudo_copy() {
   printf "%s => %s\n" "$(blue "$(printf '%-25s' "$1")")" "$2"
 
@@ -30,13 +32,17 @@ sudo_copy() {
 }
 
 copy_executable() {
-  sudo_copy "$1" "/usr/local/bin/" "755"
+  local bin_dir="$prefix/bin"
+  if [[ ! -d "$bin_dir" ]]; then
+    $sudo mkdir -p "$bin_dir"
+  fi
+  sudo_copy "$1" "$bin_dir/" "755"
 }
 
 copy_man() {
   for file in "$1"/*.[1-8]; do
     section="${file##*.}"
-    target_dir="/usr/local/share/man/man$section/"
+    target_dir="$prefix/share/man/man$section/"
 
     if [[ ! -d "$target_dir" ]]; then
       $sudo mkdir -p "$target_dir"
@@ -46,7 +52,7 @@ copy_man() {
   done
 
   if command_exist makewhatis; then
-    $sudo makewhatis /usr/local/man
+    $sudo makewhatis "$prefix/share/man"
   fi
 }
 
@@ -74,10 +80,14 @@ initialize() {
   set -e
   trap 'onerror' ERR
 
-  # Figure out if we need sudo or not
+  # Only use sudo if the prefix is not under the user's home directory
   sudo=''
   if [[ $EUID -ne 0 ]]; then
-    sudo='sudo'
+    if [[ -n "$HOME" && ( "$prefix" == "$HOME" || "$prefix" == "$HOME"/* ) ]]; then
+      :
+    else
+      sudo='sudo'
+    fi
   fi
 
   repo="$1"
