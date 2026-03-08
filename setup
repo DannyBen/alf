@@ -1,102 +1,46 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-print_in_color() {
-  local color="$1"
-  shift
-  if [[ -z ${NO_COLOR+x} ]]; then
-    printf "$color%b\e[0m\n" "$*"
-  else
-    printf "%b\n" "$*"
-  fi
-}
+prepare_installer() {
+  echo "Initializing installer..."
+  SSI_VERSION="0.1.5"
 
-red() { print_in_color "\e[31m" "$*"; }
-green() { print_in_color "\e[32m" "$*"; }
-green_bold() { print_in_color "\e[1;32m" "$*"; }
-blue() { print_in_color "\e[34m" "$*"; }
+  # Set up tmp dir where all work is done
+  tmpdir="$(mktemp -d)"
+  trap 'rm -rf "$tmpdir"' EXIT
+  cd "$tmpdir"
+  export PATH="$tmpdir:$PATH"
 
-section() {
-  printf "\n=== %s\n" "$(green_bold "$@")"
-}
-
-sudo_copy() {
-  printf "%s => %s\n" "$(blue "$(printf '%-25s' "$1")")" "$2"
-
-  if [[ -n "$3" ]]; then
-    $sudo install -m "$3" "$1" "$2"
-  else
-    $sudo install "$1" "$2"
-  fi
-}
-
-copy_executable() {
-  sudo_copy "$1" "/usr/local/bin/" "755"
-}
-
-copy_man() {
-  for file in "$1"/*.[1-8]; do
-    section="${file##*.}"
-    target_dir="/usr/local/share/man/man$section/"
-
-    if [[ ! -d "$target_dir" ]]; then
-      $sudo mkdir -p "$target_dir"
+  # Download ssi if needed
+  if ! command -v ssi >/dev/null 2>&1 || [ "$(ssi --version 2>/dev/null)" != "$SSI_VERSION" ]; then
+    if command -v curl >/dev/null 2>&1; then
+      curl -fSsL https://github.com/DannyBen/ssi/releases/download/v$SSI_VERSION/ssi -o ssi
+    elif command -v wget >/dev/null 2>&1; then
+      wget -nv -O ssi https://github.com/DannyBen/ssi/releases/download/v$SSI_VERSION/ssi
+    else
+      echo "Error: please install wget or curl, then try again" >&2
+      exit 1
     fi
-
-    sudo_copy "$file" "$target_dir"
-  done
-
-  if command_exist makewhatis; then
-    $sudo makewhatis /usr/local/man
+    chmod +x ssi
   fi
 }
 
-command_exist() {
-  [[ -x "$(command -v "$1")" ]]
-}
+prepare_installer
 
-need() {
-  command_exist "$1" || fail "Cannot run $1"
-  printf "%s found\n" "$(blue "    $1")"
-}
+if ! command -v git >/dev/null 2>&1; then
+  echo "Error: please install git and try again" >&2
+  exit 1
+fi
 
-onerror() {
-  local exit_status=$?
-  printf "\n=== %s\n" "$(red "Aborted with exit status $exit_status")"
-  exit $exit_status
-}
+ssi log info Installing alf
+ssi log debug Cloning github repo
+git clone -q --depth 1 https://github.com/DannyBen/alf.git alf
+ssi install bin alf/alf
+ssi install man alf/doc
 
-fail() {
-  printf "$(red 'ERR') %s\n" "$*"
-  return 1
-}
-
-initialize() {
-  set -e
-  trap 'onerror' ERR
-
-  # Figure out if we need sudo or not
-  sudo=''
-  if [[ $EUID -ne 0 ]]; then
-    sudo='sudo'
-  fi
-
-  repo="$1"
-  repo_url="https://github.com/${repo}.git"
-  pushd "$(mktemp -d)" >/dev/null
-}
-
-section "Initializing"
-initialize "DannyBen/alf"
-
-section "Checking for pre-requisites"
-need git
-
-section "Cloning $repo"
-git clone --depth 1 "$repo_url" .
-
-section "Copying files"
-copy_executable 'alf'
-copy_man 'doc'
-
-section "Done"
-alf --version
+if command -v alf >/dev/null 2>&1; then
+  ssi log info "alf --version : $(alf --version)"
+else
+  ssi log warn "alf not found on PATH after install"
+fi
+ssi log debug Installation complete

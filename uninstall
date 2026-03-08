@@ -1,80 +1,32 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-print_in_color() {
-  local color="$1"
-  shift
-  if [[ -z ${NO_COLOR+x} ]]; then
-    printf "$color%b\e[0m\n" "$*"
-  else
-    printf "%b\n" "$*"
+prepare_installer() {
+  echo "Initializing installer..."
+  SSI_VERSION="0.1.5"
+
+  # Set up tmp dir where all work is done
+  tmpdir="$(mktemp -d)"
+  trap 'rm -rf "$tmpdir"' EXIT
+  cd "$tmpdir"
+  export PATH="$tmpdir:$PATH"
+
+  # Download ssi if needed
+  if ! command -v ssi >/dev/null 2>&1 || [ "$(ssi --version 2>/dev/null)" != "$SSI_VERSION" ]; then
+    if command -v curl >/dev/null 2>&1; then
+      curl -fSsL https://github.com/DannyBen/ssi/releases/download/v$SSI_VERSION/ssi -o ssi
+    elif command -v wget >/dev/null 2>&1; then
+      wget -nv -O ssi https://github.com/DannyBen/ssi/releases/download/v$SSI_VERSION/ssi
+    else
+      echo "Error: please install wget or curl, then try again" >&2
+      exit 1
+    fi
+    chmod +x ssi
   fi
 }
 
-red() { print_in_color "\e[31m" "$*"; }
-green() { print_in_color "\e[32m" "$*"; }
-green_bold() { print_in_color "\e[1;32m" "$*"; }
-blue() { print_in_color "\e[34m" "$*"; }
-
-section() {
-  printf "\n=== %s\n" "$(green_bold "$@")"
-}
-
-command_exist() {
-  [[ -x "$(command -v "$1")" ]]
-}
-
-rm_executable() {
-  if [[ -z "$1" ]]; then return; fi
-
-  printf "%s %s\n" "$(blue rm)" "$1"
-  $sudo rm -f "/usr/local/bin/$1"
-
-  if command_exist "$1"; then
-    fail "Command $1 still exists"
-  fi
-}
-
-rm_man() {
-  if [[ ! -d "/usr/local/share/man/man1/" ]]; then return; fi
-  if [[ -z "$1" ]]; then return; fi
-
-  printf "%s %s\n" "$(blue rm)" "/usr/local/share/man/man1/$1*.1"
-  $sudo rm -f /usr/local/share/man/man1/"$1"*.1
-
-  printf "%s %s\n" "$(blue rm)" "/usr/local/share/man/man5/$1*.5"
-  $sudo rm -f /usr/local/share/man/man5/"$1"*.5
-
-  if command_exist makewhatis; then
-    $sudo makewhatis /usr/local/man
-  fi
-}
-
-onerror() {
-  local exit_status=$?
-  printf "\n=== %s\n" "$(red "Aborted with exit status $exit_status")"
-  exit $exit_status
-}
-
-fail() {
-  printf "$(red 'ERR') %s\n" "$*"
-  return 1
-}
-
-initialize() {
-  set -e
-  trap 'onerror' ERR
-
-  # Figure out if we need sudo or not
-  sudo=''
-  if [[ $EUID -ne 0 ]]; then
-    sudo='sudo'
-  fi
-}
-
-initialize
-
-section "Removing files"
-rm_executable 'alf'
-rm_man 'alf'
-
-section "Done"
+prepare_installer
+ssi log info "Uninstalling alf"
+ssi uninstall bin alf
+ssi uninstall man alf --all
+ssi log debug Uninstallation complete
