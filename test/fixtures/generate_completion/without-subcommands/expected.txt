@@ -1,0 +1,3 @@
+# Completions
+if command -v complete &> /dev/null ; then
+fi

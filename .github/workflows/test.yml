@@ -18,6 +18,8 @@ jobs:
       run: docker compose run ci
     - name: Run sanity test in zsh
       run: docker compose run test_zsh
+    - name: Run Bats tests
+      run: bats test/commands test/lib
 
   ubuntu_setup:
     name: Setup on Ubuntu

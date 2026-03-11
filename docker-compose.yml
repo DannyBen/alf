@@ -20,16 +20,15 @@ services:
     volumes: 
     - .:/app
     environment: { TEST }
-    command: test/approve
+    command: test-legacy/approve
 
   test_zsh: &test_zsh
     <<: *zsh
     environment: { CI, GITHUB_ACTIONS }
-    command: test/approve_zsh
+    command: test-legacy/approve_zsh
 
   ci:
     <<: *test
     environment:
       CI: 1
     volumes: []
-

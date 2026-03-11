@@ -1,0 +1,15 @@
+Initializing installer...
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m Installing alf
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m Installed: /usr/local/bin/alf
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m Installed: /usr/local/share/man/man1/alf-connect.1
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m Installed: /usr/local/share/man/man1/alf-download.1
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m Installed: /usr/local/share/man/man1/alf-edit.1
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m Installed: /usr/local/share/man/man1/alf-generate.1
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m Installed: /usr/local/share/man/man1/alf-info.1
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m Installed: /usr/local/share/man/man1/alf-save.1
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m Installed: /usr/local/share/man/man1/alf-upgrade.1
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m Installed: /usr/local/share/man/man1/alf-upload.1
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m Installed: /usr/local/share/man/man1/alf-which.1
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m Installed: /usr/local/share/man/man1/alf.1
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m Installed: /usr/local/share/man/man5/alf.conf.5
+[1;32m•[0m [1;34minfo [0m [1;32m→[0m alf --version : 0.6.1

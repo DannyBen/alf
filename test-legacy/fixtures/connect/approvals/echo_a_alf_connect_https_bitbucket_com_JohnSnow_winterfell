@@ -1,0 +1,9 @@
+This operation will:
+
+  clone  https://bitbucket.com/JohnSnow/winterfell
+     to  ./alf-conf
+
+  write  /app/test-legacy/fixtures/connect/alf-conf
+     to  ./alfrc
+
+Continue? [yN] Aborting
