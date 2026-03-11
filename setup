@@ -3,7 +3,7 @@ set -euo pipefail
 
 prepare_installer() {
   echo "Initializing installer..."
-  SSI_VERSION="0.1.5"
+  SSI_VERSION="0.1.8"
 
   # Set up tmp dir where all work is done
   tmpdir="$(mktemp -d)"

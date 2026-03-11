@@ -3,7 +3,7 @@ set -euo pipefail
 
 prepare_installer() {
   echo "Initializing installer..."
-  SSI_VERSION="0.1.5"
+  SSI_VERSION="0.1.8"
 
   # Set up tmp dir where all work is done
   tmpdir="$(mktemp -d)"
@@ -28,5 +28,5 @@ prepare_installer() {
 prepare_installer
 ssi log info "Uninstalling alf"
 ssi uninstall bin alf
-ssi uninstall man alf --all
+ssi uninstall man alf
 ssi log debug Uninstallation complete
