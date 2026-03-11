@@ -15,7 +15,7 @@ jobs:
     - name: Run shellcheck tests
       run: shellcheck alf setup uninstall
     - name: Run Bats tests
-      run: bats --recursive --print-output-on-failure --abort test
+      run: bats --recursive --print-output-on-failure test
 
   ubuntu_setup:
     name: Setup on Ubuntu
