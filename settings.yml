@@ -1,3 +1,4 @@
+commands_dir: commands
 enable_view_markers: always
 enable_env_var_names_array: never
 enable_deps_array: never
@@ -5,6 +6,6 @@ enable_deps_array: never
 usage_colors:
   caption: bold
   command: green
-  # arg: bold
-  # flag: bold
-  # environment_variable: bold
+  arg: bold
+  flag: bold
+  environment_variable: bold

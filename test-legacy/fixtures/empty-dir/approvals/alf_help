@@ -17,14 +17,14 @@ alf - Your Little Bash Alias Friend
   [32minfo[0m       Show all alf related system facts.
 
 [1mOptions:[0m
-  --help, -h
+  [1m--help, -h[0m
     Show this help
 
-  --version, -v
+  [1m--version, -v[0m
     Show version number
 
 [1mEnvironment Variables:[0m
-  ALF_RC_FILE
+  [1mALF_RC_FILE[0m
     Path to alfrc file.
     
     This file holds the path to the alf-conf repository.

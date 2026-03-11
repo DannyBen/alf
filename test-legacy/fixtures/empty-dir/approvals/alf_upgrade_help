@@ -5,5 +5,5 @@ alf upgrade - Upgrade alf to the latest version.
   alf upgrade --help | -h
 
 [1mOptions:[0m
-  --help, -h
+  [1m--help, -h[0m
     Show this help

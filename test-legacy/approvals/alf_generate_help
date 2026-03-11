@@ -7,5 +7,5 @@ Alias: g
   alf generate --help | -h
 
 [1mOptions:[0m
-  --help, -h
+  [1m--help, -h[0m
     Show this help

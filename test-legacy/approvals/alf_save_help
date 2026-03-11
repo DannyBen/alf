@@ -7,11 +7,11 @@ Alias: s
   alf save --help | -h
 
 [1mOptions:[0m
-  --help, -h
+  [1m--help, -h[0m
     Show this help
 
 [1mEnvironment Variables:[0m
-  ALF_ALIASES_FILE
+  [1mALF_ALIASES_FILE[0m
     Path to bash_aliases file.
     
     Aliases will be saved to this file.

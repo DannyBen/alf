@@ -7,12 +7,12 @@ Alias: w
   alf which --help | -h
 
 [1mOptions:[0m
-  --help, -h
+  [1m--help, -h[0m
     Show this help
 
 [1mArguments:[0m
-  CODE
+  [1mCODE[0m
     Show the command for this alias code.
 
-  SUBCODE
+  [1mSUBCODE[0m
     Show the command for this alias sub-code.
