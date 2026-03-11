@@ -13,22 +13,3 @@ services:
     environment:
       PS1: "zsh %/ $$ "
     entrypoint: zsh
-
-  # TEST=connect docker compose run test
-  test: &test
-    <<: *default
-    volumes: 
-    - .:/app
-    environment: { TEST }
-    command: test-legacy/approve
-
-  test_zsh: &test_zsh
-    <<: *zsh
-    environment: { CI, GITHUB_ACTIONS }
-    command: test-legacy/approve_zsh
-
-  ci:
-    <<: *test
-    environment:
-      CI: 1
-    volumes: []

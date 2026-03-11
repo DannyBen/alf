@@ -12,14 +12,8 @@ jobs:
       uses: actions/checkout@v4
     - name: Run shellcheck tests
       run: shellcheck alf setup
-    - name: Build container for approval tests
-      run: docker compose build
-    - name: Run approval tests
-      run: docker compose run ci
-    - name: Run sanity test in zsh
-      run: docker compose run test_zsh
     - name: Run Bats tests
-      run: bats test/commands test/lib
+      run: bats --recursive --print-output-on-failure --abort test
 
   ubuntu_setup:
     name: Setup on Ubuntu
@@ -28,9 +22,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Run setup
-      run: ./setup
+      run:
+        ./setup
+        command -v alf
     - name: Run uninstall
-      run: ./uninstall
+      run:
+        ./uninstall
+        ! command -v alf
 
   macos_setup:
     name: Setup on macOS
@@ -41,9 +39,13 @@ jobs:
     - name: Upgrade the outdated bash
       run: brew install bash
     - name: Run setup
-      run: ./setup
+      run:
+        ./setup
+        command -v alf
     - name: Run uninstall
-      run: ./uninstall
+      run:
+        ./uninstall
+        ! command -v alf
 
   static_analysis:
     name: Static analysis
