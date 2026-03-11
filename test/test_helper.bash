@@ -36,6 +36,14 @@ write_file() {
   printf '%s\n' "$@" >"$path"
 }
 
+unset_functions() {
+  local fn
+
+  for fn in "$@"; do
+    unset -f "$fn" 2>/dev/null || true
+  done
+}
+
 source_libs() {
   local lib
 

@@ -37,6 +37,12 @@ The repository currently uses approval tests. Keep this distinction clear in fut
   - failure modes
   - local fixture repo scenarios
 
+For Bats tests, prefer this split:
+
+- Use checked-in fixtures when the unit's job is to interpret files, parse config, or derive behavior from prepared filesystem state.
+- Use stubs when the unit's job is orchestration.
+- In stub-driven unit tests, it is acceptable to create the smallest transient prerequisite inline when it is only a mechanical precondition (for example, an empty file required to satisfy an existence check).
+
 ## Approval Testing Rules
 
 - Never edit approval files manually.

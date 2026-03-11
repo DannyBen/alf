@@ -10,14 +10,16 @@ teardown() {
   teardown_test_environment
 }
 
-@test "info reports local config details when no git repo is connected" {
+@test "show_info reports local config details when no git repo is connected" {
   fixture_dir="$TEST_ROOT/with-config"
   mkdir -p "$fixture_dir"
   write_file "$fixture_dir/alf.conf" "g: git"
   export ALF_RC_FILE="$TEST_ROOT/missing-alfrc"
   export ALF_ALIASES_FILE="$TEST_ROOT/aliases.txt"
+  cd "$fixture_dir" || exit 1
+  source_libs find_config show_info
 
-  run env ALF_RC_FILE="$ALF_RC_FILE" ALF_ALIASES_FILE="$ALF_ALIASES_FILE" ALF_REPO_ROOT="$ALF_REPO_ROOT" PATH="$PATH" bash -lc "source '$ALF_REPO_ROOT/src/initialize.sh'; source '$ALF_REPO_ROOT/src/lib/find_config.sh'; cd '$fixture_dir' || exit 1; source '$ALF_REPO_ROOT/src/info_command.sh'"
+  run show_info
 
   [ "$status" -eq 0 ]
   assert_output_contains "path:              $TEST_ROOT/bin/alf"
@@ -29,7 +31,7 @@ teardown() {
   assert_output_contains "remote:            unset"
 }
 
-@test "info reports connected repo details from ALF_RC_FILE" {
+@test "show_info reports connected repo details from ALF_RC_FILE" {
   repo_path="$TEST_ROOT/connected-alf"
   mkdir -p "$repo_path"
   write_file "$repo_path/alf.conf" "g: git"
@@ -39,8 +41,10 @@ teardown() {
   export ALF_ALIASES_FILE="$TEST_ROOT/aliases.txt"
   touch "$TEST_ROOT/aliases.txt"
   git -C "$repo_path" remote add origin https://example.com/acme/alf-conf.git
+  cd "$HOME" || exit 1
+  source_libs find_config show_info
 
-  run env ALF_RC_FILE="$ALF_RC_FILE" ALF_ALIASES_FILE="$ALF_ALIASES_FILE" ALF_REPO_ROOT="$ALF_REPO_ROOT" PATH="$PATH" HOME="$HOME" bash -lc "source '$ALF_REPO_ROOT/src/initialize.sh'; source '$ALF_REPO_ROOT/src/lib/find_config.sh'; cd '$HOME' || exit 1; source '$ALF_REPO_ROOT/src/info_command.sh'"
+  run show_info
 
   [ "$status" -eq 0 ]
   assert_output_contains "ALF_RC_FILE:       $TEST_ROOT/alfrc"
