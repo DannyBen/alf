@@ -1,0 +1,5 @@
+# Completions
+if command -v complete &> /dev/null ; then
+  complete -W "s l" g
+  complete -W "deploy upd" dc
+fi

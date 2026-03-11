@@ -10,14 +10,12 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+    - name: Install test dependencies
+      run: sudo apt-get update && sudo apt-get install -y bats shellcheck
     - name: Run shellcheck tests
-      run: shellcheck alf setup
-    - name: Build container for approval tests
-      run: docker compose build
-    - name: Run approval tests
-      run: docker compose run ci
-    - name: Run sanity test in zsh
-      run: docker compose run test_zsh
+      run: shellcheck alf setup uninstall
+    - name: Run Bats tests
+      run: bats --recursive --print-output-on-failure test
 
   ubuntu_setup:
     name: Setup on Ubuntu
@@ -26,9 +24,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Run setup
-      run: ./setup
+      run:
+        ./setup
+        command -v alf
     - name: Run uninstall
-      run: ./uninstall
+      run:
+        ./uninstall
+        ! command -v alf
 
   macos_setup:
     name: Setup on macOS
@@ -39,9 +41,13 @@ jobs:
     - name: Upgrade the outdated bash
       run: brew install bash
     - name: Run setup
-      run: ./setup
+      run:
+        ./setup
+        command -v alf
     - name: Run uninstall
-      run: ./uninstall
+      run:
+        ./uninstall
+        ! command -v alf
 
   static_analysis:
     name: Static analysis

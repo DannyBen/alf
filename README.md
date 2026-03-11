@@ -104,7 +104,6 @@ Commands:
   save       Generate aliases to ~/.bash_aliases
   edit       Open your alf.conf for editing
   which      Show the alias command
-  upgrade    Upgrade alf to the latest version
   info       Show all alf related system facts
 
 Options:
