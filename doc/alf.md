@@ -1,6 +1,6 @@
 % alf(1) Version 0.6.1 | Your Little Bash Alias Friend
 % Danny Ben Shitrit \<https://github.com/dannyben\>
-% December 2024
+% March 2026
 
 NAME
 ==================================================
@@ -56,11 +56,6 @@ alf which
 
 Show the alias command.
 
-alf upgrade
---------------------------------------------------
-
-Upgrade alf to the latest version.
-
 alf info
 --------------------------------------------------
 
@@ -84,7 +79,7 @@ Default: **~/.alfrc**
 SEE ALSO
 ==================================================
 
-**alf-connect**(1), **alf-download**(1), **alf-upload**(1), **alf-generate**(1), **alf-save**(1), **alf-edit**(1), **alf-which**(1), **alf-upgrade**(1), **alf-info**(1), **alf.conf**(5)
+**alf-connect**(1), **alf-download**(1), **alf-upload**(1), **alf-generate**(1), **alf-save**(1), **alf-edit**(1), **alf-which**(1), **alf-info**(1), **alf.conf**(5)
 
 # SOURCE CODE
 

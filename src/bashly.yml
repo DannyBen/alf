@@ -101,10 +101,6 @@ commands:
   - name: subcode
     help: Show the command for this alias sub-code.
 
-- name: upgrade
-  help: Upgrade alf to the latest version.
-  dependencies: [curl]
-
 - name: info
   help: Show all alf related system facts.
   dependencies: [git]

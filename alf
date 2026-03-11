@@ -33,7 +33,6 @@ alf_usage() {
   printf "  %s   Generate aliases to \`~/.bash_aliases\`.\n" "$(green "save")    "
   printf "  %s   Open your \`alf.conf\` for editing.\n" "$(green "edit")    "
   printf "  %s   Show the alias command.\n" "$(green "which")   "
-  printf "  %s   Upgrade alf to the latest version.\n" "$(green "upgrade") "
   printf "  %s   Show all alf related system facts.\n" "$(green "info")    "
   echo
 
@@ -282,28 +281,6 @@ alf_which_usage() {
 }
 
 # :command.usage
-alf_upgrade_usage() {
-  printf "alf upgrade - Upgrade alf to the latest version.\n\n"
-
-  printf "%s\n" "$(bold "Usage:")"
-  printf "  alf upgrade\n"
-  printf "  alf upgrade --help | -h\n"
-  echo
-
-  # :command.long_usage
-  if [[ -n "$long_usage" ]]; then
-    # :command.usage_options
-    printf "%s\n" "$(bold "Options:")"
-
-    # :command.usage_fixed_flags
-    printf "  %s\n" "$(bold "--help, -h")"
-    printf "    Show this help\n"
-    echo
-
-  fi
-}
-
-# :command.usage
 alf_info_usage() {
   printf "alf info - Show all alf related system facts.\n\n"
 
@@ -357,22 +334,6 @@ normalize_input() {
   done
 }
 
-# :command.inspect_args
-inspect_args() {
-  local k
-
-  if ((${#args[@]})); then
-    readarray -t sorted_keys < <(printf '%s\n' "${!args[@]}" | sort)
-    echo args:
-    for k in "${sorted_keys[@]}"; do
-      echo "- \${args[$k]} = ${args[$k]}"
-    done
-  else
-    echo args: none
-  fi
-
-}
-
 # :command.user_lib
 # src/lib/colors.sh
 print_in_color() {
@@ -414,6 +375,109 @@ magenta_underlined() { print_in_color "\e[4;35m" "$*"; }
 cyan_underlined() { print_in_color "\e[4;36m" "$*"; }
 black_underlined() { print_in_color "\e[4;30m" "$*"; }
 white_underlined() { print_in_color "\e[4;37m" "$*"; }
+
+# src/lib/connect_repo.sh
+connect_repo() {
+  local repo="$1"
+  local force="$2"
+  local force_ssh="$3"
+  local force_https="$4"
+  local repo_url partial_github_url answer
+
+  if [[ $repo =~ ':' ]]; then
+    repo_url=$repo
+  elif [[ $repo =~ '/' ]]; then
+    partial_github_url=1
+    repo_url="$repo.git"
+  else
+    partial_github_url=1
+    repo_url="$repo/alf-conf.git"
+  fi
+
+  if [[ $force_ssh ]]; then
+    answer=y
+    [[ $partial_github_url ]] && repo_url="git@github.com:$repo_url"
+    echo "Connecting to $repo_url"
+
+  elif [[ $force_https ]]; then
+    answer=y
+    [[ $partial_github_url ]] && repo_url="https://github.com/$repo_url"
+    echo "Connecting to $repo_url"
+
+  elif [[ $force ]]; then
+    if [[ $partial_github_url ]]; then
+      echo "Error: Cannot determine the full URL for the repository"
+      echo "To connect to GitHub use --ssh or --https"
+      echo "To connect to another repository, provide the full URL"
+      return 1
+    fi
+    answer=y
+    echo "Connecting to $repo_url"
+
+  else
+    echo "This operation will:"
+    echo ""
+    if [[ ! -d ./alf-conf ]]; then
+      echo "  clone  $repo_url"
+      echo "     to  ./alf-conf"
+      echo ""
+    fi
+    echo "  write  $PWD/alf-conf"
+    echo "     to  $rc_file"
+    echo ""
+
+    if [[ -n "$partial_github_url" ]]; then
+      answer="$(prompt_for_github_protocol)"
+
+      if [[ $answer =~ [Ss] ]]; then
+        repo_url="git@github.com:$repo_url"
+        answer=y
+        echo ""
+        echo "Using $repo_url"
+      elif [[ $answer =~ [Hh] ]]; then
+        repo_url="https://github.com/$repo_url"
+        answer=y
+        echo ""
+        echo "Using $repo_url"
+      fi
+    else
+      answer="$(prompt_to_continue)"
+    fi
+  fi
+
+  if [[ $answer =~ [Yy] ]]; then
+    if [[ -d ./alf-conf ]]; then
+      echo "Skipping clone, directory already exists"
+    else
+      git clone "$repo_url" ./alf-conf
+    fi
+    echo "$PWD/alf-conf" >"$rc_file"
+    echo "Storing location in $rc_file"
+  else
+    echo "Aborting"
+    return 0
+  fi
+
+  save_config
+}
+
+# src/lib/download_repo.sh
+download_repo() {
+  find_config
+
+  if [[ ! -f $rc_file ]]; then
+    echo "Cannot find $rc_file"
+    echo "Please connect alf to a repository first"
+    return 1
+  fi
+
+  pushd "$repo_path" >/dev/null
+  echo "Pulling from repository to $repo_path"
+  git pull
+  popd >/dev/null
+
+  save_config
+}
 
 # src/lib/find_config.sh
 find_config() {
@@ -573,6 +637,25 @@ has_subcommands() {
   return 1
 }
 
+# src/lib/prompt.sh
+prompt_for_github_protocol() {
+  local answer
+
+  echo "Would you like to connect to GitHub via SSH or HTTPS?"
+  echo ""
+  printf "[S]SH, [H]TTPS or [A]bort (default): "
+  read -r answer
+  printf '%s\n' "$answer"
+}
+
+prompt_to_continue() {
+  local answer
+
+  printf "Continue? [yN] "
+  read -r answer
+  printf '%s\n' "$answer"
+}
+
 # src/lib/save_config.sh
 save_config() {
   find_config
@@ -587,6 +670,104 @@ save_config() {
   echo "$ source $friendly_aliases_file"
 }
 
+# src/lib/show_alias_command.sh
+show_alias_command() {
+  local code="$1"
+  local subcode="${2:-}"
+  local regex_exact_code regex_exact_subcode cmd1 cmd2
+
+  find_config
+  regex_exact_code="^($code): *(.+)$"
+  regex_exact_subcode="^( +)($subcode): *(.+)$"
+  cmd1=""
+
+  while IFS= read -r line || [ -n "$line" ]; do
+    if [[ $line =~ $regex_exact_code ]]; then
+      cmd1="${BASH_REMATCH[2]}"
+      if [[ -z $subcode ]]; then
+        echo "$cmd1"
+        return 0
+      fi
+    elif [[ -n $cmd1 ]]; then
+      if [[ $line =~ $regex_exact_subcode ]]; then
+        cmd2="${BASH_REMATCH[3]}"
+        if [[ $cmd2 =~ ^! ]]; then
+          echo "${cmd2:1}"
+        else
+          echo "$cmd1 $cmd2"
+        fi
+        return 0
+      fi
+    fi
+  done <"$config_file"
+
+  echo "Error: No such alias: $code $subcode"
+  return 1
+}
+
+# src/lib/show_info.sh
+show_info() {
+  find_config
+
+  if [[ -d "$repo_path/.git" ]]; then
+    pushd "$repo_path" >/dev/null
+    remote="$(git config --get remote.origin.url)"
+    popd >/dev/null
+  else
+    remote="unset"
+  fi
+
+  if [[ -f "$rc_file" ]]; then
+    alfrc_content="exists with '$(<"$rc_file")'"
+  else
+    alfrc_content="does not exist"
+  fi
+
+  if [[ -f "$aliases_file" ]]; then
+    bash_aliases_status="exists"
+  else
+    bash_aliases_status="does not exist"
+  fi
+
+  echo "Executable:"
+  echo "  path:              $(command -v alf)"
+  echo
+  echo "Environment:"
+  echo "  ALF_RC_FILE:       ${ALF_RC_FILE:-unset}"
+  echo "  ALF_ALIASES_FILE:  ${ALF_ALIASES_FILE:-unset}"
+  echo
+  echo "Paths:"
+  echo "  alfrc path:        $rc_file"
+  echo "  aliases path:      $aliases_file"
+  echo "  repo path:         $repo_path"
+  echo "  config path:       $config_file"
+  echo
+  echo "Files:"
+  echo "  alfrc:             $alfrc_content"
+  echo "  aliases:           $bash_aliases_status"
+  echo
+  echo "GitHub:"
+  echo "  remote:            $remote"
+  echo
+}
+
+# src/lib/upload_repo.sh
+upload_repo() {
+  find_config
+
+  if [[ ! -f $rc_file ]]; then
+    echo "Cannot find $rc_file"
+    echo "Please connect alf to a repository first"
+    return 1
+  fi
+
+  pushd "$repo_path" >/dev/null
+  echo "Pushing $repo_path to repository"
+  git commit -am "automatic push"
+  git push
+  popd >/dev/null
+}
+
 # :command.command_functions
 # :command.function
 alf_connect_command() {
@@ -597,85 +778,7 @@ alf_connect_command() {
   force_ssh=${args[--ssh]}
   force_https=${args[--https]}
 
-  if [[ $repo =~ ':' ]]; then
-    repo_url=$repo
-  elif [[ $repo =~ '/' ]]; then
-    partial_github_url=1
-    repo_url="$repo.git"
-  else
-    partial_github_url=1
-    repo_url="$repo/alf-conf.git"
-  fi
-
-  if [[ $force_ssh ]]; then
-    answer=y
-    [[ $partial_github_url ]] && repo_url="git@github.com:$repo_url"
-    echo "Connecting to $repo_url"
-
-  elif [[ $force_https ]]; then
-    answer=y
-    [[ $partial_github_url ]] && repo_url="https://github.com/$repo_url"
-    echo "Connecting to $repo_url"
-
-  elif [[ $force ]]; then
-    if [[ $partial_github_url ]]; then
-      echo "Error: Cannot determine the full URL for the repository"
-      echo "To connect to GitHub use --ssh or --https"
-      echo "To connect to another repository, provide the full URL"
-      exit 1
-    fi
-    answer=y
-    echo "Connecting to $repo_url"
-
-  else
-    echo "This operation will:"
-    echo ""
-    if [[ ! -d ./alf-conf ]]; then
-      echo "  clone  $repo_url"
-      echo "     to  ./alf-conf"
-      echo ""
-    fi
-    echo "  write  $PWD/alf-conf"
-    echo "     to  $rc_file"
-    echo ""
-
-    if [[ -n "$partial_github_url" ]]; then
-      echo "Would you like to connect to GitHub via SSH or HTTPS?"
-      echo ""
-      printf "[S]SH, [H]TTPS or [A]bort (default): "
-      read -r answer
-
-      if [[ $answer =~ [Ss] ]]; then
-        repo_url="git@github.com:$repo_url"
-        answer=y
-        echo ""
-        echo "Using $repo_url"
-      elif [[ $answer =~ [Hh] ]]; then
-        repo_url="https://github.com/$repo_url"
-        answer=y
-        echo ""
-        echo "Using $repo_url"
-      fi
-    else
-      printf "Continue? [yN] "
-      read -r answer
-    fi
-  fi
-
-  if [[ $answer =~ [Yy] ]]; then
-    if [[ -d ./alf-conf ]]; then
-      echo "Skipping clone, directory already exists"
-    else
-      git clone "$repo_url" ./alf-conf
-    fi
-    echo "$PWD/alf-conf" >"$rc_file"
-    echo "Storing location in $rc_file"
-  else
-    echo "Aborting"
-    exit
-  fi
-
-  save_config
+  connect_repo "$repo" "$force" "$force_ssh" "$force_https"
 
 }
 
@@ -683,39 +786,16 @@ alf_connect_command() {
 alf_download_command() {
 
   # src/commands/download.sh
-  find_config
+  download_repo
 
-  if [[ ! -f $rc_file ]]; then
-    echo "Cannot find $rc_file"
-    echo "Please connect alf to a repository first"
-    exit 1
-  fi
-
-  pushd "$repo_path" >/dev/null
-  echo "Pulling from repository to $repo_path"
-  git pull
-  popd >/dev/null
-
-  save_config
 }
 
 # :command.function
 alf_upload_command() {
 
   # src/commands/upload.sh
-  find_config
+  upload_repo
 
-  if [[ ! -f $rc_file ]]; then
-    echo "Cannot find $rc_file"
-    echo "Please connect alf to a repository first"
-    exit 1
-  fi
-
-  pushd "$repo_path" >/dev/null
-  echo "Pushing $repo_path to repository"
-  git commit -am "automatic push"
-  git push
-  popd >/dev/null
 }
 
 # :command.function
@@ -749,41 +829,7 @@ alf_which_command() {
   code=${args[code]}
   subcode=${args[subcode]}
 
-  find_config
-  regex_exact_code="^($code): *(.+)$"
-  regex_exact_subcode="^( +)($subcode): *(.+)$"
-  cmd1=""
-
-  while IFS= read -r line || [ -n "$line" ]; do
-    if [[ $line =~ $regex_exact_code ]]; then
-      cmd1="${BASH_REMATCH[2]}"
-      if [[ -z $subcode ]]; then
-        echo "$cmd1"
-        exit 0
-      fi
-    elif [[ -n $cmd1 ]]; then
-      if [[ $line =~ $regex_exact_subcode ]]; then
-        cmd2="${BASH_REMATCH[3]}"
-        if [[ $cmd2 =~ ^! ]]; then
-          echo "${cmd2:1}"
-        else
-          echo "$cmd1 $cmd2"
-        fi
-        exit 0
-      fi
-    fi
-  done <"$config_file"
-
-  echo "Error: No such alias: $code $subcode"
-  exit 1
-
-}
-
-# :command.function
-alf_upgrade_command() {
-
-  # src/commands/upgrade.sh
-  exec bash <(curl -s https://raw.githubusercontent.com/DannyBen/alf/master/setup)
+  show_alias_command "$code" "$subcode"
 
 }
 
@@ -791,52 +837,7 @@ alf_upgrade_command() {
 alf_info_command() {
 
   # src/commands/info.sh
-  find_config
-
-  if [[ -d "$repo_path/.git" ]]; then
-    pushd "$repo_path" >/dev/null
-    remote="$(git config --get remote.origin.url)"
-    popd >/dev/null
-  else
-    remote="unset"
-  fi
-
-  if [[ -f "$rc_file" ]]; then
-    alfrc_content="exists with '$(<"$rc_file")'"
-  else
-    alfrc_content="does not exist"
-  fi
-
-  if [[ -f "$aliases_file" ]]; then
-    bash_aliases_status="exists"
-  else
-    bash_aliases_status="does not exist"
-  fi
-
-  echo "Executable:"
-  echo "  path:              $(command -v alf)"
-  echo
-
-  echo "Environment:"
-  echo "  ALF_RC_FILE:       ${ALF_RC_FILE:-unset}"
-  echo "  ALF_ALIASES_FILE:  ${ALF_ALIASES_FILE:-unset}"
-  echo
-
-  echo "Paths:"
-  echo "  alfrc path:        $rc_file"
-  echo "  aliases path:      $aliases_file"
-  echo "  repo path:         $repo_path"
-  echo "  config path:       $config_file"
-  echo
-
-  echo "Files:"
-  echo "  alfrc:             $alfrc_content"
-  echo "  aliases:           $bash_aliases_status"
-  echo
-
-  echo "GitHub:"
-  echo "  remote:            $remote"
-  echo
+  show_info
 
 }
 
@@ -920,13 +921,6 @@ parse_requirements() {
       action="which"
       shift
       alf_which_parse_requirements "$@"
-      shift $#
-      ;;
-
-    upgrade)
-      action="upgrade"
-      shift
-      alf_upgrade_parse_requirements "$@"
       shift $#
       ;;
 
@@ -1394,65 +1388,6 @@ alf_which_parse_requirements() {
 }
 
 # :command.parse_requirements
-alf_upgrade_parse_requirements() {
-  local key
-
-  # :command.fixed_flags_filter
-  while [[ $# -gt 0 ]]; do
-    key="$1"
-    case "$key" in
-      --help | -h)
-        long_usage=yes
-        alf_upgrade_usage
-        exit
-        ;;
-
-      *)
-        break
-        ;;
-
-    esac
-  done
-
-  # :command.dependencies_filter
-  missing_deps=
-  # :dependency.filter
-  if ! command -v curl >/dev/null 2>&1; then
-    printf "missing dependency: curl\n" >&2
-    missing_deps=1
-  fi
-
-  if [[ -n $missing_deps ]]; then
-    exit 1
-  fi
-
-  # :command.command_filter
-  action="upgrade"
-
-  # :command.parse_requirements_while
-  while [[ $# -gt 0 ]]; do
-    key="$1"
-    case "$key" in
-
-      -?*)
-        printf "invalid option: %s\n" "$key" >&2
-        exit 1
-        ;;
-
-      *)
-        # :command.parse_requirements_case
-        # :command.parse_requirements_case_simple
-        printf "invalid argument: %s\n" "$key" >&2
-        exit 1
-
-        ;;
-
-    esac
-  done
-
-}
-
-# :command.parse_requirements
 alf_info_parse_requirements() {
   local key
 
@@ -1541,14 +1476,11 @@ run() {
     "save") alf_save_command ;;
     "edit") alf_edit_command ;;
     "which") alf_which_command ;;
-    "upgrade") alf_upgrade_command ;;
     "info") alf_info_command ;;
   esac
 }
 
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  # :command.start
-  command_line_args=("$@")
-  initialize
-  run "${command_line_args[@]}"
-fi
+# :command.start
+command_line_args=("$@")
+initialize
+run "${command_line_args[@]}"

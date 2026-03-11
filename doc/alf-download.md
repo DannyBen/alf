@@ -1,6 +1,6 @@
 % alf-download(1) | Perform git pull on the connected repo.
 % 
-% December 2024
+% March 2026
 
 NAME
 ==================================================

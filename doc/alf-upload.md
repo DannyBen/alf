@@ -1,6 +1,6 @@
 % alf-upload(1) | Perform git commit and push on the connected repo.
 % 
-% December 2024
+% March 2026
 
 NAME
 ==================================================
