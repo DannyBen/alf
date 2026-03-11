@@ -773,10 +773,10 @@ upload_repo() {
 alf_connect_command() {
 
   # src/commands/connect.sh
-  repo=${args[repo]}
-  force=${args[--yes]}
-  force_ssh=${args[--ssh]}
-  force_https=${args[--https]}
+  repo=${args["repo"]}
+  force=${args["--yes"]}
+  force_ssh=${args["--ssh"]}
+  force_https=${args["--https"]}
 
   connect_repo "$repo" "$force" "$force_ssh" "$force_https"
 
@@ -826,8 +826,8 @@ alf_edit_command() {
 alf_which_command() {
 
   # src/commands/which.sh
-  code=${args[code]}
-  subcode=${args[subcode]}
+  code=${args["code"]}
+  subcode=${args["subcode"]}
 
   show_alias_command "$code" "$subcode"
 

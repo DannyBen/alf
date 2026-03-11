@@ -53,3 +53,7 @@ source_libs() {
     source "$ALF_REPO_ROOT/src/lib/${lib}.sh"
   done
 }
+
+source_command() {
+  source "$ALF_REPO_ROOT/src/commands/${1}.sh"
+}
