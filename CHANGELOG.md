@@ -1,5 +1,20 @@
-Change Log
+Changelog
 ========================================
+
+v0.7.0 - 2026-03-12
+----------------------------------------
+
+- Regenerate with bashly 1.2.7 pre-release [`85c7f47`](https://github.com/DannyBen/alf/commit/85c7f47)
+- Update setup to set 755 on the executable [`b05a2c4`](https://github.com/DannyBen/alf/commit/b05a2c4)
+- Update setup/uninstall [`b12000f`](https://github.com/DannyBen/alf/commit/b12000f)
+- Add unit tests [`8696c33`](https://github.com/DannyBen/alf/commit/8696c33)
+- Refactor commands to function units [`c79fe19`](https://github.com/DannyBen/alf/commit/c79fe19)
+- Remove approval tests in favor of bats [`096cb1d`](https://github.com/DannyBen/alf/commit/096cb1d)
+- Remove `alf upgrade` command [`c76055e`](https://github.com/DannyBen/alf/commit/c76055e)
+- Improve `alf upload` for different git repo states [`14c5ecd`](https://github.com/DannyBen/alf/commit/14c5ecd)
+- Fix uppercase alias handling [`816cf89`](https://github.com/DannyBen/alf/commit/816cf89)
+- Compare [`v0.6.1..v0.7.0`](https://github.com/dannyben/alf/compare/v0.6.1..v0.7.0)
+
 
 v0.6.1 - 2024-02-27
 ----------------------------------------
@@ -39,6 +54,7 @@ v0.4.12 - 2022-05-23
 
 - Fix completions error with configs that do not have subcommands [`5951355`](https://github.com/DannyBen/alf/commit/5951355)
 - Compare [`v0.4.11..v0.4.12`](https://github.com/dannyben/alf/compare/v0.4.11..v0.4.12)
+
 
 <!-- break v0.4.11 -->
 v0.4.11 - 2022-05-12
@@ -98,5 +114,3 @@ v0.4.4 - 2020-10-14
 
 - Add support for ZSH [`8990a50`](https://github.com/DannyBen/alf/commit/8990a50)
 - Compare [`v0.4.3..v0.4.4`](https://github.com/dannyben/alf/compare/v0.4.3..v0.4.4)
-
-
