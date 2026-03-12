@@ -34,6 +34,18 @@ teardown() {
   [ "$output" = "$(cat "$(fixture_path generate_config/with-subcommands/expected.sh)")" ]
 }
 
+@test "generate_config emits uppercase nested alias functions and completions" {
+  export ALF_RC_FILE
+  ALF_RC_FILE="$(fixture_path generate_config/with-uppercase-subcommands/alfrc)"
+  cd "$(fixture_path generate_config/with-uppercase-subcommands)" || exit 1
+  source_libs find_config generate_last_cmd has_subcommands generate_completion generate_config
+
+  run generate_config
+
+  [ "$status" -eq 0 ]
+  [ "$output" = "$(cat "$(fixture_path generate_config/with-uppercase-subcommands/expected.sh)")" ]
+}
+
 @test "generate_config fails when no config can be found" {
   export ALF_RC_FILE
   ALF_RC_FILE="$(fixture_path generate_config/without-config/alfrc)"

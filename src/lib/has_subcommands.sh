@@ -1,6 +1,6 @@
 ## Returns true if the config has subcommands
 has_subcommands() {
-  regex="^ +([a-z0-9\-]+):"
+  regex="^ +([a-zA-Z0-9\-]+):"
   find_config
 
   while IFS= read -r line || [ -n "$line" ]; do

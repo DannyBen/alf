@@ -22,6 +22,18 @@ teardown() {
   [ "$output" = "$(cat "$(fixture_path generate_completion/with-subcommands/expected.txt)")" ]
 }
 
+@test "generate_completions preserves uppercase aliases and subcommands" {
+  export ALF_RC_FILE
+  ALF_RC_FILE="$(fixture_path generate_completion/with-uppercase-subcommands/alfrc)"
+  cd "$(fixture_path generate_completion/with-uppercase-subcommands)" || exit 1
+  source_libs find_config generate_completion
+
+  run generate_completions
+
+  [ "$status" -eq 0 ]
+  [ "$output" = "$(cat "$(fixture_path generate_completion/with-uppercase-subcommands/expected.txt)")" ]
+}
+
 @test "generate_completions emits only the wrapper when there are no subcommands" {
   export ALF_RC_FILE
   ALF_RC_FILE="$(fixture_path generate_completion/without-subcommands/alfrc)"

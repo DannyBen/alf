@@ -21,6 +21,17 @@ teardown() {
   [ "$?" -eq 0 ]
 }
 
+@test "has_subcommands returns success when nested aliases use uppercase codes" {
+  export ALF_RC_FILE
+  ALF_RC_FILE="$(fixture_path has_subcommands/with-uppercase-subcommands/alfrc)"
+  cd "$(fixture_path has_subcommands/with-uppercase-subcommands)" || exit 1
+  source_libs find_config has_subcommands
+
+  has_subcommands
+
+  [ "$?" -eq 0 ]
+}
+
 @test "has_subcommands returns failure when aliases are flat" {
   export ALF_RC_FILE
   ALF_RC_FILE="$(fixture_path has_subcommands/without-subcommands/alfrc)"
