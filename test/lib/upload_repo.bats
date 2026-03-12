@@ -25,12 +25,44 @@ teardown() {
 
   git() {
     printf '%s\n' "$1" >>"$TEST_ROOT/git.log"
+
+    if [ "$1" = "diff" ]; then
+      return 1
+    fi
   }
 
   upload_repo
 
-  [ "$(sed -n '1p' "$TEST_ROOT/git.log")" = "commit" ]
-  [ "$(sed -n '2p' "$TEST_ROOT/git.log")" = "push" ]
+  [ "$(sed -n '1p' "$TEST_ROOT/git.log")" = "add" ]
+  [ "$(sed -n '2p' "$TEST_ROOT/git.log")" = "diff" ]
+  [ "$(sed -n '3p' "$TEST_ROOT/git.log")" = "commit" ]
+  [ "$(sed -n '4p' "$TEST_ROOT/git.log")" = "push" ]
+}
+
+@test "upload_repo pushes even when there is nothing to commit" {
+  export ALF_RC_FILE="$TEST_ROOT/alfrc"
+  repo_path="$TEST_ROOT/repo"
+  mkdir -p "$repo_path"
+  : >"$ALF_RC_FILE"
+  cd "$TEST_ROOT" || exit 1
+  source_libs upload_repo
+
+  find_config() {
+    :
+  }
+
+  git() {
+    printf '%s\n' "$1" >>"$TEST_ROOT/git.log"
+  }
+
+  run upload_repo
+
+  [ "$status" -eq 0 ]
+  assert_output_contains "No local changes to commit"
+  [ "$(sed -n '1p' "$TEST_ROOT/git.log")" = "add" ]
+  [ "$(sed -n '2p' "$TEST_ROOT/git.log")" = "diff" ]
+  [ "$(sed -n '3p' "$TEST_ROOT/git.log")" = "push" ]
+  [ -z "$(sed -n '4p' "$TEST_ROOT/git.log")" ]
 }
 
 @test "upload_repo fails when no rc file exists" {

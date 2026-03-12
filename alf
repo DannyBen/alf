@@ -763,7 +763,14 @@ upload_repo() {
 
   pushd "$repo_path" >/dev/null
   echo "Pushing $repo_path to repository"
-  git commit -am "automatic push"
+  git add -A
+
+  if git diff --cached --quiet; then
+    echo "No local changes to commit"
+  else
+    git commit -m "automatic push"
+  fi
+
   git push
   popd >/dev/null
 }
