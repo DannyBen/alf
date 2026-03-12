@@ -1456,7 +1456,7 @@ alf_info_parse_requirements() {
 # :command.initialize
 initialize() {
   declare -g version="0.6.1"
-  set -e
+  set -eo pipefail
 
   # src/initialize.sh
   aliases_file=${ALF_ALIASES_FILE:-~/.bash_aliases}
