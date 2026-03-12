@@ -1,5 +1,5 @@
 upload_repo() {
-  find_config
+  find_config || return 1
 
   if [[ ! -f $rc_file ]]; then
     echo "Cannot find $rc_file"

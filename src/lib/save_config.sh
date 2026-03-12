@@ -1,5 +1,5 @@
 save_config() {
-  find_config
+  find_config || return 1
 
   tilde='~'
   friendly_aliases_file="${aliases_file/#$HOME/$tilde}"

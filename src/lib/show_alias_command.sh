@@ -3,7 +3,7 @@ show_alias_command() {
   local subcode="${2:-}"
   local regex_exact_code regex_exact_subcode cmd1 cmd2
 
-  find_config
+  find_config || return 1
   regex_exact_code="^($code): *(.+)$"
   regex_exact_subcode="^( +)($subcode): *(.+)$"
   cmd1=""

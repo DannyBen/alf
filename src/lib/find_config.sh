@@ -11,6 +11,6 @@ find_config() {
     echo "You should either:"
     echo "- Run this command in a folder with 'alf.conf' file, or"
     echo "- Run 'alf connect' to properly connect to a remote config"
-    exit 1
+    return 1
   fi
 }

@@ -1,5 +1,5 @@
 show_info() {
-  find_config
+  find_config || return 1
 
   if [[ -d "$repo_path/.git" ]]; then
     pushd "$repo_path" >/dev/null
