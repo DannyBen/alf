@@ -15,6 +15,13 @@ This repository is a Bashly-based CLI. Prefer working from the source partials i
   - `src/lib/*.sh`
   - `settings.yml`
 
+## Helper Commands
+
+- `op.conf` is the repo-local source of truth for common helper commands such as
+  testing, ShellCheck, formatting, generation, and docs tasks.
+- Prefer the `op.conf` entries when looking up or running standard project
+  workflows.
+
 ## Generated Artifact Policy
 
 - Only inspect `./alf` when you need to verify generated output, trace a generation issue, or confirm the final emitted behavior.

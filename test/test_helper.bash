@@ -23,7 +23,7 @@ teardown_test_environment() {
 
 assert_output_contains() {
   local expected="$1"
-  [[ "$output" == *"$expected"* ]]
+  [[ "${output-}" == *"$expected"* ]]
 }
 
 fixture_path() {
@@ -47,13 +47,16 @@ unset_functions() {
 source_libs() {
   local lib
 
+  # shellcheck disable=SC1091
   source "$ALF_REPO_ROOT/src/initialize.sh"
 
   for lib in "$@"; do
+    # shellcheck disable=SC1090
     source "$ALF_REPO_ROOT/src/lib/${lib}.sh"
   done
 }
 
 source_command() {
+  # shellcheck disable=SC1090
   source "$ALF_REPO_ROOT/src/commands/${1}.sh"
 }
