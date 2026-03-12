@@ -499,8 +499,8 @@ find_config() {
 
 # src/lib/generate_completion.sh
 generate_completions() {
-  ali1_regex="^([a-z0-9\-]+):"
-  ali2_regex="^ +([a-z0-9\-]+):"
+  ali1_regex="^([a-zA-Z0-9\-]+):"
+  ali2_regex="^ +([a-zA-Z0-9\-]+):"
   find_config
 
   echo '# Completions'
@@ -625,7 +625,7 @@ generate_last_cmd() {
 
 # src/lib/has_subcommands.sh
 has_subcommands() {
-  regex="^ +([a-z0-9\-]+):"
+  regex="^ +([a-zA-Z0-9\-]+):"
   find_config
 
   while IFS= read -r line || [ -n "$line" ]; do
@@ -763,7 +763,14 @@ upload_repo() {
 
   pushd "$repo_path" >/dev/null
   echo "Pushing $repo_path to repository"
-  git commit -am "automatic push"
+  git add -A
+
+  if git diff --cached --quiet; then
+    echo "No local changes to commit"
+  else
+    git commit -m "automatic push"
+  fi
+
   git push
   popd >/dev/null
 }
@@ -1449,7 +1456,7 @@ alf_info_parse_requirements() {
 # :command.initialize
 initialize() {
   declare -g version="0.6.1"
-  set -e
+  set -eo pipefail
 
   # src/initialize.sh
   aliases_file=${ALF_ALIASES_FILE:-~/.bash_aliases}

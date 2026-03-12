@@ -62,7 +62,7 @@ teardown() {
 
   find_config() {
     echo "ERROR: Cannot find config file"
-    exit 1
+    return 1
   }
 
   generate_config() {

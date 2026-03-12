@@ -1,7 +1,7 @@
 generate_completions() {
-  ali1_regex="^([a-z0-9\-]+):"
-  ali2_regex="^ +([a-z0-9\-]+):"
-  find_config
+  ali1_regex="^([a-zA-Z0-9\-]+):"
+  ali2_regex="^ +([a-zA-Z0-9\-]+):"
+  find_config || return 1
 
   echo '# Completions'
   echo 'if command -v complete &> /dev/null ; then'
@@ -28,4 +28,3 @@ generate_completions() {
   
   echo 'fi'
 }
-

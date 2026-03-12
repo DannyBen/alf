@@ -2,6 +2,7 @@ commands_dir: commands
 enable_view_markers: always
 enable_env_var_names_array: never
 enable_deps_array: never
+strict: set -eo pipefail
 
 usage_colors:
   caption: bold

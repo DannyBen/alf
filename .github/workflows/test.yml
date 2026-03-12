@@ -13,7 +13,7 @@ jobs:
     - name: Install test dependencies
       run: sudo apt-get update && sudo apt-get install -y bats shellcheck
     - name: Run shellcheck tests
-      run: shellcheck alf setup uninstall
+      run: shellcheck alf setup uninstall test/test_helper.bash
     - name: Run Bats tests
       run: bats --recursive --print-output-on-failure test
 

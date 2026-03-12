@@ -1,0 +1,5 @@
+# Completions
+if command -v complete &> /dev/null ; then
+  complete -W "S L" G
+  complete -W "DEPLOY UPD" DC
+fi
