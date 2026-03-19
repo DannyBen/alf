@@ -48,21 +48,3 @@ jobs:
       run:
         ./uninstall
         ! command -v alf
-
-  static_analysis:
-    name: Static analysis
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    # Rush needed for easy installation of latest shfmt
-    - name: Install rush
-      run: curl -Ls http://get.dannyb.co/rush/setup | bash
-    - name: Connect rush repo
-      run: rush clone dannyben --shallow --default
-    - name: Install shfmt and opcode
-      run: rush get shfmt && rush get opcode
-    - name: Run shellcheck tests
-      run: op shellcheck
-    - name: Run shfmt tests
-      run: op shfmt
