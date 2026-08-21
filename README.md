@@ -43,6 +43,12 @@ place it somewhere in your path, and make it executable.
 
 Note that alf requires bash 4.0 or higher (`brew install bash` for mac users).
 
+### Installing with Homebrew
+
+```shell
+$ brew install dannyben/tap/alf
+```
+
 
 ## Using with GitHub-hosted configuration (recommended)
 
